@@ -1,0 +1,7 @@
+{
+    "pack": {
+        "description": "Minecraft Dungeon creator",
+        "pack_format": 6,
+        "_comment": "A pack_format of 6 requires json lang files and some texture changes from 1.16.2. Note: we require v6 pack meta for all mods.  I am not currently sure if you can do anything useful with this (since your mod is not a resource pack) but it seems to be necessary"
+    }
+}

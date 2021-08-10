@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "_comment1": "see the various types of recipe in IRecipeSerializer",
+  "group": "mbe35_paintings_group",
+  "pattern": [
+    "PD ",
+    "PDF",
+    "PD "
+  ],
+  "key": {
+    "D": [
+      {"item": "minecraft:black_dye"},
+      {"item": "minecraft:white_dye"}
+    ],
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    }
+  },
+  "result": {
+    "item": "minecraft:painting"
+  }
+}
