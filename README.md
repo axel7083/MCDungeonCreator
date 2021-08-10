@@ -2,11 +2,11 @@
 
 
 # MCDungeonCreator
- A Minecraft Java Mod to create objectgroup.json from command line.
+ A Minecraft Java Mod to create objectgroup.json from command line. To use the mod, install forge 1.16.5 from [here](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html) and download the `dungeoncreator-1.16.5.jar` file of the mod in the [release section](https://github.com/DungeonsModding/MCDungeonCreator/releases/latest) in the Assets part.
  
 # Objectgroup.json file generated
 
-The objectgroup.json does not contain the block information, only the position of the tiles, you need to use (Dungeons-Mod-Kit)[https://github.com/Dokucraft/Dungeons-Mod-Kit] and the (JavaWorldToObjectGroup.exe)[https://github.com/Dokucraft/Dungeons-Mod-Kit/tree/master/Tools] tool to convert to an objectgroup.json containing the block informations.
+The objectgroup.json does not contain the block information, only the position of the tiles, you need to use [Dungeons-Mod-Kit](https://github.com/Dokucraft/Dungeons-Mod-Kit) and the [JavaWorldToObjectGroup.exe](https://github.com/Dokucraft/Dungeons-Mod-Kit/tree/master/Tools) tool to convert to an objectgroup.json containing the block informations.
 
 An objectgroup.json generate from this mod will look like this:
  ```JS
