@@ -1,7 +1,10 @@
 package dungeoncreator;
 
+import dungeoncreator.utils.OrthoViewHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -17,6 +20,7 @@ public class DungeonCreator {
 
     // Get an instance of the mod event bus
     final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    modEventBus.addListener(this::clientSetup);
     registerCommonEvents(modEventBus);
   }
 
@@ -27,7 +31,13 @@ public class DungeonCreator {
   public void registerCommonEvents(IEventBus eventBus) {
     eventBus.register(dungeoncreator.itemgroup.StartupCommon.class);
     eventBus.register(dungeoncreator.commands.StartupCommon.class);
-    eventBus.register(dungeoncreator.commands.StartupCommon.class);
+    eventBus.register(dungeoncreator.items.StartupCommon.class);
+  }
+
+  private void clientSetup(final FMLClientSetupEvent event) {
+    OrthoViewHandler ovh = OrthoViewHandler.getInstance();
+    MinecraftForge.EVENT_BUS.register(ovh);
+
   }
 
 }

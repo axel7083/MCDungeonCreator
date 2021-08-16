@@ -1,3 +1,6 @@
 {
-  "itemGroup.mcdc_itemgroup": "Minecraft Dungeon blocks"
+  "itemGroup.mcdc_itemgroup": "Minecraft Dungeon blocks",
+  "key.dungeoncreator.ortho.toggle": "Camera Mode",
+  "item.dungeoncreator.walkable_item": "Walkable +",
+  "item.dungeoncreator.exclude_item": "Walkable -"
 }

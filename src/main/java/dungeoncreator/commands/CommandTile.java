@@ -8,11 +8,13 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dungeoncreator.GroupObject;
 import dungeoncreator.managers.TilesManager;
 import dungeoncreator.models.TileObject;
+import dungeoncreator.utils.TileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.*;
@@ -45,9 +47,97 @@ public class CommandTile {
                 // Listing all tiles
                 .then(Commands.literal("list").executes(CommandTile::listTiles))
                 .then(Commands.literal("show").executes(commandSource -> toggleBox(commandSource,true)))
-                .then(Commands.literal("hide").executes(commandSource -> toggleBox(commandSource,false)));
+                .then(Commands.literal("hide").executes(commandSource -> toggleBox(commandSource,false)))
+                .then(Commands.literal("where").executes(CommandTile::where))
+                .then(Commands.literal("export").executes(CommandTile::exportWalkable))
+                .then(Commands.literal("walkable").executes(CommandTile::showWalkable)); //TODO: combine show and walkable /show [box|walkable]
 
         dispatcher.register(commandTile);
+    }
+
+    static int exportWalkable(CommandContext<CommandSource> commandContext) {
+        File saveDir = getSaveDirectory();
+        if(saveDir == null) {
+            sendMessage(commandContext,"[Error] saveDir NULL");
+            return 0;
+        }
+        GroupObject groupObject = GroupObject.getInstance(saveDir);
+        try {
+            BlockPos pos = commandContext.getSource().asPlayer().getPosition();
+            TileObject t= TileUtils.getTileWithPlayerInside(groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
+            if(t != null) {
+                TileUtils.exportRegionPlane(t);
+                sendMessage(commandContext,"Done.");
+            }
+            else
+            {
+                sendMessage(commandContext,"[Error] You are not in a defined tile");
+            }
+
+        } catch (CommandSyntaxException e) {
+            e.printStackTrace();
+            sendMessage(commandContext,"[Error] during search");
+        }
+        return 1;
+    }
+
+
+    static int showWalkable(CommandContext<CommandSource> commandContext) {
+        File saveDir = getSaveDirectory();
+        if(saveDir == null) {
+            sendMessage(commandContext,"[Error] saveDir NULL");
+            return 0;
+        }
+        GroupObject groupObject = GroupObject.getInstance(saveDir);
+        try {
+            BlockPos pos = commandContext.getSource().asPlayer().getPosition();
+            TileObject t= TileUtils.getTileWithPlayerInside(groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
+            if(t != null) {
+                t.displayWalkable = !t.displayWalkable;
+                if(!t.heightMapComputed) { //TODO: maybe offer a way to "recompute" it if map changed
+                    TileUtils.computeHeightMap(t, commandContext.getSource().getWorld());
+                    sendMessage(commandContext,"Computing height map...");
+                }
+                sendMessage(commandContext,"Done.");
+            }
+            else
+            {
+                sendMessage(commandContext,"[Error] You are not in a defined tile");
+            }
+
+        } catch (CommandSyntaxException e) {
+            e.printStackTrace();
+            sendMessage(commandContext,"[Error] during search");
+        }
+
+        return 1;
+    }
+
+
+    static int where(CommandContext<CommandSource> commandContext) {
+        File saveDir = getSaveDirectory();
+        if(saveDir == null) {
+            sendMessage(commandContext,"[Error] saveDir NULL");
+            return 0;
+        }
+        GroupObject groupObject = GroupObject.getInstance(saveDir);
+        try {
+            BlockPos pos = commandContext.getSource().asPlayer().getPosition();
+            TileObject t= TileUtils.getTileWithPlayerInside(groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
+            if(t == null) {
+                sendMessage(commandContext,"You are not currently inside a defined tile.");
+            }
+            else
+            {
+                sendMessage(commandContext,"You are currently in tile: " + t.id);
+            }
+
+        } catch (CommandSyntaxException e) {
+            e.printStackTrace();
+            sendMessage(commandContext,"[Error] during search");
+        }
+
+        return 1;
     }
 
     static int toggleBox(CommandContext<CommandSource> commandContext, boolean visible) {
