@@ -1,5 +1,6 @@
 ![alt text](https://github.com/DungeonsModding/MCDungeonCreator/blob/main/screenshots/tiles_show.png)
 
+This mod need a lot of re-work, most of the features are just prototype to prove it is possible to have them.
 
 # MCDungeonCreator
  A Minecraft Java Mod to create objectgroup.json from command line. To use the mod, install forge 1.16.5 from [here](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html) and download the `dungeoncreator-1.16.5.jar` file of the mod in the [release section](https://github.com/DungeonsModding/MCDungeonCreator/releases/latest) in the Assets part.
