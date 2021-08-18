@@ -20,6 +20,5 @@ public class RegisterCommandEvent
     CommandDispatcher<CommandSource> commandDispatcher = event.getDispatcher();
     CommandTile.register(commandDispatcher);
     CommandView.register(commandDispatcher);
-    CommandPlane.register(commandDispatcher);
   }
 }

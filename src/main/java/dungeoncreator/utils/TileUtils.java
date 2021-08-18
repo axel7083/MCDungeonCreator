@@ -1,20 +1,17 @@
 package dungeoncreator.utils;
 
 import dungeoncreator.GroupObject;
-import dungeoncreator.models.TileObject;
+import dungeoncreator.models.InGameTile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 
 import java.util.ArrayList;
@@ -22,16 +19,16 @@ import java.util.zip.Inflater;
 
 public class TileUtils {
 
-    public static boolean checkOverLapping(ArrayList<TileObject> tiles, TileObject tile) {
-        for(TileObject t : tiles) {
+    public static boolean checkOverLapping(ArrayList<InGameTile> tiles, InGameTile tile) {
+        for(InGameTile t : tiles) {
             if(t.isOverlapping(tile))
                 return true;
         }
         return false;
     }
 
-    public static TileObject getTileWithPlayerInside(ArrayList<TileObject> tiles, int playerX, int playerY, int playerZ) {
-        for(TileObject t : tiles) {
+    public static InGameTile getTileWithPlayerInside(ArrayList<InGameTile> tiles, int playerX, int playerY, int playerZ) {
+        for(InGameTile t : tiles) {
             if(t.sizeX == 0 || t.sizeY == 0 || t.sizeZ == 0)
                 t.computeSizes();
 
@@ -43,7 +40,7 @@ public class TileUtils {
         return null;
     }
 
-    public static void computeHeightMap(TileObject t, World world) {
+    public static void computeHeightMap(InGameTile t, World world) {
         if(t.sizeX == 0 || t.sizeY == 0 || t.sizeZ == 0)
             t.computeSizes();
 
@@ -69,7 +66,7 @@ public class TileUtils {
             BlockPos pos = playerIn.getPosition();
 
             // Getting the tile where the player is in
-            TileObject tile = TileUtils.getTileWithPlayerInside(groupObject.objects,pos.getX(),pos.getY(),pos.getZ());
+            InGameTile tile = TileUtils.getTileWithPlayerInside(groupObject.objects,pos.getX(),pos.getY(),pos.getZ());
 
             if(tile == null)  {
                 return "You are not currently in a tile.";
@@ -112,7 +109,7 @@ public class TileUtils {
         return null;
     }
 
-    public static void exportRegionPlane(TileObject tile) {
+    public static String exportRegionPlane(InGameTile tile) {
 
         byte[][] plane = tile.regionPlane;
         byte[] simpleArray = new byte[tile.sizeX*tile.sizeZ];
@@ -124,14 +121,29 @@ public class TileUtils {
         }
 
         try {
-            System.out.println("[" + new String(Base64.getEncoder().encode(compress(simpleArray))) +"]");
+            return new String(Base64.getEncoder().encode(compress(simpleArray)));
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
+    }
 
+    public static void importRegionPlane(InGameTile tile) throws IOException, DataFormatException {
+        if(tile.encodedRegionPlane == null) {
+            return;
+        }
 
+        byte[][] plane = new byte[tile.sizeX][tile.sizeZ];
+        byte[] simpleArray = decompress(Base64.getDecoder().decode(tile.encodedRegionPlane));
+
+        for(int x = 0 ; x < tile.sizeX; x++) {
+            for(int z = 0; z < tile.sizeZ ; z++) {
+                plane[x][z] = simpleArray[x+z*tile.sizeX];
+            }
+        }
+        tile.regionPlane = plane;
     }
 
     // Source: https://dzone.com/articles/how-compress-and-uncompress
@@ -151,4 +163,21 @@ public class TileUtils {
 
         return outputStream.toByteArray();
     }
+
+    public static byte[] decompress(byte[] data) throws IOException, DataFormatException {
+        Inflater inflater = new Inflater();
+        inflater.setInput(data);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        while (!inflater.finished()) {
+            int count = inflater.inflate(buffer);
+            outputStream.write(buffer, 0, count);
+        }
+        outputStream.close();
+        return outputStream.toByteArray();
+    }
+
+
+
 }

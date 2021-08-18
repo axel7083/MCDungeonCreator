@@ -2,7 +2,7 @@ package dungeoncreator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dungeoncreator.models.TileObject;
+import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.TileUtils;
 import net.minecraft.util.text.Color;
 import net.minecraft.util.text.IFormattableTextComponent;
@@ -25,11 +25,11 @@ public class GroupObject {
     transient private static GroupObject groupObject = null;
     transient private static File saveDir = null;
 
-    public ArrayList<TileObject> objects = null;
+    public ArrayList<InGameTile> objects = null;
 
     public GroupObject() {}
 
-    public boolean addTile(TileObject tileObject) throws IOException {
+    public boolean addTile(InGameTile tileObject) throws IOException {
         System.out.println("Adding tiles");
         if(objects == null)
             objects = new ArrayList<>();
@@ -54,29 +54,40 @@ public class GroupObject {
         String json ;
         try {
             json = FileUtils.readFileToString(objectgroup, StandardCharsets.UTF_8);
-            return new Gson().fromJson(json, GroupObject.class);
+            GroupObject obj = new Gson().fromJson(json, GroupObject.class);
+            for(InGameTile t : obj.objects) {
+                t.computeSizes();
+                t.decompressEncodedRegionPlane();
+            }
+            return obj;
         } catch (Exception e) {
             e.printStackTrace();
             return new GroupObject();
         }
     }
 
-    public IFormattableTextComponent deleteTile(String tileName) {
-
-        for (int i = 0; i < objects.size(); i++) {
-            if(objects.get(i).id.equals(tileName)) {
-                objects.remove(objects.get(i));
-                try {
-                    save();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return new StringTextComponent("[Error] Problem while saving.");
-                }
-                return new StringTextComponent(tileName + " deleted.");
+    public InGameTile getTileByName(String name) {
+        for (InGameTile object : objects) {
+            if (object.id.equals(name)) {
+                return object;
             }
         }
+        return null;
+    }
 
-        return new StringTextComponent("[Error] Tile with name \"" + tileName + "\" not found.").setStyle(Style.EMPTY.setColor(Color.fromHex("#FF0000")));
+    public IFormattableTextComponent deleteTile(String tileName) {
+        InGameTile t = getTileByName(tileName);
+        if(t == null)
+            return new StringTextComponent("[Error] Tile with name \"" + tileName + "\" not found.").setStyle(Style.EMPTY.setColor(Color.fromHex("#FF0000")));
+
+        objects.remove(t);
+        try {
+            save();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new StringTextComponent("[Error] Problem while saving.");
+        }
+        return new StringTextComponent(tileName + " deleted.");
     }
 
     public TextComponent listAllTiles() {
@@ -88,7 +99,7 @@ public class GroupObject {
 
         t = new StringTextComponent(objects.size() + " tile(s) in memory.");
 
-        for(TileObject o : objects) {
+        for(InGameTile o : objects) {
             t.append(new StringTextComponent("\n- " + o.id + " "));
 
             Style style = Style.EMPTY

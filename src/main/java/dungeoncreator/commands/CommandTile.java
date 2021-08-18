@@ -6,15 +6,14 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dungeoncreator.GroupObject;
-import dungeoncreator.managers.TilesManager;
-import dungeoncreator.models.TileObject;
+import dungeoncreator.models.InGameTile;
+import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.*;
@@ -24,11 +23,8 @@ import java.io.IOException;
 
 public class CommandTile {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
-        //Minecraft.getInstance().gameDir
-
-
-        LiteralArgumentBuilder<CommandSource> commandTile
-                = Commands.literal("tiles")
+        LiteralArgumentBuilder<CommandSource> commandTile =
+                Commands.literal("tiles")
                 .requires((commandSource) -> commandSource.hasPermissionLevel(1))
                 .then(Commands.literal("create")
                         .then(Commands.argument("name",StringArgumentType.string())
@@ -36,8 +32,6 @@ public class CommandTile {
                                         .then(Commands.argument("to", BlockPosArgument.blockPos())
                                                 .executes(commandContext -> {
                                                     createTile(commandContext);
-
-                                                    //sendMessage(commandContext, "PROVIDER NAME: " + dir);
                                                     return 0;
                                                 })))))
                 // Deleting a tile
@@ -46,58 +40,66 @@ public class CommandTile {
                                 .executes(CommandTile::deleteTile)))
                 // Listing all tiles
                 .then(Commands.literal("list").executes(CommandTile::listTiles))
-                .then(Commands.literal("show").executes(commandSource -> toggleBox(commandSource,true)))
-                .then(Commands.literal("hide").executes(commandSource -> toggleBox(commandSource,false)))
+                // Show walkable areas or tiles boxes
+                .then(Commands.literal("boxes")
+                        .then(Commands.literal("show").executes(commandSource -> toggleBox(commandSource,true)))
+                        .then(Commands.literal("hide").executes(commandSource -> toggleBox(commandSource,false))))
                 .then(Commands.literal("where").executes(CommandTile::where))
-                .then(Commands.literal("export").executes(CommandTile::exportWalkable))
-                .then(Commands.literal("walkable").executes(CommandTile::showWalkable)); //TODO: combine show and walkable /show [box|walkable]
+                .then(Commands.literal("force-save").executes(CommandTile::forceSave))
+                .then(Commands.literal("walkable")
+                        .then(Commands.literal("show").executes(commandSource -> toggleWalkable(commandSource,true)))
+                        .then(Commands.literal("hide").executes(commandSource -> toggleWalkable(commandSource,false)))
+                );
 
         dispatcher.register(commandTile);
     }
 
-    static int exportWalkable(CommandContext<CommandSource> commandContext) {
-        File saveDir = getSaveDirectory();
-        if(saveDir == null) {
-            sendMessage(commandContext,"[Error] saveDir NULL");
-            return 0;
-        }
-        GroupObject groupObject = GroupObject.getInstance(saveDir);
-        try {
-            BlockPos pos = commandContext.getSource().asPlayer().getPosition();
-            TileObject t= TileUtils.getTileWithPlayerInside(groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
-            if(t != null) {
-                TileUtils.exportRegionPlane(t);
-                sendMessage(commandContext,"Done.");
-            }
-            else
-            {
-                sendMessage(commandContext,"[Error] You are not in a defined tile");
-            }
+    static int recomputeHeightMap(CommandContext<CommandSource> commandContext) {
+        // Fetching the cahce
+        Cache cache = Cache.getInstance();
 
-        } catch (CommandSyntaxException e) {
-            e.printStackTrace();
-            sendMessage(commandContext,"[Error] during search");
+        // Get the name argument
+        String name = StringArgumentType.getString(commandContext,"name");
+
+        if(name == null) {
+            sendMessage(commandContext,"Computing heightmap of all tiles.");
+            for(InGameTile t : cache.groupObject.objects) {
+                TileUtils.computeHeightMap(t, commandContext.getSource().getWorld());
+            }
+            sendMessage(commandContext,"Done.");
+        }
+        else
+        {
+            InGameTile t = cache.groupObject.getTileByName(name);
+            if(t != null)
+                TileUtils.computeHeightMap(t, commandContext.getSource().getWorld());
+            else
+                sendMessage(commandContext,"Tile with name " + name + " not found.");
         }
         return 1;
     }
 
-
-    static int showWalkable(CommandContext<CommandSource> commandContext) {
-        File saveDir = getSaveDirectory();
-        if(saveDir == null) {
-            sendMessage(commandContext,"[Error] saveDir NULL");
-            return 0;
+    static int forceSave(CommandContext<CommandSource> commandContext) {
+        try {
+            Cache.getInstance().groupObject.save();
+            sendMessage(commandContext,"Saved.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            sendMessage(commandContext,"Error while saving");
         }
-        GroupObject groupObject = GroupObject.getInstance(saveDir);
+        return 1;
+    }
+
+    static int toggleWalkable(CommandContext<CommandSource> commandContext, boolean visible) {
+        Cache cache = Cache.getInstance();
+
         try {
             BlockPos pos = commandContext.getSource().asPlayer().getPosition();
-            TileObject t= TileUtils.getTileWithPlayerInside(groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
+            InGameTile t = TileUtils.getTileWithPlayerInside(cache.groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
             if(t != null) {
-                t.displayWalkable = !t.displayWalkable;
-                if(!t.heightMapComputed) { //TODO: maybe offer a way to "recompute" it if map changed
-                    TileUtils.computeHeightMap(t, commandContext.getSource().getWorld());
-                    sendMessage(commandContext,"Computing height map...");
-                }
+                t.displayWalkable = visible;
+                sendMessage(commandContext,"Computing height map...");
+                TileUtils.computeHeightMap(t, commandContext.getSource().getWorld());
                 sendMessage(commandContext,"Done.");
             }
             else
@@ -115,15 +117,12 @@ public class CommandTile {
 
 
     static int where(CommandContext<CommandSource> commandContext) {
-        File saveDir = getSaveDirectory();
-        if(saveDir == null) {
-            sendMessage(commandContext,"[Error] saveDir NULL");
-            return 0;
-        }
-        GroupObject groupObject = GroupObject.getInstance(saveDir);
+        System.out.println("WHERE");
+        Cache cache = Cache.getInstance();
+        System.out.println("Cache.getInstance() => "  + cache.groupObject.objects.size());
         try {
             BlockPos pos = commandContext.getSource().asPlayer().getPosition();
-            TileObject t= TileUtils.getTileWithPlayerInside(groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
+            InGameTile t= TileUtils.getTileWithPlayerInside(cache.groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
             if(t == null) {
                 sendMessage(commandContext,"You are not currently inside a defined tile.");
             }
@@ -141,43 +140,19 @@ public class CommandTile {
     }
 
     static int toggleBox(CommandContext<CommandSource> commandContext, boolean visible) {
-        File saveDir = getSaveDirectory();
-        if(saveDir == null) {
-            sendMessage(commandContext,"[Error] saveDir NULL");
-            return 0;
-        }
-        TilesManager.getInstance(saveDir).toggleTilesBox(visible);
+        Cache.getInstance().groupObject.objects.forEach(tileObject -> tileObject.visible = visible);
         return 1;
     }
 
     static int deleteTile(CommandContext<CommandSource> commandContext) {
-        File saveDir = getSaveDirectory();
-        if(saveDir == null) {
-            sendMessage(commandContext,"[Error] saveDir NULL");
-            return 0;
-        }
-        GroupObject groupObject = GroupObject.getInstance(saveDir);
-        sendMessage(commandContext,groupObject.deleteTile(StringArgumentType.getString(commandContext,"name")));
+        sendMessage(commandContext,Cache.getInstance().groupObject.deleteTile(StringArgumentType.getString(commandContext,"name")));
         return 1;
     }
 
-    static File getSaveDirectory() {
-        if(Minecraft.getInstance().isIntegratedServerRunning()) {
-            return Minecraft.getInstance().getIntegratedServer().getWorldIconFile().getParentFile();
-        }
-        return null;
-    }
-
-    static int listTiles(CommandContext<CommandSource> commandContext) throws CommandSyntaxException {
-        File saveDir = getSaveDirectory();
-        if(saveDir == null) {
-            sendMessage(commandContext,"[Error] saveDir NULL");
-            return 0;
-        }
-        GroupObject groupObject = GroupObject.getInstance(saveDir);
+    static int listTiles(CommandContext<CommandSource> commandContext) {
         Entity entity = commandContext.getSource().getEntity();
         if(entity != null)
-            commandContext.getSource().getServer().getPlayerList().func_232641_a_(groupObject.listAllTiles(), ChatType.CHAT, entity.getUniqueID());
+            commandContext.getSource().getServer().getPlayerList().func_232641_a_(Cache.getInstance().groupObject.listAllTiles(), ChatType.CHAT, entity.getUniqueID());
         return 1;
     }
 
@@ -186,16 +161,8 @@ public class CommandTile {
         BlockPos to = BlockPosArgument.getLoadedBlockPos(commandContext, "to");
         String name = StringArgumentType.getString(commandContext,"name");
 
-        File saveDir = getSaveDirectory();
-        if(saveDir == null) {
-            sendMessage(commandContext,"[Error] saveDir NULL");
-            return;
-        }
-        sendMessage(commandContext,"saveDir: " + saveDir.getAbsolutePath());
-
-        GroupObject groupObject = GroupObject.getInstance(saveDir);
         try {
-            groupObject.addTile(new TileObject(name, new int[] {from.getX(),from.getY(),from.getZ()},new int[] {to.getX(),to.getY(),to.getZ()}));
+            Cache.getInstance().groupObject.addTile(new InGameTile(name, new int[] {from.getX(),from.getY(),from.getZ()},new int[] {to.getX(),to.getY(),to.getZ()}));
             sendMessage(commandContext, "Saved.");
         } catch (IOException e) {
             sendMessage(commandContext, "[Error] " + e.getMessage());

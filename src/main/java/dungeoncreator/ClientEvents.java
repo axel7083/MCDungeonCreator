@@ -3,7 +3,8 @@ package dungeoncreator;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import dungeoncreator.models.TileObject;
+import dungeoncreator.models.InGameTile;
+import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -25,8 +26,8 @@ public class ClientEvents {
         // If we are in a world
         if(Minecraft.getInstance().world != null)
         {
-            GroupObject groupObject = GroupObject.getInstance();
-            if(groupObject == null || groupObject.objects == null)
+            Cache cache = Cache.getInstance();
+            if(cache.groupObject == null || cache.groupObject.objects == null)
                 return;
 
             IRenderTypeBuffer.Impl renderBuffers = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
@@ -45,9 +46,9 @@ public class ClientEvents {
             matrixStack.push();
             matrixStack.translate(-x, -y, -z);
 
-            renderTileBoxes(event, renderBuffers, builder, matrixStack, groupObject);
+            renderTileBoxes(event, renderBuffers, builder, matrixStack, cache.groupObject);
 
-            TileObject t = TileUtils.getTileWithPlayerInside(groupObject.objects, (int) x, (int) y, (int) z);
+            InGameTile t = TileUtils.getTileWithPlayerInside(cache.groupObject.objects, (int) x, (int) y, (int) z);
             if(t != null)
                 renderWalkableArea(builder, matrixStack, t);
 
@@ -71,7 +72,7 @@ public class ClientEvents {
         });
     }
 
-    private static void renderWalkableArea(IVertexBuilder builder, MatrixStack matrixStack, TileObject tileObject) {
+    private static void renderWalkableArea(IVertexBuilder builder, MatrixStack matrixStack, InGameTile tileObject) {
 
         float offset = -0.6f;
         Matrix4f matrix4f = matrixStack.getLast().getMatrix();

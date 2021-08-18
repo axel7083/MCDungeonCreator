@@ -1,29 +1,47 @@
 package dungeoncreator.models;
 
-public class TileObject {
+import com.google.gson.annotations.SerializedName;
+import dungeoncreator.utils.TileUtils;
+
+import java.io.IOException;
+import java.util.zip.DataFormatException;
+
+public class InGameTile {
     public transient boolean visible = false;
     public transient boolean displayWalkable = false;
     public String id;
     public int[] pos;
     public int[] pos2;
-    public int sizeX;
-    public int sizeY;
-    public int sizeZ;
+    public transient int sizeX;
+    public transient int sizeY;
+    public transient int sizeZ;
 
-    public int minX;
-    public int minY;
-    public int minZ;
+    public transient int minX;
+    public transient int minY;
+    public transient int minZ;
 
-    public byte[][] regionPlane;
+    @SerializedName(value = "region-plane")
+    public String encodedRegionPlane = null;
+
+    public transient byte[][] regionPlane;
     public transient short[][] heightPlane;
     public transient boolean heightMapComputed = false;
 
-    public TileObject(String id, int[] pos, int[] pos2) {
+    public InGameTile(String id, int[] pos, int[] pos2) {
         this.id = id;
         this.pos = pos;
         this.pos2 = pos2;
         generatePlane();
         computeSizes();
+    }
+
+    public void decompressEncodedRegionPlane() {
+        generatePlane();
+        try {
+            TileUtils.importRegionPlane(this);
+        } catch (IOException | DataFormatException e) {
+            e.printStackTrace();
+        }
     }
 
     public void computeSizes() {
@@ -47,7 +65,7 @@ public class TileObject {
             }
     }
 
-    public boolean isOverlapping(TileObject o2) {
+    public boolean isOverlapping(InGameTile o2) {
         return pos2[0] > o2.pos[0] && pos[0] < o2.pos2[0] &&
                 pos2[1]  > o2.pos[1] && pos[1] < o2.pos2[1] &&
                 pos2[2]  > o2.pos[2] && pos[2] < o2.pos2[2];
