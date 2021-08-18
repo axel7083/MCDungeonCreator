@@ -37,6 +37,7 @@ public class GroupObject {
         if(TileUtils.checkOverLapping(objects, tileObject))
             return false;
 
+        tileObject.computeSizes();
         objects.add(tileObject);
         System.out.println("tiles added");
         save();

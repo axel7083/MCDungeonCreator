@@ -44,8 +44,6 @@ public class DungeonCreator {
       System.out.println("[onWorldLoaded] "  + ((ServerWorld) event.getWorld()).getServer().getWorldIconFile().getParentFile().getAbsolutePath());
       // Fetching the WorldIconFile allows us to get the Save Directory easily.
       cache.groupObject = GroupObject.getInstance(((ServerWorld) event.getWorld()).getServer().getWorldIconFile().getParentFile());
-
-      System.out.println("Found " + cache.groupObject.objects.size() + " tiles.");
     }
   }
 

@@ -12,9 +12,9 @@ public class InGameTile {
     public String id;
     public int[] pos;
     public int[] pos2;
-    public transient int sizeX;
-    public transient int sizeY;
-    public transient int sizeZ;
+    public int sizeX;
+    public int sizeY;
+    public int sizeZ;
 
     public transient int minX;
     public transient int minY;

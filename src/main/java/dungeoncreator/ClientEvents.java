@@ -80,13 +80,17 @@ public class ClientEvents {
         int minX = Math.min( tileObject.pos[0], tileObject.pos2[0]);
         int minZ = Math.min( tileObject.pos[2], tileObject.pos2[2]);
 
+        if(tileObject.sizeX == 0 || tileObject.sizeY == 0 ||tileObject.sizeZ == 0)
+            tileObject.computeSizes();
+
         if(tileObject.displayWalkable) {
             for(int x = 0; x< tileObject.sizeX; x++) {
                 for(int z = 0; z< tileObject.sizeZ; z++) {
 
-                    if(tileObject.regionPlane == null)
+                    if(tileObject.regionPlane == null || tileObject.regionPlane.length == 0)
                         tileObject.generatePlane();
 
+                    //System.out.println("LENGTH ; " + tileObject.regionPlane.length);
                     boolean minimap = tileObject.regionPlane[x][z] == 0;
                     float green = minimap?1.0f:0;
                     float red = minimap?0:1.0f;
