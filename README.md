@@ -24,11 +24,23 @@ An objectgroup.json generate from this mod will look like this:
         X2,
         Y2,
         Z2
-      ]
+      ],
+      "region-plane" = "...",
     }, ...
   ]
 }
 ```
+ 
+# Region-Plane (For proper minimap)
+![alt text](https://github.com/DungeonsModding/MCDungeonCreator/blob/main/screenshots/walkable_area.png)
+
+You can use the command `/tiles walkable show` to see the walkable areas in the tiles you are currently in (See example [here](https://github.com/DungeonsModding/MCDungeonCreator/blob/main/screenshots/walkable_area.png) ).
+Two items have been added to the Redstone inventory section in creative, they allow you to paint the walkable areas (when visible) in Green or Red.
+
+In the save directory of the world you are currently in, in the objectgroup.json each objects will have (if used) a new property "region-plane" (You can do `/tiles force-save` to force the mod to generate the file) you need to replace in the final objectgroup.json generate by the [JavaWorldToObjectGroup.exe](https://github.com/Dokucraft/Dungeons-Mod-Kit/tree/master/Tools) tool the content of the region-plane property by the one from the Java World Directory.
+
+## TODO:
+The goal would be to avoid using [JavaWorldToObjectGroup.exe](https://github.com/Dokucraft/Dungeons-Mod-Kit/tree/master/Tools) and do all the conversion in the Java Mod. It is possible, but a bit long to port all the Python code. Any help appreciated.
  
 # Commands
 
@@ -36,6 +48,7 @@ An objectgroup.json generate from this mod will look like this:
 |-----------------------------------------	|-------------------------------------------------------------------------------------------------	|
 | `tiles create [name] X1 Y1 Z1 X2 Y2 Z2` 	| Create a tile in the objectgroup.json file in the root folder of the save you are currently in. ![alt text](https://github.com/DungeonsModding/MCDungeonCreator/blob/main/screenshots/tiles_create.png) 	|
 | `tiles delete [name]`                   	| Delete a tile from the objectgroup.json file.                                                    	|
-| `tiles show`                            	| Show a box around the tiles                                                                     	|
-| `tiles hide`                            	| Hide the box around the tiles                                                                   	|
+| `tiles boxes [show|hide]`               	| Show or hide boxes around the tiles                                                                     	|
+| `tiles walkable [show|hide]`               	| Show or hide the walkable areas on the tiles                                                   	|
 | `tiles list`                            	| List all tiles in the objectgroup.json file ![alt text](https://github.com/DungeonsModding/MCDungeonCreator/blob/main/screenshots/tiles_list.png)                                                    	|
+| `tiles force-save`               	| Generate directly the objectgroup.json in the world save directory                                                                     	|
