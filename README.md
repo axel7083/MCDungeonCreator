@@ -5,31 +5,10 @@ This mod need a lot of re-work, most of the features are just prototype to prove
 # MCDungeonCreator
  A Minecraft Java Mod to create objectgroup.json from command line. To use the mod, install forge 1.16.5 from [here](https://files.minecraftforge.net/net/minecraftforge/forge/index_1.16.5.html) and download the `dungeoncreator-1.16.5.jar` file of the mod in the [release section](https://github.com/DungeonsModding/MCDungeonCreator/releases/latest) in the Assets part.
  
-# Objectgroup.json file generated
+# Generate the objectgroup.json
 
-The objectgroup.json does not contain the block information, only the position of the tiles, you need to use [Dungeons-Mod-Kit](https://github.com/Dokucraft/Dungeons-Mod-Kit) and the [JavaWorldToObjectGroup.exe](https://github.com/Dokucraft/Dungeons-Mod-Kit/tree/master/Tools) tool to convert to an objectgroup.json containing the block informations.
-
-An objectgroup.json generate from this mod will look like this:
- ```JS
-{
-  "objects": [
-    {
-      "id": "name",
-      "pos": [
-        X1,
-        Y1,
-        Z1
-      ],
-      "pos2": [
-        X2,
-        Y2,
-        Z2
-      ],
-      "region-plane" = "...",
-    }, ...
-  ]
-}
-```
+You need to create some tiles (at least 3), defined doors using structure block (More information about that in the Discord), put a starting place by placing a player_head.
+Then, you can run the commands explained in the commands section to export the objectgroup.json, ready to be used.
  
 # Region-Plane (For proper minimap)
 ![alt text](https://github.com/DungeonsModding/MCDungeonCreator/blob/main/screenshots/walkable_area.png)
@@ -48,7 +27,14 @@ The goal would be to avoid using [JavaWorldToObjectGroup.exe](https://github.com
 |-----------------------------------------	|-------------------------------------------------------------------------------------------------	|
 | `tiles create [name] X1 Y1 Z1 X2 Y2 Z2` 	| Create a tile in the objectgroup.json file in the root folder of the save you are currently in. ![alt text](https://github.com/DungeonsModding/MCDungeonCreator/blob/main/screenshots/tiles_create.png) 	|
 | `tiles delete [name]`                   	| Delete a tile from the objectgroup.json file.                                                    	|
-| `tiles boxes [show|hide]`               	| Show or hide boxes around the tiles                                                                     	|
-| `tiles walkable [show|hide]`               	| Show or hide the walkable areas on the tiles                                                   	|
+| `tiles boxes [show/hide]`               	| Show or hide boxes around the tiles                                                                     	|
+| `tiles walkable [show/hide]`               	| Show or hide the walkable areas on the tiles                                                   	|
 | `tiles list`                            	| List all tiles in the objectgroup.json file ![alt text](https://github.com/DungeonsModding/MCDungeonCreator/blob/main/screenshots/tiles_list.png)                                                    	|
 | `tiles force-save`               	| Generate directly the objectgroup.json in the world save directory                                                                     	|
+| `tiles export`               	| Export the objectgroup.json file (in your world save directory folder by default.                      	|
+| `tiles export set-default-path "C:[path]/objectgroup.json"`               	| Set the export path for your current world to some place on your computer. You need to put the path between quotes (") and use `/` instead of `\`                      	|
+| `tiles export reset-default-path`               	| Remove any previous path given, the world save directory will be used from now.                      	|
+| `tiles export show-export-path`               	| Show the path where the file will be exported.                      	|
+
+
+
