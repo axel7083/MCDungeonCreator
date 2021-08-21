@@ -1,5 +1,7 @@
 package dungeoncreator.models.not_implemented;
 
+import dungeoncreator.models.ObjectTile;
+
 import java.util.ArrayList;
 import java.util.List;
 

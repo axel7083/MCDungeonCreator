@@ -8,7 +8,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
-import dungeoncreator.utils.not_implemented.ObjectGroupExporter;
+import dungeoncreator.exporter.ObjectGroupExporter;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;

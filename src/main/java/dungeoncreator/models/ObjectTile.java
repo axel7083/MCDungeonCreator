@@ -1,6 +1,8 @@
-package dungeoncreator.models.not_implemented;
+package dungeoncreator.models;
 
 import com.google.gson.annotations.SerializedName;
+import dungeoncreator.models.not_implemented.Door;
+import dungeoncreator.models.not_implemented.Region;
 
 import java.util.List;
 

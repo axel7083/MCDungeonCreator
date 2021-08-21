@@ -1,12 +1,19 @@
-package dungeoncreator.utils.not_implemented;
+package dungeoncreator.exporter;
 
 import com.google.gson.*;
+import com.google.gson.stream.MalformedJsonException;
 import dungeoncreator.WorldData;
 import dungeoncreator.models.InGameTile;
+import dungeoncreator.models.not_implemented.Door;
 import dungeoncreator.models.not_implemented.ObjectGroup;
-import dungeoncreator.models.not_implemented.ObjectTile;
+import dungeoncreator.models.ObjectTile;
+import dungeoncreator.models.not_implemented.Region;
 import dungeoncreator.utils.TileUtils;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.StructureBlock;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.StructureBlockTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -94,6 +101,8 @@ public class ObjectGroupExporter {
 
             ObjectGroup objectGroup = new ObjectGroup();
             for(InGameTile tile : worldData.objects) {
+                ArrayList<Region> regions = new ArrayList<>();
+                ArrayList<Door> doors = new ArrayList<>();
 
                 int block_count =tile.sizeX*tile.sizeY*tile.sizeZ;
                 byte[] blocks = new byte[(int) Math.ceil(block_count*2 + (float) block_count/2)];
@@ -121,11 +130,57 @@ public class ObjectGroupExporter {
                                     continue;
                                 case "minecraft:player_head":
                                 case "minecraft:player_wall_head":
-                                    // TODO:
                                     System.out.println("Define player spawn position");
+                                    regions.add(new Region("playerstart", "playerstart", "trigger", new int[]{x, y, z}, new int[]{1,1,1}));
                                     break;
                                 case "minecraft:structure_block":
-                                    // TODO:
+
+                                    TileEntity tileentity = world.getTileEntity(new BlockPos(realX, realY, realZ));
+                                    // We fetch the tileEntity linked to the structureBlock at the position we are currently exploring
+                                    if (tileentity instanceof StructureBlockTileEntity) {
+                                        BlockPos boxSize = ((StructureBlockTileEntity) tileentity).getStructureSize();
+                                        String name = ((StructureBlockTileEntity) tileentity).getName();
+                                        String metadata = ((StructureBlockTileEntity) tileentity).getMetadata();
+                                        String tag = null;
+                                        String type = null;
+
+                                        int[] pos = new int[]{x, y, z};
+                                        int[] size = new int[]{boxSize.getX(), boxSize.getY(), boxSize.getZ()};
+
+                                        // We create a door if it is
+                                        if(name.startsWith("door:")) {
+                                            doors.add(new Door(pos, size));
+                                        }
+
+                                        // If it is a region, we define it properly
+                                        if(name.startsWith("region:")) {
+                                            if(name.length() > 7)
+                                                name = name.substring(7);
+
+                                            JsonObject json_metadata = null;
+                                            if(metadata.length() > 2) {
+                                                try {
+                                                    json_metadata = new Gson().fromJson(metadata, JsonObject.class);
+                                                }
+                                                catch (JsonSyntaxException e) {
+                                                    if(callback != null) {
+                                                        callback.LogEvent("[ERROR] JsonSyntaxException in StructureBlock at (" + realX + "," + realY + "," + realZ + ").");
+                                                    }
+                                                }
+                                            }
+
+                                            if(json_metadata != null) {
+                                                if(json_metadata.has("tags"))
+                                                    tag = json_metadata.get("tags").getAsString();
+                                                if(json_metadata.has("type"))
+                                                    type = json_metadata.get("type").getAsString();
+                                            }
+
+                                            regions.add(new Region(name, tag, type, pos, size));
+                                        }
+                                    }
+
+
                                 case "minecraft:barrier":
                                     // TODO:
                                     break;
@@ -173,8 +228,8 @@ public class ObjectGroupExporter {
                         TileUtils.exportRegionPlane(tile),
                         TileUtils.exportHeightPlane(tile),
                         null,
-                        null,
-                        null));
+                        doors,
+                        regions));
             }
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
