@@ -19,7 +19,7 @@ Two items have been added to the Redstone inventory section in creative, they al
 In the save directory of the world you are currently in, in the objectgroup.json each objects will have (if used) a new property "region-plane" (You can do `/tiles force-save` to force the mod to generate the file) you need to replace in the final objectgroup.json generate by the [JavaWorldToObjectGroup.exe](https://github.com/Dokucraft/Dungeons-Mod-Kit/tree/master/Tools) tool the content of the region-plane property by the one from the Java World Directory.
 
 ## TODO:
-The goal would be to avoid using [JavaWorldToObjectGroup.exe](https://github.com/Dokucraft/Dungeons-Mod-Kit/tree/master/Tools) and do all the conversion in the Java Mod. It is possible, but a bit long to port all the Python code. Any help appreciated.
+Support the bundaries.
  
 # Commands
 
