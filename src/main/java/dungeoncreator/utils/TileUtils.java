@@ -1,6 +1,6 @@
 package dungeoncreator.utils;
 
-import dungeoncreator.GroupObject;
+import dungeoncreator.WorldData;
 import dungeoncreator.models.InGameTile;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -60,13 +60,13 @@ public class TileUtils {
     }
 
     public static String setBlockWalkable(PlayerEntity playerIn, byte value, int range) {
-        GroupObject groupObject = GroupObject.getInstance();
-        if(groupObject != null) {
+        WorldData worldData = WorldData.getInstance();
+        if(worldData != null) {
             // Fetching the player position
             BlockPos pos = playerIn.getPosition();
 
             // Getting the tile where the player is in
-            InGameTile tile = TileUtils.getTileWithPlayerInside(groupObject.objects,pos.getX(),pos.getY(),pos.getZ());
+            InGameTile tile = TileUtils.getTileWithPlayerInside(worldData.objects,pos.getX(),pos.getY(),pos.getZ());
 
             if(tile == null)  {
                 return "You are not currently in a tile.";
@@ -122,8 +122,25 @@ public class TileUtils {
 
         try {
             return new String(Base64.getEncoder().encode(compress(simpleArray)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    //heightPlane
+    public static String exportHeightPlane(InGameTile tile) {
 
+        byte[] simpleArray = new byte[tile.sizeX*tile.sizeZ];
+
+        for(int x = 0 ; x < tile.sizeX; x++) {
+            for(int z = 0; z < tile.sizeZ ; z++) {
+                simpleArray[x+z*tile.sizeX] = (byte) (tile.heightPlane[x][z] & 0xff);
+            }
+        }
+
+        try {
+            return new String(Base64.getEncoder().encode(compress(simpleArray)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -147,7 +164,7 @@ public class TileUtils {
     }
 
     // Source: https://dzone.com/articles/how-compress-and-uncompress
-    private static byte[] compress(byte[] data) throws IOException {
+    public static byte[] compress(byte[] data) throws IOException {
         Deflater deflater = new Deflater();
         deflater.setInput(data);
 

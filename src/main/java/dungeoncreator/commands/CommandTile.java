@@ -5,11 +5,10 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import dungeoncreator.GroupObject;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
-import net.minecraft.client.Minecraft;
+import dungeoncreator.utils.not_implemented.ObjectGroupExporter;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
@@ -46,12 +45,68 @@ public class CommandTile {
                         .then(Commands.literal("hide").executes(commandSource -> toggleBox(commandSource,false))))
                 .then(Commands.literal("where").executes(CommandTile::where))
                 .then(Commands.literal("force-save").executes(CommandTile::forceSave))
+                .then(Commands.literal("export").executes(CommandTile::export)
+                        .then(Commands.literal("set-default-path")
+                            .then(Commands.argument("path",StringArgumentType.string())
+                                    .executes(CommandTile::setExportPath)))
+                        .then(Commands.literal("reset-default-path")
+                                .executes(CommandTile::resetExportPath))
+                        .then(Commands.literal("show-export-path")
+                                .executes(CommandTile::showExportPath)))
                 .then(Commands.literal("walkable")
                         .then(Commands.literal("show").executes(commandSource -> toggleWalkable(commandSource,true)))
                         .then(Commands.literal("hide").executes(commandSource -> toggleWalkable(commandSource,false)))
                 );
 
         dispatcher.register(commandTile);
+    }
+
+    static int showExportPath(CommandContext<CommandSource> commandContext) {
+
+        if(Cache.getInstance().worldData.exportPath == null) {
+            sendMessage(commandContext,
+                    "For this world, we use the default export path which is: " + Cache.getInstance().worldData.saveDir.getAbsolutePath() + "\\" + Cache.getInstance().worldData.fileName);
+        }
+        else
+        {
+            sendMessage(commandContext,"The current export-path is " + Cache.getInstance().worldData.exportPath);
+        }
+
+        return 1;
+    }
+
+    static int resetExportPath(CommandContext<CommandSource> commandContext) {
+        try {
+            Cache.getInstance().worldData.exportPath = null;
+            Cache.getInstance().worldData.save();
+            sendMessage(commandContext,"Saved.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            sendMessage(commandContext,"Error while defining the path");
+        }
+        return 1;
+    }
+
+    static int setExportPath(CommandContext<CommandSource> commandContext) {
+        String path = StringArgumentType.getString(commandContext,"path");
+        try {
+            File file = new File(path);
+
+            if (!file.isDirectory()) {
+                Cache.getInstance().worldData.exportPath = path;
+                Cache.getInstance().worldData.save();
+                sendMessage(commandContext,"Saved.");
+            }
+            else
+            {
+                sendMessage(commandContext,"The path selected is a directory, you need to choose the filename.");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            sendMessage(commandContext,"Error while defining the path");
+        }
+        return 1;
     }
 
     static int recomputeHeightMap(CommandContext<CommandSource> commandContext) {
@@ -63,14 +118,14 @@ public class CommandTile {
 
         if(name == null) {
             sendMessage(commandContext,"Computing heightmap of all tiles.");
-            for(InGameTile t : cache.groupObject.objects) {
+            for(InGameTile t : cache.worldData.objects) {
                 TileUtils.computeHeightMap(t, commandContext.getSource().getWorld());
             }
             sendMessage(commandContext,"Done.");
         }
         else
         {
-            InGameTile t = cache.groupObject.getTileByName(name);
+            InGameTile t = cache.worldData.getTileByName(name);
             if(t != null)
                 TileUtils.computeHeightMap(t, commandContext.getSource().getWorld());
             else
@@ -81,7 +136,7 @@ public class CommandTile {
 
     static int forceSave(CommandContext<CommandSource> commandContext) {
         try {
-            Cache.getInstance().groupObject.save();
+            Cache.getInstance().worldData.save();
             sendMessage(commandContext,"Saved.");
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,7 +150,7 @@ public class CommandTile {
 
         try {
             BlockPos pos = commandContext.getSource().asPlayer().getPosition();
-            InGameTile t = TileUtils.getTileWithPlayerInside(cache.groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
+            InGameTile t = TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
             if(t != null) {
                 t.displayWalkable = visible;
                 sendMessage(commandContext,"Computing height map...");
@@ -115,14 +170,23 @@ public class CommandTile {
         return 1;
     }
 
+    static int export(CommandContext<CommandSource> commandContext) {
+        sendMessage(commandContext, "Any objectgroup.json file inside the world save folder will be deleted.");
+        System.out.println("EXPORTING");
+        Cache cache = Cache.getInstance();
+        ObjectGroupExporter o = new ObjectGroupExporter(cache.worldData, commandContext.getSource().getWorld(), cache.worldPath, str -> sendMessage(commandContext, str));
+        o.export();
+
+        return 1;
+    }
 
     static int where(CommandContext<CommandSource> commandContext) {
         System.out.println("WHERE");
         Cache cache = Cache.getInstance();
-        System.out.println("Cache.getInstance() => "  + cache.groupObject.objects.size());
+        System.out.println("Cache.getInstance() => "  + cache.worldData.objects.size());
         try {
             BlockPos pos = commandContext.getSource().asPlayer().getPosition();
-            InGameTile t= TileUtils.getTileWithPlayerInside(cache.groupObject.objects, pos.getX(), pos.getY(), pos.getZ());
+            InGameTile t= TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
             if(t == null) {
                 sendMessage(commandContext,"You are not currently inside a defined tile.");
             }
@@ -140,19 +204,19 @@ public class CommandTile {
     }
 
     static int toggleBox(CommandContext<CommandSource> commandContext, boolean visible) {
-        Cache.getInstance().groupObject.objects.forEach(tileObject -> tileObject.visible = visible);
+        Cache.getInstance().worldData.objects.forEach(tileObject -> tileObject.visible = visible);
         return 1;
     }
 
     static int deleteTile(CommandContext<CommandSource> commandContext) {
-        sendMessage(commandContext,Cache.getInstance().groupObject.deleteTile(StringArgumentType.getString(commandContext,"name")));
+        sendMessage(commandContext,Cache.getInstance().worldData.deleteTile(StringArgumentType.getString(commandContext,"name")));
         return 1;
     }
 
     static int listTiles(CommandContext<CommandSource> commandContext) {
         Entity entity = commandContext.getSource().getEntity();
         if(entity != null)
-            commandContext.getSource().getServer().getPlayerList().func_232641_a_(Cache.getInstance().groupObject.listAllTiles(), ChatType.CHAT, entity.getUniqueID());
+            commandContext.getSource().getServer().getPlayerList().func_232641_a_(Cache.getInstance().worldData.listAllTiles(), ChatType.CHAT, entity.getUniqueID());
         return 1;
     }
 
@@ -162,7 +226,7 @@ public class CommandTile {
         String name = StringArgumentType.getString(commandContext,"name");
 
         try {
-            Cache.getInstance().groupObject.addTile(new InGameTile(name, new int[] {from.getX(),from.getY(),from.getZ()},new int[] {to.getX(),to.getY(),to.getZ()}));
+            Cache.getInstance().worldData.addTile(new InGameTile(name, new int[] {from.getX(),from.getY(),from.getZ()},new int[] {to.getX(),to.getY(),to.getZ()}));
             sendMessage(commandContext, "Saved.");
         } catch (IOException e) {
             sendMessage(commandContext, "[Error] " + e.getMessage());

@@ -19,15 +19,16 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class GroupObject {
+public class WorldData {
 
-    transient private static String fileName = "objectgroup.json";
-    transient private static GroupObject groupObject = null;
-    transient private static File saveDir = null;
+    transient public static String fileName = "world_data.json";
+    transient private static WorldData worldData = null;
+    transient public static File saveDir = null;
 
     public ArrayList<InGameTile> objects = null;
+    public String exportPath = null;
 
-    public GroupObject() {}
+    public WorldData() {}
 
     public boolean addTile(InGameTile tileObject) throws IOException {
         System.out.println("Adding tiles");
@@ -44,18 +45,18 @@ public class GroupObject {
         return true;
     }
 
-    private static GroupObject load() {
+    private static WorldData load() {
         File objectgroup = new File(saveDir.getAbsoluteFile() + "\\" + fileName);
 
         if(!objectgroup.exists()) {
             System.out.println("Object group file does not exist.");
-            return new GroupObject();
+            return new WorldData();
         }
         System.out.println("Converting json to GroupObject.class");
         String json ;
         try {
             json = FileUtils.readFileToString(objectgroup, StandardCharsets.UTF_8);
-            GroupObject obj = new Gson().fromJson(json, GroupObject.class);
+            WorldData obj = new Gson().fromJson(json, WorldData.class);
             for(InGameTile t : obj.objects) {
                 t.computeSizes();
                 t.decompressEncodedRegionPlane();
@@ -63,7 +64,7 @@ public class GroupObject {
             return obj;
         } catch (Exception e) {
             e.printStackTrace();
-            return new GroupObject();
+            return new WorldData();
         }
     }
 
@@ -123,22 +124,22 @@ public class GroupObject {
         writer.close();
     }
 
-    public static GroupObject getInstance() {
+    public static WorldData getInstance() {
         if(saveDir == null) {
             return null;
         }
-        return groupObject;
+        return worldData;
     }
 
     /**
      * Return the singleton GameObject instance for the world
      */
-    public static GroupObject getInstance(File _saveDir) {
+    public static WorldData getInstance(File _saveDir) {
         if(saveDir == null || !saveDir.equals(_saveDir)) {
             saveDir = _saveDir;
-            groupObject = load();
+            worldData = load();
         }
         System.out.println("getInstance");
-        return groupObject;
+        return worldData;
     }
 }

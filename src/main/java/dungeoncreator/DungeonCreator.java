@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import java.io.IOException;
+import java.io.*;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(DungeonCreator.MODID)
@@ -21,7 +21,6 @@ public class DungeonCreator {
   public static final String MODID = "dungeoncreator";
 
   public DungeonCreator() {
-
 
     // Get an instance of the mod event bus
     final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -39,11 +38,15 @@ public class DungeonCreator {
     {
       System.out.println("[onWorldLoaded]");
       Cache cache = Cache.getInstance();
-      cache.currentWorld = event.getWorld();
-
       System.out.println("[onWorldLoaded] "  + ((ServerWorld) event.getWorld()).getServer().getWorldIconFile().getParentFile().getAbsolutePath());
+
       // Fetching the WorldIconFile allows us to get the Save Directory easily.
-      cache.groupObject = GroupObject.getInstance(((ServerWorld) event.getWorld()).getServer().getWorldIconFile().getParentFile());
+      File s = ((ServerWorld) event.getWorld()).getServer().getWorldIconFile().getParentFile();
+
+      // Caching important data
+      cache.currentWorld = event.getWorld();
+      cache.worldPath = s.getAbsolutePath();
+      cache.worldData = WorldData.getInstance(s);
     }
   }
 
@@ -59,7 +62,7 @@ public class DungeonCreator {
 
         // Saving the cached groupObject
         try {
-          cache.groupObject.save();
+          cache.worldData.save();
         } catch (IOException e) {
           e.printStackTrace();
         }

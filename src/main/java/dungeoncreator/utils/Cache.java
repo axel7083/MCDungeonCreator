@@ -1,14 +1,13 @@
 package dungeoncreator.utils;
 
-import dungeoncreator.GroupObject;
-import dungeoncreator.models.not_implemented.ObjectGroup;
+import dungeoncreator.WorldData;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 
 public class Cache {
 
     public IWorld currentWorld = null;
-    public GroupObject groupObject = null;
+    public WorldData worldData = null;
+    public String worldPath = null;
 
     private static Cache cache = null;
 
@@ -18,7 +17,7 @@ public class Cache {
 
     public void destroy() {
         currentWorld = null;
-        groupObject = null;
+        worldData = null;
     }
 
     public static Cache getInstance() {

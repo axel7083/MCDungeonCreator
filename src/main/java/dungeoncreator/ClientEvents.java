@@ -27,7 +27,7 @@ public class ClientEvents {
         if(Minecraft.getInstance().world != null)
         {
             Cache cache = Cache.getInstance();
-            if(cache.groupObject == null || cache.groupObject.objects == null)
+            if(cache.worldData == null || cache.worldData.objects == null)
                 return;
 
             IRenderTypeBuffer.Impl renderBuffers = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
@@ -46,9 +46,9 @@ public class ClientEvents {
             matrixStack.push();
             matrixStack.translate(-x, -y, -z);
 
-            renderTileBoxes(event, renderBuffers, builder, matrixStack, cache.groupObject);
+            renderTileBoxes(event, renderBuffers, builder, matrixStack, cache.worldData);
 
-            InGameTile t = TileUtils.getTileWithPlayerInside(cache.groupObject.objects, (int) x, (int) y, (int) z);
+            InGameTile t = TileUtils.getTileWithPlayerInside(cache.worldData.objects, (int) x, (int) y, (int) z);
             if(t != null)
                 renderWalkableArea(builder, matrixStack, t);
 
@@ -58,9 +58,9 @@ public class ClientEvents {
         }
     }
 
-    private static void renderTileBoxes(RenderWorldLastEvent event, IRenderTypeBuffer.Impl renderBuffers, IVertexBuilder builder, MatrixStack matrixStack, GroupObject groupObject) {
+    private static void renderTileBoxes(RenderWorldLastEvent event, IRenderTypeBuffer.Impl renderBuffers, IVertexBuilder builder, MatrixStack matrixStack, WorldData worldData) {
 
-        groupObject.objects.forEach(tileObject -> {
+        worldData.objects.forEach(tileObject -> {
             if(tileObject.visible)
                 WorldRenderer.drawBoundingBox(matrixStack, builder,
                         Math.min(tileObject.pos[0],tileObject.pos2[0]),

@@ -26,7 +26,7 @@ public class ObjectTile {
         this.blocks = blocks;
         this.regionPlane = regionPlane;
         this.heightPlane = heightPlane;
-        this.regionYPlane = regionYPlane;
+        this.regionYPlane = (regionYPlane==null)?heightPlane:regionYPlane; // Usually just a copy of heightPlane
         this.doors = doors;
         this.regions = regions;
     }

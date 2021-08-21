@@ -1,0 +1,5381 @@
+{
+  "minecraft:air": [0, 0],
+  "minecraft:stone": [1, 0],
+  "minecraft:granite": [1, 1],
+  "minecraft:polished_granite": [1, 2],
+  "minecraft:diorite": [1, 3],
+  "minecraft:polished_diorite": [1, 4],
+  "minecraft:andesite": [1, 5],
+  "minecraft:polished_andesite": [1, 6],
+  "minecraft:blackstone": [1, 7],
+  "minecraft:chiseled_polished_blackstone": [1, 8],
+  "minecraft:polished_blackstone": [1, 9],
+  "minecraft:polished_blackstone_bricks": [1, 10],
+  "minecraft:gilded_blackstone": [1, 11],
+  "minecraft:cracked_polished_blackstone_bricks": [1, 12],
+  "minecraft:lodestone": [1, 13],
+  "minecraft:ancient_debris": [1, 14],
+  "minecraft:infested_chiseled_stone_bricks": [1, 15],
+  "minecraft:grass_block": [2, 0],
+  "minecraft:dirt": [3, 0],
+  "minecraft:coarse_dirt": [3, 1],
+  "minecraft:cobblestone": [4, 0],
+  "minecraft:oak_planks": [5, 0],
+  "minecraft:spruce_planks": [5, 1],
+  "minecraft:birch_planks": [5, 2],
+  "minecraft:jungle_planks": [5, 3],
+  "minecraft:acacia_planks": [5, 4],
+  "minecraft:dark_oak_planks": [5, 5],
+  "minecraft:oak_sapling": [{
+    "props": {
+      "stage": "0"
+    },
+    "dungeons": [6, 0]
+  }, {
+    "props": {
+      "stage": "1"
+    },
+    "dungeons": [6, 8]
+  }
+  ],
+  "minecraft:spruce_sapling": [{
+    "props": {
+      "stage": "0"
+    },
+    "dungeons": [6, 1]
+  }, {
+    "props": {
+      "stage": "1"
+    },
+    "dungeons": [6, 9]
+  }
+  ],
+  "minecraft:birch_sapling": [{
+    "props": {
+      "stage": "0"
+    },
+    "dungeons": [6, 2]
+  }, {
+    "props": {
+      "stage": "1"
+    },
+    "dungeons": [6, 10]
+  }
+  ],
+  "minecraft:jungle_sapling": [{
+    "props": {
+      "stage": "0"
+    },
+    "dungeons": [6, 3]
+  }, {
+    "props": {
+      "stage": "1"
+    },
+    "dungeons": [6, 11]
+  }
+  ],
+  "minecraft:acacia_sapling": [{
+    "props": {
+      "stage": "0"
+    },
+    "dungeons": [6, 4]
+  }, {
+    "props": {
+      "stage": "1"
+    },
+    "dungeons": [6, 12]
+  }
+  ],
+  "minecraft:dark_oak_sapling": [{
+    "props": {
+      "stage": "0"
+    },
+    "dungeons": [6, 5]
+  }, {
+    "props": {
+      "stage": "1"
+    },
+    "dungeons": [6, 13]
+  }
+  ],
+  "minecraft:bedrock": [7, 0],
+  "minecraft:water": [{
+    "props": {
+      "level": "1"
+    },
+    "dungeons": [8, 0]
+  }, {
+    "props": {
+      "level": "2"
+    },
+    "dungeons": [8, 1]
+  }, {
+    "props": {
+      "level": "3"
+    },
+    "dungeons": [8, 2]
+  }, {
+    "props": {
+      "level": "4"
+    },
+    "dungeons": [8, 3]
+  }, {
+    "props": {
+      "level": "5"
+    },
+    "dungeons": [8, 4]
+  }, {
+    "props": {
+      "level": "6"
+    },
+    "dungeons": [8, 5]
+  }, {
+    "props": {
+      "level": "7"
+    },
+    "dungeons": [8, 6]
+  }, {
+    "props": {
+      "level": "8"
+    },
+    "dungeons": [8, 7]
+  }, {
+    "props": {
+      "level": "9"
+    },
+    "dungeons": [8, 8]
+  }, {
+    "props": {
+      "level": "10"
+    },
+    "dungeons": [8, 9]
+  }, {
+    "props": {
+      "level": "11"
+    },
+    "dungeons": [8, 10]
+  }, {
+    "props": {
+      "level": "12"
+    },
+    "dungeons": [8, 11]
+  }, {
+    "props": {
+      "level": "13"
+    },
+    "dungeons": [8, 12]
+  }, {
+    "props": {
+      "level": "14"
+    },
+    "dungeons": [8, 13]
+  }, {
+    "props": {
+      "level": "15"
+    },
+    "dungeons": [8, 14]
+  }, {
+    "props": {
+      "level": "0"
+    },
+    "dungeons": [9]
+  }
+  ],
+  "minecraft:lava": [{
+    "props": {
+      "level": "1"
+    },
+    "dungeons": [10, 0]
+  }, {
+    "props": {
+      "level": "2"
+    },
+    "dungeons": [10, 1]
+  }, {
+    "props": {
+      "level": "3"
+    },
+    "dungeons": [10, 2]
+  }, {
+    "props": {
+      "level": "4"
+    },
+    "dungeons": [10, 3]
+  }, {
+    "props": {
+      "level": "5"
+    },
+    "dungeons": [10, 4]
+  }, {
+    "props": {
+      "level": "6"
+    },
+    "dungeons": [10, 5]
+  }, {
+    "props": {
+      "level": "7"
+    },
+    "dungeons": [10, 6]
+  }, {
+    "props": {
+      "level": "8"
+    },
+    "dungeons": [10, 7]
+  }, {
+    "props": {
+      "level": "9"
+    },
+    "dungeons": [10, 8]
+  }, {
+    "props": {
+      "level": "10"
+    },
+    "dungeons": [10, 9]
+  }, {
+    "props": {
+      "level": "11"
+    },
+    "dungeons": [10, 10]
+  }, {
+    "props": {
+      "level": "12"
+    },
+    "dungeons": [10, 11]
+  }, {
+    "props": {
+      "level": "13"
+    },
+    "dungeons": [10, 12]
+  }, {
+    "props": {
+      "level": "14"
+    },
+    "dungeons": [10, 13]
+  }, {
+    "props": {
+      "level": "15"
+    },
+    "dungeons": [10, 14]
+  }, {
+    "props": {
+      "level": "0"
+    },
+    "dungeons": [11]
+  }
+  ],
+  "minecraft:sand": [12, 0],
+  "minecraft:red_sand": [12, 1],
+  "minecraft:gravel": [13, 0],
+  "minecraft:gold_ore": [14, 0],
+  "minecraft:iron_ore": [15, 0],
+  "minecraft:coal_ore": [16, 0],
+  "minecraft:oak_log": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [17, 0]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [17, 4]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [17, 8]
+  }
+  ],
+  "minecraft:spruce_log": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [17, 1]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [17, 5]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [17, 9]
+  }
+  ],
+  "minecraft:birch_log": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [17, 2]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [17, 6]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [17, 10]
+  }
+  ],
+  "minecraft:jungle_log": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [17, 3]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [17, 7]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [17, 11]
+  }
+  ],
+  "minecraft:oak_wood": [17, 12],
+  "minecraft:spruce_wood": [17, 13],
+  "minecraft:birch_wood": [17, 14],
+  "minecraft:jungle_wood": [17, 15],
+  "minecraft:oak_leaves": [{
+    "props": {
+      "persistent": "false"
+    },
+    "dungeons": [18, 0, 7]
+  }, {
+    "props": {
+      "persistent": "true"
+    },
+    "dungeons": [18, 4, 7]
+  }
+  ],
+  "minecraft:spruce_leaves": [{
+    "props": {
+      "persistent": "false"
+    },
+    "dungeons": [18, 1, 7]
+  }, {
+    "props": {
+      "persistent": "true"
+    },
+    "dungeons": [18, 5, 7]
+  }
+  ],
+  "minecraft:birch_leaves": [{
+    "props": {
+      "persistent": "false"
+    },
+    "dungeons": [18, 2, 7]
+  }, {
+    "props": {
+      "persistent": "true"
+    },
+    "dungeons": [18, 6, 7]
+  }
+  ],
+  "minecraft:jungle_leaves": [{
+    "props": {
+      "persistent": "false"
+    },
+    "dungeons": [18, 3, 7]
+  }, {
+    "props": {
+      "persistent": "true"
+    },
+    "dungeons": [18, 7, 7]
+  }
+  ],
+  "minecraft:sponge": [19, 0],
+  "minecraft:glass": [20, 0],
+  "minecraft:lapis_ore": [21, 0],
+  "minecraft:lapis_block": [22, 0],
+  "minecraft:dispenser": [{
+    "props": {
+      "facing": "down"
+    },
+    "dungeons": [23, 0]
+  }, {
+    "props": {
+      "facing": "up"
+    },
+    "dungeons": [23, 1]
+  }, {
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [23, 2]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [23, 3]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [23, 4]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [23, 5]
+  }, {
+    "props": {
+      "facing": "down"
+    },
+    "dungeons": [23, 8]
+  }, {
+    "props": {
+      "facing": "up"
+    },
+    "dungeons": [23, 9]
+  }, {
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [23, 10]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [23, 11]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [23, 12]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [23, 13]
+  }
+  ],
+  "minecraft:sandstone": [24, 0],
+  "minecraft:chiseled_sandstone": [24, 1],
+  "minecraft:cut_sandstone": [24, 2],
+  "minecraft:smooth_sandstone": [24, 3],
+  "minecraft:note_block": [{
+    "props": {
+      "instrument": "harp",
+      "note": "0"
+    },
+    "dungeons": [25, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "1"
+    },
+    "dungeons": [360, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "2"
+    },
+    "dungeons": [344, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "3"
+    },
+    "dungeons": [340, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "4"
+    },
+    "dungeons": [341, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "5"
+    },
+    "dungeons": [343, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "6"
+    },
+    "dungeons": [342, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "7"
+    },
+    "dungeons": [346, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "8"
+    },
+    "dungeons": [352, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "9"
+    },
+    "dungeons": [295, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "10"
+    },
+    "dungeons": [296, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "11"
+    },
+    "dungeons": [303, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "12"
+    },
+    "dungeons": [331, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "13"
+    },
+    "dungeons": [302, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "14"
+    },
+    "dungeons": [342, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "15"
+    },
+    "dungeons": [353, 0]
+  }, {
+    "props": {
+      "instrument": "harp",
+      "note": "16"
+    },
+    "dungeons": [351, 0]
+  }
+  ],
+  "minecraft:red_bed": [{
+    "props": {
+      "part": "foot",
+      "occupied": "false",
+      "facing": "south"
+    },
+    "dungeons": [26, 0]
+  }, {
+    "props": {
+      "part": "foot",
+      "occupied": "false",
+      "facing": "west"
+    },
+    "dungeons": [26, 1]
+  }, {
+    "props": {
+      "part": "foot",
+      "occupied": "false",
+      "facing": "north"
+    },
+    "dungeons": [26, 2]
+  }, {
+    "props": {
+      "part": "foot",
+      "occupied": "false",
+      "facing": "east"
+    },
+    "dungeons": [26, 3]
+  }, {
+    "props": {
+      "part": "foot",
+      "occupied": "true",
+      "facing": "south"
+    },
+    "dungeons": [26, 4]
+  }, {
+    "props": {
+      "part": "foot",
+      "occupied": "true",
+      "facing": "west"
+    },
+    "dungeons": [26, 5]
+  }, {
+    "props": {
+      "part": "foot",
+      "occupied": "true",
+      "facing": "north"
+    },
+    "dungeons": [26, 6]
+  }, {
+    "props": {
+      "part": "foot",
+      "occupied": "true",
+      "facing": "east"
+    },
+    "dungeons": [26, 7]
+  }, {
+    "props": {
+      "part": "head",
+      "occupied": "false",
+      "facing": "south"
+    },
+    "dungeons": [26, 8]
+  }, {
+    "props": {
+      "part": "head",
+      "occupied": "false",
+      "facing": "west"
+    },
+    "dungeons": [26, 9]
+  }, {
+    "props": {
+      "part": "head",
+      "occupied": "false",
+      "facing": "north"
+    },
+    "dungeons": [26, 10]
+  }, {
+    "props": {
+      "part": "head",
+      "occupied": "false",
+      "facing": "east"
+    },
+    "dungeons": [26, 11]
+  }, {
+    "props": {
+      "part": "head",
+      "occupied": "true",
+      "facing": "south"
+    },
+    "dungeons": [26, 12]
+  }, {
+    "props": {
+      "part": "head",
+      "occupied": "true",
+      "facing": "west"
+    },
+    "dungeons": [26, 13]
+  }, {
+    "props": {
+      "part": "head",
+      "occupied": "true",
+      "facing": "north"
+    },
+    "dungeons": [26, 14]
+  }, {
+    "props": {
+      "part": "head",
+      "occupied": "true",
+      "facing": "east"
+    },
+    "dungeons": [26, 15]
+  }
+  ],
+  "minecraft:powered_rail": [{
+    "props": {
+      "powered": "false",
+      "shape": "north_south"
+    },
+    "dungeons": [27, 0]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "east_west"
+    },
+    "dungeons": [27, 1]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "ascending_east"
+    },
+    "dungeons": [27, 2]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "ascending_west"
+    },
+    "dungeons": [27, 3]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "ascending_north"
+    },
+    "dungeons": [27, 4]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "ascending_south"
+    },
+    "dungeons": [27, 5]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "north_south"
+    },
+    "dungeons": [27, 8]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "east_west"
+    },
+    "dungeons": [27, 9]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "ascending_east"
+    },
+    "dungeons": [27, 10]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "ascending_west"
+    },
+    "dungeons": [27, 11]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "ascending_north"
+    },
+    "dungeons": [27, 12]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "ascending_south"
+    },
+    "dungeons": [27, 13]
+  }
+  ],
+  "minecraft:detector_rail": [{
+    "props": {
+      "powered": "false",
+      "shape": "north_south"
+    },
+    "dungeons": [28, 0]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "east_west"
+    },
+    "dungeons": [28, 1]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "ascending_east"
+    },
+    "dungeons": [28, 2]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "ascending_west"
+    },
+    "dungeons": [28, 3]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "ascending_north"
+    },
+    "dungeons": [28, 4]
+  }, {
+    "props": {
+      "powered": "false",
+      "shape": "ascending_south"
+    },
+    "dungeons": [28, 5]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "north_south"
+    },
+    "dungeons": [28, 8]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "east_west"
+    },
+    "dungeons": [28, 9]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "ascending_east"
+    },
+    "dungeons": [28, 10]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "ascending_west"
+    },
+    "dungeons": [28, 11]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "ascending_north"
+    },
+    "dungeons": [28, 12]
+  }, {
+    "props": {
+      "powered": "true",
+      "shape": "ascending_south"
+    },
+    "dungeons": [28, 13]
+  }
+  ],
+  "minecraft:sticky_piston": [{
+    "props": {
+      "extended": "false",
+      "facing": "down"
+    },
+    "dungeons": [29, 0]
+  }, {
+    "props": {
+      "extended": "false",
+      "facing": "up"
+    },
+    "dungeons": [29, 1]
+  }, {
+    "props": {
+      "extended": "false",
+      "facing": "north"
+    },
+    "dungeons": [29, 2]
+  }, {
+    "props": {
+      "extended": "false",
+      "facing": "south"
+    },
+    "dungeons": [29, 3]
+  }, {
+    "props": {
+      "extended": "false",
+      "facing": "west"
+    },
+    "dungeons": [29, 4]
+  }, {
+    "props": {
+      "extended": "false",
+      "facing": "east"
+    },
+    "dungeons": [29, 5]
+  }, {
+    "props": {
+      "extended": "true",
+      "facing": "down"
+    },
+    "dungeons": [29, 8]
+  }, {
+    "props": {
+      "extended": "true",
+      "facing": "up"
+    },
+    "dungeons": [29, 9]
+  }, {
+    "props": {
+      "extended": "true",
+      "facing": "north"
+    },
+    "dungeons": [29, 10]
+  }, {
+    "props": {
+      "extended": "true",
+      "facing": "south"
+    },
+    "dungeons": [29, 11]
+  }, {
+    "props": {
+      "extended": "true",
+      "facing": "west"
+    },
+    "dungeons": [29, 12]
+  }, {
+    "props": {
+      "extended": "true",
+      "facing": "east"
+    },
+    "dungeons": [29, 13]
+  }
+  ],
+  "minecraft:cobweb": [30, 0],
+  "minecraft:grass": [31, 1],
+  "minecraft:fern": [31, 2],
+  "minecraft:white_wool": [35, 0],
+  "minecraft:orange_wool": [35, 1],
+  "minecraft:magenta_wool": [35, 2],
+  "minecraft:light_blue_wool": [35, 3],
+  "minecraft:yellow_wool": [35, 4],
+  "minecraft:lime_wool": [35, 5],
+  "minecraft:pink_wool": [35, 6],
+  "minecraft:gray_wool": [35, 7],
+  "minecraft:light_gray_wool": [35, 8],
+  "minecraft:cyan_wool": [35, 9],
+  "minecraft:purple_wool": [35, 10],
+  "minecraft:blue_wool": [35, 11],
+  "minecraft:brown_wool": [35, 12],
+  "minecraft:green_wool": [35, 13],
+  "minecraft:red_wool": [35, 14],
+  "minecraft:black_wool": [35, 15],
+  "minecraft:dandelion": [37, 0],
+  "minecraft:poppy": [38, 0],
+  "minecraft:blue_orchid": [38, 1],
+  "minecraft:allium": [38, 2],
+  "minecraft:azure_bluet": [38, 3],
+  "minecraft:red_tulip": [38, 4],
+  "minecraft:orange_tulip": [38, 5],
+  "minecraft:white_tulip": [38, 6],
+  "minecraft:pink_tulip": [38, 7],
+  "minecraft:oxeye_daisy": [38, 8],
+  "minecraft:cornflower": [38, 9],
+  "minecraft:lily_of_the_valley": [38, 10],
+  "minecraft:brown_mushroom": [39, 0],
+  "minecraft:red_mushroom": [40, 0],
+  "minecraft:gold_block": [41, 0],
+  "minecraft:iron_block": [42, 0],
+  "minecraft:smooth_stone_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [43, 0]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [44, 0]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [44, 8]
+  }
+  ],
+  "minecraft:sandstone_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [43, 1]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [44, 1]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [44, 9]
+  }
+  ],
+  "minecraft:petrified_oak_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [43, 2]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [44, 2]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [44, 10]
+  }
+  ],
+  "minecraft:cobblestone_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [43, 3]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [44, 3]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [44, 11]
+  }
+  ],
+  "minecraft:brick_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [43, 4]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [44, 4]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [44, 12]
+  }
+  ],
+  "minecraft:stone_brick_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [43, 5]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [44, 5]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [44, 13]
+  }
+  ],
+  "minecraft:quartz_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [43, 6]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [44, 6]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [44, 14]
+  }
+  ],
+  "minecraft:nether_brick_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [43, 7]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [44, 7]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [44, 15]
+  }
+  ],
+  "minecraft:bricks": [45, 0],
+  "minecraft:tnt": [46, 0],
+  "minecraft:bookshelf": [47, 0],
+  "minecraft:mossy_cobblestone": [48, 0],
+  "minecraft:obsidian": [49, 0],
+  "minecraft:wall_torch": [{
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [50, 1]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [50, 2]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [50, 3]
+  }, {
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [50, 4]
+  }
+  ],
+  "minecraft:torch": [50, 5],
+  "minecraft:fire": [51, 0],
+  "minecraft:spawner": [52, 0],
+  "minecraft:oak_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [53, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [53, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [53, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [53, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [53, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [53, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [53, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [53, 7]
+  }
+  ],
+  "minecraft:chest": [{
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [54, 2]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [54, 3]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [54, 4]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [54, 5]
+  }
+  ],
+  "minecraft:redstone_wire": [{
+    "props": {
+      "power": "0"
+    },
+    "dungeons": [55, 0]
+  }, {
+    "props": {
+      "power": "1"
+    },
+    "dungeons": [55, 1]
+  }, {
+    "props": {
+      "power": "2"
+    },
+    "dungeons": [55, 2]
+  }, {
+    "props": {
+      "power": "3"
+    },
+    "dungeons": [55, 3]
+  }, {
+    "props": {
+      "power": "4"
+    },
+    "dungeons": [55, 4]
+  }, {
+    "props": {
+      "power": "5"
+    },
+    "dungeons": [55, 5]
+  }, {
+    "props": {
+      "power": "6"
+    },
+    "dungeons": [55, 6]
+  }, {
+    "props": {
+      "power": "7"
+    },
+    "dungeons": [55, 7]
+  }, {
+    "props": {
+      "power": "8"
+    },
+    "dungeons": [55, 8]
+  }, {
+    "props": {
+      "power": "9"
+    },
+    "dungeons": [55, 9]
+  }, {
+    "props": {
+      "power": "10"
+    },
+    "dungeons": [55, 10]
+  }, {
+    "props": {
+      "power": "11"
+    },
+    "dungeons": [55, 11]
+  }, {
+    "props": {
+      "power": "12"
+    },
+    "dungeons": [55, 12]
+  }, {
+    "props": {
+      "power": "13"
+    },
+    "dungeons": [55, 13]
+  }, {
+    "props": {
+      "power": "14"
+    },
+    "dungeons": [55, 14]
+  }, {
+    "props": {
+      "power": "15"
+    },
+    "dungeons": [55, 15]
+  }
+  ],
+  "minecraft:diamond_ore": [56, 0],
+  "minecraft:diamond_block": [57, 0],
+  "minecraft:crafting_table": [58, 0],
+  "minecraft:wheat": [{
+    "props": {
+      "age": "0"
+    },
+    "dungeons": [59, 0]
+  }, {
+    "props": {
+      "age": "1"
+    },
+    "dungeons": [59, 1]
+  }, {
+    "props": {
+      "age": "2"
+    },
+    "dungeons": [59, 2]
+  }, {
+    "props": {
+      "age": "3"
+    },
+    "dungeons": [59, 3]
+  }, {
+    "props": {
+      "age": "4"
+    },
+    "dungeons": [59, 4]
+  }, {
+    "props": {
+      "age": "5"
+    },
+    "dungeons": [59, 5]
+  }, {
+    "props": {
+      "age": "6"
+    },
+    "dungeons": [59, 6]
+  }, {
+    "props": {
+      "age": "7"
+    },
+    "dungeons": [59, 7]
+  }
+  ],
+  "minecraft:farmland": [{
+    "props": {
+      "moisture": "0"
+    },
+    "dungeons": [60, 0]
+  }, {
+    "props": {
+      "moisture": "7"
+    },
+    "dungeons": [60, 7]
+  }, {
+    "props": {
+      "moisture": "1"
+    },
+    "dungeons": [198, 1]
+  }, {
+    "props": {
+      "moisture": "2"
+    },
+    "dungeons": [198, 2]
+  }, {
+    "props": {
+      "moisture": "3"
+    },
+    "dungeons": [198, 3]
+  }, {
+    "props": {
+      "moisture": "4"
+    },
+    "dungeons": [198, 4]
+  }
+  ],
+  "minecraft:furnace": [{
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [61, 2]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [61, 3]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [61, 4]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [61, 5]
+  }
+  ],
+  "minecraft:oak_sign": [{
+    "props": {
+      "rotation": "0"
+    },
+    "dungeons": [63, 0]
+  }, {
+    "props": {
+      "rotation": "1"
+    },
+    "dungeons": [63, 1]
+  }, {
+    "props": {
+      "rotation": "2"
+    },
+    "dungeons": [63, 2]
+  }, {
+    "props": {
+      "rotation": "3"
+    },
+    "dungeons": [63, 3]
+  }, {
+    "props": {
+      "rotation": "4"
+    },
+    "dungeons": [63, 4]
+  }, {
+    "props": {
+      "rotation": "5"
+    },
+    "dungeons": [63, 5]
+  }, {
+    "props": {
+      "rotation": "6"
+    },
+    "dungeons": [63, 6]
+  }, {
+    "props": {
+      "rotation": "7"
+    },
+    "dungeons": [63, 7]
+  }, {
+    "props": {
+      "rotation": "8"
+    },
+    "dungeons": [63, 8]
+  }, {
+    "props": {
+      "rotation": "9"
+    },
+    "dungeons": [63, 9]
+  }, {
+    "props": {
+      "rotation": "10"
+    },
+    "dungeons": [63, 10]
+  }, {
+    "props": {
+      "rotation": "11"
+    },
+    "dungeons": [63, 11]
+  }, {
+    "props": {
+      "rotation": "12"
+    },
+    "dungeons": [63, 12]
+  }, {
+    "props": {
+      "rotation": "13"
+    },
+    "dungeons": [63, 13]
+  }, {
+    "props": {
+      "rotation": "14"
+    },
+    "dungeons": [63, 14]
+  }, {
+    "props": {
+      "rotation": "15"
+    },
+    "dungeons": [63, 15]
+  }
+  ],
+  "minecraft:oak_door": [{
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [64, 0]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [64, 1]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [64, 2]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [64, 3]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [64, 4]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [64, 5]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [64, 6]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [64, 7]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "false",
+      "hinge": "left"
+    },
+    "dungeons": [64, 8]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "false",
+      "hinge": "right"
+    },
+    "dungeons": [64, 9]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "true",
+      "hinge": "left"
+    },
+    "dungeons": [64, 10]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "true",
+      "hinge": "right"
+    },
+    "dungeons": [64, 11]
+  }
+  ],
+  "minecraft:ladder": [{
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [65, 2, 7]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [65, 3, 7]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [65, 4, 7]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [65, 5, 7]
+  }
+  ],
+  "minecraft:rail": [{
+    "props": {
+      "shape": "north_south"
+    },
+    "dungeons": [66, 0]
+  }, {
+    "props": {
+      "shape": "east_west"
+    },
+    "dungeons": [66, 1]
+  }, {
+    "props": {
+      "shape": "ascending_east"
+    },
+    "dungeons": [66, 2]
+  }, {
+    "props": {
+      "shape": "ascending_west"
+    },
+    "dungeons": [66, 3]
+  }, {
+    "props": {
+      "shape": "ascending_north"
+    },
+    "dungeons": [66, 4]
+  }, {
+    "props": {
+      "shape": "ascending_south"
+    },
+    "dungeons": [66, 5]
+  }, {
+    "props": {
+      "shape": "south_east"
+    },
+    "dungeons": [66, 6]
+  }, {
+    "props": {
+      "shape": "south_west"
+    },
+    "dungeons": [66, 7]
+  }, {
+    "props": {
+      "shape": "north_west"
+    },
+    "dungeons": [66, 8]
+  }, {
+    "props": {
+      "shape": "north_east"
+    },
+    "dungeons": [66, 9]
+  }
+  ],
+  "minecraft:cobblestone_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [67, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [67, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [67, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [67, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [67, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [67, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [67, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [67, 7]
+  }
+  ],
+  "minecraft:oak_wall_sign": [{
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [68, 2]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [68, 3]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [68, 4]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [68, 5]
+  }
+  ],
+  "minecraft:stone_pressure_plate": [{
+    "props": {
+      "powered": "false"
+    },
+    "dungeons": [70, 0]
+  }, {
+    "props": {
+      "powered": "true"
+    },
+    "dungeons": [70, 1]
+  }
+  ],
+  "minecraft:redstone_ore": [{
+    "props": {
+      "lit": "false"
+    },
+    "dungeons": [73, 0]
+  }, {
+    "props": {
+      "lit": "true"
+    },
+    "dungeons": [74, 0]
+  }
+  ],
+  "minecraft:snow": [{
+    "props": {
+      "layers": "1"
+    },
+    "dungeons": [78, 0, 7]
+  }, {
+    "props": {
+      "layers": "2"
+    },
+    "dungeons": [78, 1, 7]
+  }, {
+    "props": {
+      "layers": "3"
+    },
+    "dungeons": [78, 2, 7]
+  }, {
+    "props": {
+      "layers": "4"
+    },
+    "dungeons": [78, 3, 7]
+  }, {
+    "props": {
+      "layers": "5"
+    },
+    "dungeons": [78, 4, 7]
+  }, {
+    "props": {
+      "layers": "6"
+    },
+    "dungeons": [78, 5, 7]
+  }, {
+    "props": {
+      "layers": "7"
+    },
+    "dungeons": [78, 6, 7]
+  }, {
+    "props": {
+      "layers": "8"
+    },
+    "dungeons": [78, 7, 7]
+  }
+  ],
+  "minecraft:redstone_wall_torch": [{
+    "props": {
+      "lit": "false",
+      "facing": "east"
+    },
+    "dungeons": [75, 1]
+  }, {
+    "props": {
+      "lit": "false",
+      "facing": "west"
+    },
+    "dungeons": [75, 2]
+  }, {
+    "props": {
+      "lit": "false",
+      "facing": "south"
+    },
+    "dungeons": [75, 3]
+  }, {
+    "props": {
+      "lit": "false",
+      "facing": "north"
+    },
+    "dungeons": [75, 4]
+  }, {
+    "props": {
+      "lit": "true",
+      "facing": "east"
+    },
+    "dungeons": [76, 1]
+  }, {
+    "props": {
+      "lit": "true",
+      "facing": "west"
+    },
+    "dungeons": [76, 2]
+  }, {
+    "props": {
+      "lit": "true",
+      "facing": "south"
+    },
+    "dungeons": [76, 3]
+  }, {
+    "props": {
+      "lit": "true",
+      "facing": "north"
+    },
+    "dungeons": [76, 4]
+  }
+  ],
+  "minecraft:redstone_torch": [{
+    "props": {
+      "lit": "false"
+    },
+    "dungeons": [75, 5]
+  }, {
+    "props": {
+      "lit": "true"
+    },
+    "dungeons": [76, 5]
+  }
+  ],
+  "minecraft:stone_button": [{
+    "props": {
+      "face": "ceiling"
+    },
+    "dungeons": [77, 0]
+  }, {
+    "props": {
+      "face": "floor"
+    },
+    "dungeons": [77, 1]
+  }, {
+    "props": {
+      "face": "wall",
+      "facing": "north"
+    },
+    "dungeons": [77, 2]
+  }, {
+    "props": {
+      "face": "wall",
+      "facing": "south"
+    },
+    "dungeons": [77, 3]
+  }, {
+    "props": {
+      "face": "wall",
+      "facing": "west"
+    },
+    "dungeons": [77, 4]
+  }, {
+    "props": {
+      "face": "wall",
+      "facing": "east"
+    },
+    "dungeons": [77, 5]
+  }
+  ],
+  "minecraft:ice": [79, 0],
+  "minecraft:snow_block": [80, 0],
+  "minecraft:cactus": [{
+    "props": {
+      "age": "0"
+    },
+    "dungeons": [81, 0]
+  }, {
+    "props": {
+      "age": "1"
+    },
+    "dungeons": [81, 1]
+  }, {
+    "props": {
+      "age": "2"
+    },
+    "dungeons": [81, 2]
+  }, {
+    "props": {
+      "age": "3"
+    },
+    "dungeons": [81, 3]
+  }, {
+    "props": {
+      "age": "4"
+    },
+    "dungeons": [81, 4]
+  }, {
+    "props": {
+      "age": "5"
+    },
+    "dungeons": [81, 5]
+  }, {
+    "props": {
+      "age": "6"
+    },
+    "dungeons": [81, 6]
+  }, {
+    "props": {
+      "age": "7"
+    },
+    "dungeons": [81, 7]
+  }, {
+    "props": {
+      "age": "8"
+    },
+    "dungeons": [81, 8]
+  }, {
+    "props": {
+      "age": "9"
+    },
+    "dungeons": [81, 9]
+  }, {
+    "props": {
+      "age": "10"
+    },
+    "dungeons": [81, 10]
+  }, {
+    "props": {
+      "age": "11"
+    },
+    "dungeons": [81, 11]
+  }, {
+    "props": {
+      "age": "12"
+    },
+    "dungeons": [81, 12]
+  }, {
+    "props": {
+      "age": "13"
+    },
+    "dungeons": [81, 13]
+  }, {
+    "props": {
+      "age": "14"
+    },
+    "dungeons": [81, 14]
+  }, {
+    "props": {
+      "age": "15"
+    },
+    "dungeons": [81, 15]
+  }
+  ],
+  "minecraft:clay": [82, 0],
+  "minecraft:sugar_cane": [{
+    "props": {
+      "age": "0"
+    },
+    "dungeons": [83, 0]
+  }, {
+    "props": {
+      "age": "1"
+    },
+    "dungeons": [83, 1]
+  }, {
+    "props": {
+      "age": "2"
+    },
+    "dungeons": [83, 2]
+  }, {
+    "props": {
+      "age": "3"
+    },
+    "dungeons": [83, 3]
+  }, {
+    "props": {
+      "age": "4"
+    },
+    "dungeons": [83, 4]
+  }, {
+    "props": {
+      "age": "5"
+    },
+    "dungeons": [83, 5]
+  }, {
+    "props": {
+      "age": "6"
+    },
+    "dungeons": [83, 6]
+  }, {
+    "props": {
+      "age": "7"
+    },
+    "dungeons": [83, 7]
+  }, {
+    "props": {
+      "age": "8"
+    },
+    "dungeons": [83, 8]
+  }, {
+    "props": {
+      "age": "9"
+    },
+    "dungeons": [83, 9]
+  }, {
+    "props": {
+      "age": "10"
+    },
+    "dungeons": [83, 10]
+  }, {
+    "props": {
+      "age": "11"
+    },
+    "dungeons": [83, 11]
+  }, {
+    "props": {
+      "age": "12"
+    },
+    "dungeons": [83, 12]
+  }, {
+    "props": {
+      "age": "13"
+    },
+    "dungeons": [83, 13]
+  }, {
+    "props": {
+      "age": "14"
+    },
+    "dungeons": [83, 14]
+  }, {
+    "props": {
+      "age": "15"
+    },
+    "dungeons": [83, 15]
+  }
+  ],
+  "minecraft:oak_fence": [85, 0],
+  "minecraft:spruce_fence": [85, 1],
+  "minecraft:birch_fence": [85, 2],
+  "minecraft:jungle_fence": [85, 3],
+  "minecraft:acacia_fence": [85, 4],
+  "minecraft:dark_oak_fence": [85, 5],
+  "minecraft:carved_pumpkin": [{
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [86, 0]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [86, 1]
+  }, {
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [86, 2]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [86, 3]
+  }
+  ],
+  "minecraft:netherrack": [87, 0],
+  "minecraft:soul_sand": [88, 0],
+  "minecraft:glowstone": [89, 0],
+  "minecraft:jack_o_lantern": [{
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [91, 0]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [91, 1]
+  }, {
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [91, 2]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [91, 3]
+  }
+  ],
+  "minecraft:repeater": [{
+    "props": {
+      "facing": "north",
+      "delay": "1",
+      "powered": "false"
+    },
+    "dungeons": [93, 0]
+  }, {
+    "props": {
+      "facing": "east",
+      "delay": "1",
+      "powered": "false"
+    },
+    "dungeons": [93, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "delay": "1",
+      "powered": "false"
+    },
+    "dungeons": [93, 2]
+  }, {
+    "props": {
+      "facing": "west",
+      "delay": "1",
+      "powered": "false"
+    },
+    "dungeons": [93, 3]
+  }, {
+    "props": {
+      "facing": "north",
+      "delay": "2",
+      "powered": "false"
+    },
+    "dungeons": [93, 4]
+  }, {
+    "props": {
+      "facing": "east",
+      "delay": "2",
+      "powered": "false"
+    },
+    "dungeons": [93, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "delay": "2",
+      "powered": "false"
+    },
+    "dungeons": [93, 6]
+  }, {
+    "props": {
+      "facing": "west",
+      "delay": "2",
+      "powered": "false"
+    },
+    "dungeons": [93, 7]
+  }, {
+    "props": {
+      "facing": "north",
+      "delay": "3",
+      "powered": "false"
+    },
+    "dungeons": [93, 8]
+  }, {
+    "props": {
+      "facing": "east",
+      "delay": "3",
+      "powered": "false"
+    },
+    "dungeons": [93, 9]
+  }, {
+    "props": {
+      "facing": "south",
+      "delay": "3",
+      "powered": "false"
+    },
+    "dungeons": [93, 10]
+  }, {
+    "props": {
+      "facing": "west",
+      "delay": "3",
+      "powered": "false"
+    },
+    "dungeons": [93, 11]
+  }, {
+    "props": {
+      "facing": "north",
+      "delay": "4",
+      "powered": "false"
+    },
+    "dungeons": [93, 12]
+  }, {
+    "props": {
+      "facing": "east",
+      "delay": "4",
+      "powered": "false"
+    },
+    "dungeons": [93, 13]
+  }, {
+    "props": {
+      "facing": "south",
+      "delay": "4",
+      "powered": "false"
+    },
+    "dungeons": [93, 14]
+  }, {
+    "props": {
+      "facing": "west",
+      "delay": "4",
+      "powered": "false"
+    },
+    "dungeons": [93, 15]
+  }, {
+    "props": {
+      "facing": "north",
+      "delay": "1",
+      "powered": "true"
+    },
+    "dungeons": [94, 0]
+  }, {
+    "props": {
+      "facing": "east",
+      "delay": "1",
+      "powered": "true"
+    },
+    "dungeons": [94, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "delay": "1",
+      "powered": "true"
+    },
+    "dungeons": [94, 2]
+  }, {
+    "props": {
+      "facing": "west",
+      "delay": "1",
+      "powered": "true"
+    },
+    "dungeons": [94, 3]
+  }, {
+    "props": {
+      "facing": "north",
+      "delay": "2",
+      "powered": "true"
+    },
+    "dungeons": [94, 4]
+  }, {
+    "props": {
+      "facing": "east",
+      "delay": "2",
+      "powered": "true"
+    },
+    "dungeons": [94, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "delay": "2",
+      "powered": "true"
+    },
+    "dungeons": [94, 6]
+  }, {
+    "props": {
+      "facing": "west",
+      "delay": "2",
+      "powered": "true"
+    },
+    "dungeons": [94, 7]
+  }, {
+    "props": {
+      "facing": "north",
+      "delay": "3",
+      "powered": "true"
+    },
+    "dungeons": [94, 8]
+  }, {
+    "props": {
+      "facing": "east",
+      "delay": "3",
+      "powered": "true"
+    },
+    "dungeons": [94, 9]
+  }, {
+    "props": {
+      "facing": "south",
+      "delay": "3",
+      "powered": "true"
+    },
+    "dungeons": [94, 10]
+  }, {
+    "props": {
+      "facing": "west",
+      "delay": "3",
+      "powered": "true"
+    },
+    "dungeons": [94, 11]
+  }, {
+    "props": {
+      "facing": "north",
+      "delay": "4",
+      "powered": "true"
+    },
+    "dungeons": [94, 12]
+  }, {
+    "props": {
+      "facing": "east",
+      "delay": "4",
+      "powered": "true"
+    },
+    "dungeons": [94, 13]
+  }, {
+    "props": {
+      "facing": "south",
+      "delay": "4",
+      "powered": "true"
+    },
+    "dungeons": [94, 14]
+  }, {
+    "props": {
+      "facing": "west",
+      "delay": "4",
+      "powered": "true"
+    },
+    "dungeons": [94, 15]
+  }
+  ],
+  "minecraft:oak_trapdoor": [{
+    "props": {
+      "open": "false",
+      "half": "bottom",
+      "facing": "east"
+    },
+    "dungeons": [96, 0]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "bottom",
+      "facing": "west"
+    },
+    "dungeons": [96, 1]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "bottom",
+      "facing": "south"
+    },
+    "dungeons": [96, 2]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "bottom",
+      "facing": "north"
+    },
+    "dungeons": [96, 3]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "top",
+      "facing": "east"
+    },
+    "dungeons": [96, 4]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "top",
+      "facing": "west"
+    },
+    "dungeons": [96, 5]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "top",
+      "facing": "south"
+    },
+    "dungeons": [96, 6]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "top",
+      "facing": "north"
+    },
+    "dungeons": [96, 7]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "bottom",
+      "facing": "east"
+    },
+    "dungeons": [96, 8]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "bottom",
+      "facing": "west"
+    },
+    "dungeons": [96, 9]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "bottom",
+      "facing": "south"
+    },
+    "dungeons": [96, 10]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "bottom",
+      "facing": "north"
+    },
+    "dungeons": [96, 11]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "top",
+      "facing": "east"
+    },
+    "dungeons": [96, 12]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "top",
+      "facing": "west"
+    },
+    "dungeons": [96, 13]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "top",
+      "facing": "south"
+    },
+    "dungeons": [96, 14]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "top",
+      "facing": "north"
+    },
+    "dungeons": [96, 15]
+  }
+  ],
+  "minecraft:stone_bricks": [98, 0],
+  "minecraft:mossy_stone_bricks": [98, 1],
+  "minecraft:cracked_stone_bricks": [98, 2],
+  "minecraft:chiseled_stone_bricks": [98, 3],
+  "minecraft:netherite_block": [98, 4],
+  "minecraft:brown_mushroom_block": [{
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [99, 0]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "true",
+      "north": "true",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 1]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "true",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 2]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "false",
+      "north": "true",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 3]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "true",
+      "north": "false",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 4]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 5]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 6]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "true",
+      "north": "false",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 7]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "true",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 8]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "false",
+      "north": "false",
+      "south": "true",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [99, 9]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [99, 11]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [99, 12]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [99, 13]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "true",
+      "north": "true",
+      "south": "true",
+      "up": "true",
+      "down": "true"
+    },
+    "dungeons": [99, 14]
+  }
+  ],
+  "minecraft:mushroom_stem": [{
+    "props": {
+      "east": "true",
+      "west": "true",
+      "north": "true",
+      "south": "true",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [99, 10]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "true",
+      "north": "true",
+      "south": "true",
+      "up": "true",
+      "down": "true"
+    },
+    "dungeons": [99, 15]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "true",
+      "north": "true",
+      "south": "true",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [100, 10]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "true",
+      "north": "true",
+      "south": "true",
+      "up": "true",
+      "down": "true"
+    },
+    "dungeons": [100, 15]
+  }
+  ],
+  "minecraft:red_mushroom_block": [{
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [100, 0]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "true",
+      "north": "true",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 1]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "true",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 2]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "false",
+      "north": "true",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 3]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "true",
+      "north": "false",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 4]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 5]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 6]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "true",
+      "north": "false",
+      "south": "false",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 7]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "true",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 8]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "false",
+      "north": "false",
+      "south": "true",
+      "up": "true",
+      "down": "false"
+    },
+    "dungeons": [100, 9]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [100, 11]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [100, 12]
+  }, {
+    "props": {
+      "east": "false",
+      "west": "false",
+      "north": "false",
+      "south": "false",
+      "up": "false",
+      "down": "false"
+    },
+    "dungeons": [100, 13]
+  }, {
+    "props": {
+      "east": "true",
+      "west": "true",
+      "north": "true",
+      "south": "true",
+      "up": "true",
+      "down": "true"
+    },
+    "dungeons": [100, 14]
+  }
+  ],
+  "minecraft:iron_bars": [101, 0],
+  "minecraft:glass_pane": [102, 0],
+  "minecraft:melon": [103, 0],
+  "minecraft:pumpkin_stem": [{
+    "props": {
+      "age": "0"
+    },
+    "dungeons": [104, 0]
+  }, {
+    "props": {
+      "age": "1"
+    },
+    "dungeons": [104, 1]
+  }, {
+    "props": {
+      "age": "2"
+    },
+    "dungeons": [104, 2]
+  }, {
+    "props": {
+      "age": "3"
+    },
+    "dungeons": [104, 3]
+  }, {
+    "props": {
+      "age": "4"
+    },
+    "dungeons": [104, 4]
+  }, {
+    "props": {
+      "age": "5"
+    },
+    "dungeons": [104, 5]
+  }, {
+    "props": {
+      "age": "6"
+    },
+    "dungeons": [104, 6]
+  }, {
+    "props": {
+      "age": "7"
+    },
+    "dungeons": [104, 7]
+  }
+  ],
+  "minecraft:melon_stem": [{
+    "props": {
+      "age": "0"
+    },
+    "dungeons": [105, 0]
+  }, {
+    "props": {
+      "age": "1"
+    },
+    "dungeons": [105, 1]
+  }, {
+    "props": {
+      "age": "2"
+    },
+    "dungeons": [105, 2]
+  }, {
+    "props": {
+      "age": "3"
+    },
+    "dungeons": [105, 3]
+  }, {
+    "props": {
+      "age": "4"
+    },
+    "dungeons": [105, 4]
+  }, {
+    "props": {
+      "age": "5"
+    },
+    "dungeons": [105, 5]
+  }, {
+    "props": {
+      "age": "6"
+    },
+    "dungeons": [105, 6]
+  }, {
+    "props": {
+      "age": "7"
+    },
+    "dungeons": [105, 7]
+  }
+  ],
+  "minecraft:vine": [{
+    "props": {
+      "east": "false",
+      "north": "false",
+      "west": "false",
+      "south": "false"
+    },
+    "dungeons": [106, 0]
+  }, {
+    "props": {
+      "east": "false",
+      "north": "false",
+      "west": "false",
+      "south": "true"
+    },
+    "dungeons": [106, 1]
+  }, {
+    "props": {
+      "east": "false",
+      "north": "false",
+      "west": "true",
+      "south": "false"
+    },
+    "dungeons": [106, 2]
+  }, {
+    "props": {
+      "east": "false",
+      "north": "false",
+      "west": "true",
+      "south": "true"
+    },
+    "dungeons": [106, 3]
+  }, {
+    "props": {
+      "east": "false",
+      "north": "true",
+      "west": "false",
+      "south": "false"
+    },
+    "dungeons": [106, 4]
+  }, {
+    "props": {
+      "east": "false",
+      "north": "true",
+      "west": "false",
+      "south": "true"
+    },
+    "dungeons": [106, 5]
+  }, {
+    "props": {
+      "east": "false",
+      "north": "true",
+      "west": "true",
+      "south": "false"
+    },
+    "dungeons": [106, 6]
+  }, {
+    "props": {
+      "east": "false",
+      "north": "true",
+      "west": "true",
+      "south": "true"
+    },
+    "dungeons": [106, 7]
+  }, {
+    "props": {
+      "east": "true",
+      "north": "false",
+      "west": "false",
+      "south": "false"
+    },
+    "dungeons": [106, 8]
+  }, {
+    "props": {
+      "east": "true",
+      "north": "false",
+      "west": "false",
+      "south": "true"
+    },
+    "dungeons": [106, 9]
+  }, {
+    "props": {
+      "east": "true",
+      "north": "false",
+      "west": "true",
+      "south": "false"
+    },
+    "dungeons": [106, 10]
+  }, {
+    "props": {
+      "east": "true",
+      "north": "false",
+      "west": "true",
+      "south": "true"
+    },
+    "dungeons": [106, 11]
+  }, {
+    "props": {
+      "east": "true",
+      "north": "true",
+      "west": "false",
+      "south": "false"
+    },
+    "dungeons": [106, 12]
+  }, {
+    "props": {
+      "east": "true",
+      "north": "true",
+      "west": "false",
+      "south": "true"
+    },
+    "dungeons": [106, 13]
+  }, {
+    "props": {
+      "east": "true",
+      "north": "true",
+      "west": "true",
+      "south": "false"
+    },
+    "dungeons": [106, 14]
+  }, {
+    "props": {
+      "east": "true",
+      "north": "true",
+      "west": "true",
+      "south": "true"
+    },
+    "dungeons": [106, 15]
+  }
+  ],
+  "minecraft:brick_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [108, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [108, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [108, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [108, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [108, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [108, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [108, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [108, 7]
+  }
+  ],
+  "minecraft:stone_brick_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [109, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [109, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [109, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [109, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [109, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [109, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [109, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [109, 7]
+  }
+  ],
+  "minecraft:podzol": [110, 0],
+  "minecraft:lily_pad": [111, 0],
+  "minecraft:nether_bricks": [112, 0],
+  "minecraft:nether_brick_fence": [113, 0],
+  "minecraft:nether_brick_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [114, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [114, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [114, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [114, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [114, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [114, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [114, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [114, 7]
+  }
+  ],
+  "minecraft:enchanting_table": [116, 0],
+  "minecraft:brewing_stand": [117, 0],
+  "minecraft:cauldron": [{
+    "props": {
+      "level": "0"
+    },
+    "dungeons": [118, 0]
+  }, {
+    "props": {
+      "level": "0"
+    },
+    "dungeons": [118, 1]
+  }, {
+    "props": {
+      "level": "1"
+    },
+    "dungeons": [118, 2]
+  }, {
+    "props": {
+      "level": "1"
+    },
+    "dungeons": [118, 3]
+  }, {
+    "props": {
+      "level": "2"
+    },
+    "dungeons": [118, 4]
+  }, {
+    "props": {
+      "level": "2"
+    },
+    "dungeons": [118, 5]
+  }, {
+    "props": {
+      "level": "3"
+    },
+    "dungeons": [118, 6]
+  }
+  ],
+  "minecraft:end_portal_frame": [120, 0],
+  "minecraft:redstone_lamp": [123, 0],
+  "minecraft:dropper": [{
+    "props": {
+      "triggered": "false",
+      "facing": "down"
+    },
+    "dungeons": [125, 0]
+  }, {
+    "props": {
+      "triggered": "false",
+      "facing": "up"
+    },
+    "dungeons": [125, 1]
+  }, {
+    "props": {
+      "triggered": "false",
+      "facing": "north"
+    },
+    "dungeons": [125, 2]
+  }, {
+    "props": {
+      "triggered": "false",
+      "facing": "south"
+    },
+    "dungeons": [125, 3]
+  }, {
+    "props": {
+      "triggered": "false",
+      "facing": "west"
+    },
+    "dungeons": [125, 4]
+  }, {
+    "props": {
+      "triggered": "false",
+      "facing": "east"
+    },
+    "dungeons": [125, 5]
+  }, {
+    "props": {
+      "triggered": "true",
+      "facing": "down"
+    },
+    "dungeons": [125, 8]
+  }, {
+    "props": {
+      "triggered": "true",
+      "facing": "up"
+    },
+    "dungeons": [125, 9]
+  }, {
+    "props": {
+      "triggered": "true",
+      "facing": "north"
+    },
+    "dungeons": [125, 10]
+  }, {
+    "props": {
+      "triggered": "true",
+      "facing": "south"
+    },
+    "dungeons": [125, 11]
+  }, {
+    "props": {
+      "triggered": "true",
+      "facing": "west"
+    },
+    "dungeons": [125, 12]
+  }, {
+    "props": {
+      "triggered": "true",
+      "facing": "east"
+    },
+    "dungeons": [125, 13]
+  }
+  ],
+  "minecraft:cocoa": [{
+    "props": {
+      "age": "0",
+      "facing": "north"
+    },
+    "dungeons": [127, 0]
+  }, {
+    "props": {
+      "age": "0",
+      "facing": "east"
+    },
+    "dungeons": [127, 1]
+  }, {
+    "props": {
+      "age": "0",
+      "facing": "south"
+    },
+    "dungeons": [127, 2]
+  }, {
+    "props": {
+      "age": "0",
+      "facing": "west"
+    },
+    "dungeons": [127, 3]
+  }, {
+    "props": {
+      "age": "1",
+      "facing": "north"
+    },
+    "dungeons": [127, 4]
+  }, {
+    "props": {
+      "age": "1",
+      "facing": "east"
+    },
+    "dungeons": [127, 5]
+  }, {
+    "props": {
+      "age": "1",
+      "facing": "south"
+    },
+    "dungeons": [127, 6]
+  }, {
+    "props": {
+      "age": "1",
+      "facing": "west"
+    },
+    "dungeons": [127, 7]
+  }, {
+    "props": {
+      "age": "2",
+      "facing": "north"
+    },
+    "dungeons": [127, 8]
+  }, {
+    "props": {
+      "age": "2",
+      "facing": "east"
+    },
+    "dungeons": [127, 9]
+  }, {
+    "props": {
+      "age": "2",
+      "facing": "south"
+    },
+    "dungeons": [127, 10]
+  }, {
+    "props": {
+      "age": "2",
+      "facing": "west"
+    },
+    "dungeons": [127, 11]
+  }
+  ],
+  "minecraft:sandstone_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [128, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [128, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [128, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [128, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [128, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [128, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [128, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [128, 7]
+  }
+  ],
+  "minecraft:emerald_ore": [129, 0],
+  "minecraft:emerald_block": [133, 0],
+  "minecraft:spruce_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [134, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [134, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [134, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [134, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [134, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [134, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [134, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [134, 7]
+  }
+  ],
+  "minecraft:birch_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [135, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [135, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [135, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [135, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [135, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [135, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [135, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [135, 7]
+  }
+  ],
+  "minecraft:jungle_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [136, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [136, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [136, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [136, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [136, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [136, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [136, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [136, 7]
+  }
+  ],
+  "minecraft:blackstone_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [137, 0]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [137, 8]
+  }
+  ],
+  "minecraft:crimson_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [137, 1]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [137, 9]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [519, 0]
+  }
+  ],
+  "minecraft:polished_blackstone_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [137, 2]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [137, 10]
+  }
+  ],
+  "minecraft:polished_blackstone_brick_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [137, 3]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [137, 11]
+  }
+  ],
+  "minecraft:smooth_quartz_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [137, 4]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [137, 12]
+  }
+  ],
+  "minecraft:stone_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [137, 5]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [137, 13]
+  }
+  ],
+  "minecraft:smooth_sandstone_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [137, 6]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [137, 14]
+  }, {
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [181, 6]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [182, 6]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [182, 14]
+  }
+  ],
+  "minecraft:cut_sandstone_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [137, 7]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [137, 15]
+  }
+  ],
+  "minecraft:cobblestone_wall": [139, 0],
+  "minecraft:mossy_cobblestone_wall": [139, 1],
+  "minecraft:granite_wall": [139, 2],
+  "minecraft:diorite_wall": [139, 3],
+  "minecraft:andesite_wall": [139, 4],
+  "minecraft:sandstone_wall": [139, 5],
+  "minecraft:brick_wall": [139, 6],
+  "minecraft:stone_brick_wall": [139, 7],
+  "minecraft:mossy_stone_brick_wall": [139, 8],
+  "minecraft:end_stone_brick_wall": [139, 9],
+  "minecraft:nether_brick_wall": [139, 10],
+  "minecraft:prismarine_wall": [139, 11],
+  "minecraft:red_sandstone_wall": [139, 12],
+  "minecraft:red_nether_brick_wall": [139, 13],
+  "minecraft:carrots": [{
+    "props": {
+      "age": "0"
+    },
+    "dungeons": [141, 0]
+  }, {
+    "props": {
+      "age": "1"
+    },
+    "dungeons": [141, 1]
+  }, {
+    "props": {
+      "age": "2"
+    },
+    "dungeons": [141, 2]
+  }, {
+    "props": {
+      "age": "3"
+    },
+    "dungeons": [141, 3]
+  }, {
+    "props": {
+      "age": "4"
+    },
+    "dungeons": [141, 4]
+  }, {
+    "props": {
+      "age": "5"
+    },
+    "dungeons": [141, 5]
+  }, {
+    "props": {
+      "age": "6"
+    },
+    "dungeons": [141, 6]
+  }, {
+    "props": {
+      "age": "7"
+    },
+    "dungeons": [141, 7]
+  }
+  ],
+  "minecraft:skeleton_skull": [144, 1],
+  "minecraft:skeleton_wall_skull": [{
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [144, 2]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [144, 3]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [144, 4]
+  }, {
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [144, 5]
+  }
+  ],
+  "minecraft:anvil": [{
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [145, 0]
+  }, {
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [145, 1]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [145, 2]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [145, 3]
+  }
+  ],
+  "minecraft:chipped_anvil": [{
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [145, 4]
+  }, {
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [145, 5]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [145, 6]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [145, 7]
+  }
+  ],
+  "minecraft:damaged_anvil": [{
+    "props": {
+      "facing": "west"
+    },
+    "dungeons": [145, 8]
+  }, {
+    "props": {
+      "facing": "north"
+    },
+    "dungeons": [145, 9]
+  }, {
+    "props": {
+      "facing": "east"
+    },
+    "dungeons": [145, 10]
+  }, {
+    "props": {
+      "facing": "south"
+    },
+    "dungeons": [145, 11]
+  }
+  ],
+  "minecraft:comparator": [{
+    "props": {
+      "facing": "north",
+      "mode": "compare",
+      "powered": "false"
+    },
+    "dungeons": [149, 0, 7]
+  }, {
+    "props": {
+      "facing": "east",
+      "mode": "compare",
+      "powered": "false"
+    },
+    "dungeons": [149, 1, 7]
+  }, {
+    "props": {
+      "facing": "south",
+      "mode": "compare",
+      "powered": "false"
+    },
+    "dungeons": [149, 2, 7]
+  }, {
+    "props": {
+      "facing": "west",
+      "mode": "compare",
+      "powered": "false"
+    },
+    "dungeons": [149, 3, 7]
+  }, {
+    "props": {
+      "facing": "north",
+      "mode": "subtract",
+      "powered": "false"
+    },
+    "dungeons": [149, 4, 7]
+  }, {
+    "props": {
+      "facing": "east",
+      "mode": "subtract",
+      "powered": "false"
+    },
+    "dungeons": [149, 5, 7]
+  }, {
+    "props": {
+      "facing": "south",
+      "mode": "subtract",
+      "powered": "false"
+    },
+    "dungeons": [149, 6, 7]
+  }, {
+    "props": {
+      "facing": "west",
+      "mode": "subtract",
+      "powered": "false"
+    },
+    "dungeons": [149, 7, 7]
+  }, {
+    "props": {
+      "facing": "north",
+      "mode": "compare",
+      "powered": "true"
+    },
+    "dungeons": [150, 0, 7]
+  }, {
+    "props": {
+      "facing": "east",
+      "mode": "compare",
+      "powered": "true"
+    },
+    "dungeons": [150, 1, 7]
+  }, {
+    "props": {
+      "facing": "south",
+      "mode": "compare",
+      "powered": "true"
+    },
+    "dungeons": [150, 2, 7]
+  }, {
+    "props": {
+      "facing": "west",
+      "mode": "compare",
+      "powered": "true"
+    },
+    "dungeons": [150, 3, 7]
+  }, {
+    "props": {
+      "facing": "north",
+      "mode": "subtract",
+      "powered": "true"
+    },
+    "dungeons": [150, 4, 7]
+  }, {
+    "props": {
+      "facing": "east",
+      "mode": "subtract",
+      "powered": "true"
+    },
+    "dungeons": [150, 5, 7]
+  }, {
+    "props": {
+      "facing": "south",
+      "mode": "subtract",
+      "powered": "true"
+    },
+    "dungeons": [150, 6, 7]
+  }, {
+    "props": {
+      "facing": "west",
+      "mode": "subtract",
+      "powered": "true"
+    },
+    "dungeons": [150, 7, 7]
+  }
+  ],
+  "minecraft:redstone_block": [152, 0],
+  "minecraft:quartz_ore": [153, 0],
+  "minecraft:quartz_block": [155, 0],
+  "minecraft:chiseled_quartz_block": [155, 1],
+  "minecraft:quartz_pillar": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [155, 2]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [155, 6]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [155, 10]
+  }
+  ],
+  "minecraft:smooth_quartz": [155, 3],
+  "minecraft:dead_fire_coral_block": [155, 4],
+  "minecraft:dead_brain_coral_block": [155, 5],
+  "minecraft:dead_bubble_coral_block": [155, 9],
+  "minecraft:quartz_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [156, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [156, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [156, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [156, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [156, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [156, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [156, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [156, 7]
+  }
+  ],
+  "minecraft:oak_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [157, 0, 7]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [158, 0]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [158, 8]
+  }
+  ],
+  "minecraft:spruce_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [157, 1, 7]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [158, 1]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [158, 9]
+  }
+  ],
+  "minecraft:birch_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [157, 2, 7]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [158, 2]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [158, 10]
+  }
+  ],
+  "minecraft:jungle_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [157, 3, 7]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [158, 3]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [158, 11]
+  }
+  ],
+  "minecraft:acacia_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [157, 4, 7]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [158, 4]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [158, 12]
+  }
+  ],
+  "minecraft:dark_oak_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [157, 5, 7]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [158, 5]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [158, 13]
+  }
+  ],
+  "minecraft:white_terracotta": [159, 0],
+  "minecraft:orange_terracotta": [159, 1],
+  "minecraft:magenta_terracotta": [159, 2],
+  "minecraft:light_blue_terracotta": [159, 3],
+  "minecraft:yellow_terracotta": [159, 4],
+  "minecraft:lime_terracotta": [159, 5],
+  "minecraft:pink_terracotta": [159, 6],
+  "minecraft:gray_terracotta": [159, 7],
+  "minecraft:light_gray_terracotta": [159, 8],
+  "minecraft:cyan_terracotta": [159, 9],
+  "minecraft:purple_terracotta": [159, 10],
+  "minecraft:blue_terracotta": [159, 11],
+  "minecraft:brown_terracotta": [159, 12],
+  "minecraft:green_terracotta": [159, 13],
+  "minecraft:red_terracotta": [159, 14],
+  "minecraft:black_terracotta": [159, 15],
+  "minecraft:acacia_leaves": [{
+    "props": {
+      "persistent": "false"
+    },
+    "dungeons": [161, 0, 7]
+  }, {
+    "props": {
+      "persistent": "true"
+    },
+    "dungeons": [161, 4, 7]
+  }
+  ],
+  "minecraft:dark_oak_leaves": [{
+    "props": {
+      "persistent": "false"
+    },
+    "dungeons": [161, 1, 7]
+  }, {
+    "props": {
+      "persistent": "true"
+    },
+    "dungeons": [161, 5, 7]
+  }
+  ],
+  "minecraft:acacia_log": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [162, 0]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [162, 4]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [162, 8]
+  }
+  ],
+  "minecraft:dark_oak_log": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [162, 1]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [162, 5]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [162, 9]
+  }
+  ],
+  "minecraft:acacia_wood": [162, 12],
+  "minecraft:dark_oak_wood": [162, 13],
+  "minecraft:acacia_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [163, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [163, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [163, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [163, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [163, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [163, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [163, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [163, 7]
+  }
+  ],
+  "minecraft:dark_oak_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [164, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [164, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [164, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [164, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [164, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [164, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [164, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [164, 7]
+  }
+  ],
+  "minecraft:iron_trapdoor": [{
+    "props": {
+      "open": "false",
+      "half": "bottom",
+      "facing": "east"
+    },
+    "dungeons": [167, 0]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "bottom",
+      "facing": "west"
+    },
+    "dungeons": [167, 1]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "bottom",
+      "facing": "south"
+    },
+    "dungeons": [167, 2]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "bottom",
+      "facing": "north"
+    },
+    "dungeons": [167, 3]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "top",
+      "facing": "east"
+    },
+    "dungeons": [167, 4]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "top",
+      "facing": "west"
+    },
+    "dungeons": [167, 5]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "top",
+      "facing": "south"
+    },
+    "dungeons": [167, 6]
+  }, {
+    "props": {
+      "open": "false",
+      "half": "top",
+      "facing": "north"
+    },
+    "dungeons": [167, 7]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "bottom",
+      "facing": "east"
+    },
+    "dungeons": [167, 8]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "bottom",
+      "facing": "west"
+    },
+    "dungeons": [167, 9]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "bottom",
+      "facing": "south"
+    },
+    "dungeons": [167, 10]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "bottom",
+      "facing": "north"
+    },
+    "dungeons": [167, 11]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "top",
+      "facing": "east"
+    },
+    "dungeons": [167, 12]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "top",
+      "facing": "west"
+    },
+    "dungeons": [167, 13]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "top",
+      "facing": "south"
+    },
+    "dungeons": [167, 14]
+  }, {
+    "props": {
+      "open": "true",
+      "half": "top",
+      "facing": "north"
+    },
+    "dungeons": [167, 15]
+  }
+  ],
+  "minecraft:hay_block": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [170, 0]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [170, 4]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [170, 8]
+  }
+  ],
+  "minecraft:white_carpet": [171, 0],
+  "minecraft:orange_carpet": [171, 1],
+  "minecraft:magenta_carpet": [171, 2],
+  "minecraft:light_blue_carpet": [171, 3],
+  "minecraft:yellow_carpet": [171, 4],
+  "minecraft:lime_carpet": [171, 5],
+  "minecraft:pink_carpet": [171, 6],
+  "minecraft:gray_carpet": [171, 7],
+  "minecraft:light_gray_carpet": [171, 8],
+  "minecraft:cyan_carpet": [171, 9],
+  "minecraft:purple_carpet": [171, 10],
+  "minecraft:blue_carpet": [171, 11],
+  "minecraft:brown_carpet": [171, 12],
+  "minecraft:green_carpet": [171, 13],
+  "minecraft:red_carpet": [171, 14],
+  "minecraft:black_carpet": [171, 15],
+  "minecraft:terracotta": [172, 0],
+  "minecraft:coal_block": [173, 0],
+  "minecraft:packed_ice": [174, 0],
+  "minecraft:sunflower": [{
+    "props": {
+      "half": "lower"
+    },
+    "dungeons": [175, 0]
+  }, {
+    "props": {
+      "half": "upper"
+    },
+    "dungeons": [175, 8]
+  }
+  ],
+  "minecraft:lilac": [{
+    "props": {
+      "half": "lower"
+    },
+    "dungeons": [175, 1]
+  }, {
+    "props": {
+      "half": "upper"
+    },
+    "dungeons": [175, 9]
+  }
+  ],
+  "minecraft:tall_grass": [{
+    "props": {
+      "half": "lower"
+    },
+    "dungeons": [175, 2]
+  }, {
+    "props": {
+      "half": "upper"
+    },
+    "dungeons": [175, 10]
+  }
+  ],
+  "minecraft:large_fern": [{
+    "props": {
+      "half": "lower"
+    },
+    "dungeons": [175, 3]
+  }, {
+    "props": {
+      "half": "upper"
+    },
+    "dungeons": [175, 11]
+  }
+  ],
+  "minecraft:rose_bush": [{
+    "props": {
+      "half": "lower"
+    },
+    "dungeons": [175, 4]
+  }, {
+    "props": {
+      "half": "upper"
+    },
+    "dungeons": [175, 12]
+  }
+  ],
+  "minecraft:peony": [{
+    "props": {
+      "half": "lower"
+    },
+    "dungeons": [175, 5]
+  }, {
+    "props": {
+      "half": "upper"
+    },
+    "dungeons": [175, 13]
+  }
+  ],
+  "minecraft:red_sandstone": [179, 0],
+  "minecraft:chiseled_red_sandstone": [179, 1],
+  "minecraft:cut_red_sandstone": [179, 2],
+  "minecraft:smooth_red_sandstone": [179, 3],
+  "minecraft:red_sandstone_stairs": [{
+    "props": {
+      "facing": "east",
+      "half": "bottom"
+    },
+    "dungeons": [180, 0]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "bottom"
+    },
+    "dungeons": [180, 1]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "bottom"
+    },
+    "dungeons": [180, 2]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "bottom"
+    },
+    "dungeons": [180, 3]
+  }, {
+    "props": {
+      "facing": "east",
+      "half": "top"
+    },
+    "dungeons": [180, 4]
+  }, {
+    "props": {
+      "facing": "west",
+      "half": "top"
+    },
+    "dungeons": [180, 5]
+  }, {
+    "props": {
+      "facing": "south",
+      "half": "top"
+    },
+    "dungeons": [180, 6]
+  }, {
+    "props": {
+      "facing": "north",
+      "half": "top"
+    },
+    "dungeons": [180, 7]
+  }
+  ],
+  "minecraft:red_sandstone_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [181, 0]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [182, 0]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [182, 8]
+  }
+  ],
+  "minecraft:purpur_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [181, 1]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [182, 1]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [182, 9]
+  }
+  ],
+  "minecraft:prismarine_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [181, 2]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [182, 2]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [182, 10]
+  }
+  ],
+  "minecraft:prismarine_brick_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [181, 3]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [182, 3]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [182, 11]
+  }
+  ],
+  "minecraft:dark_prismarine_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [181, 4]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [182, 4]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [182, 12]
+  }
+  ],
+  "minecraft:mossy_cobblestone_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [181, 5]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [182, 5]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [182, 13]
+  }
+  ],
+  "minecraft:red_nether_brick_slab": [{
+    "props": {
+      "type": "double"
+    },
+    "dungeons": [181, 7]
+  }, {
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [182, 7]
+  }, {
+    "props": {
+      "type": "top"
+    },
+    "dungeons": [182, 15]
+  }
+  ],
+  "minecraft:spruce_fence_gate": [{
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [183, 0]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [183, 1]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [183, 2]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [183, 3]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [183, 4]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [183, 5]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [183, 6]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [183, 7]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [183, 8]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [183, 9]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [183, 10]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [183, 11]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [183, 12]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [183, 13]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [183, 14]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [183, 15]
+  }
+  ],
+  "minecraft:birch_fence_gate": [{
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [184, 0]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [184, 1]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [184, 2]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [184, 3]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [184, 4]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [184, 5]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [184, 6]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [184, 7]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [184, 8]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [184, 9]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [184, 10]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [184, 11]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [184, 12]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [184, 13]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [184, 14]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [184, 15]
+  }
+  ],
+  "minecraft:acacia_fence_gate": [{
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [187, 0]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [187, 1]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [187, 2]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [187, 3]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [187, 4]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [187, 5]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [187, 6]
+  }, {
+    "props": {
+      "in_wall": "false",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [187, 7]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [187, 8]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [187, 9]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [187, 10]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [187, 11]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [187, 12]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [187, 13]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [187, 14]
+  }, {
+    "props": {
+      "in_wall": "true",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [187, 15]
+  }
+  ],
+  "minecraft:spruce_door": [{
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [193, 0]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [193, 1]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [193, 2]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [193, 3]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [193, 4]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [193, 5]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [193, 6]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [193, 7]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "false",
+      "hinge": "left"
+    },
+    "dungeons": [193, 8]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "false",
+      "hinge": "right"
+    },
+    "dungeons": [193, 9]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "true",
+      "hinge": "left"
+    },
+    "dungeons": [193, 10]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "true",
+      "hinge": "right"
+    },
+    "dungeons": [193, 11]
+  }
+  ],
+  "minecraft:jungle_door": [{
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [195, 0]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [195, 1]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [195, 2]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [195, 3]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [195, 4]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [195, 5]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [195, 6]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [195, 7]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "false",
+      "hinge": "left"
+    },
+    "dungeons": [195, 8]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "false",
+      "hinge": "right"
+    },
+    "dungeons": [195, 9]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "true",
+      "hinge": "left"
+    },
+    "dungeons": [195, 10]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "true",
+      "hinge": "right"
+    },
+    "dungeons": [195, 11]
+  }
+  ],
+  "minecraft:dark_oak_door": [{
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "east"
+    },
+    "dungeons": [197, 0]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "south"
+    },
+    "dungeons": [197, 1]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "west"
+    },
+    "dungeons": [197, 2]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "false",
+      "facing": "north"
+    },
+    "dungeons": [197, 3]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "east"
+    },
+    "dungeons": [197, 4]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "south"
+    },
+    "dungeons": [197, 5]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "west"
+    },
+    "dungeons": [197, 6]
+  }, {
+    "props": {
+      "half": "lower",
+      "open": "true",
+      "facing": "north"
+    },
+    "dungeons": [197, 7]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "false",
+      "hinge": "left"
+    },
+    "dungeons": [197, 8]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "false",
+      "hinge": "right"
+    },
+    "dungeons": [197, 9]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "true",
+      "hinge": "left"
+    },
+    "dungeons": [197, 10]
+  }, {
+    "props": {
+      "half": "upper",
+      "powered": "true",
+      "hinge": "right"
+    },
+    "dungeons": [197, 11]
+  }
+  ],
+  "minecraft:dirt_path": [198, 0],
+  "minecraft:grass_path": [198, 0],
+  "minecraft:dead_tube_coral_block": [199, 3],
+  "minecraft:white_concrete": [224, 0],
+  "minecraft:orange_concrete": [225, 0],
+  "minecraft:magenta_concrete": [226, 0],
+  "minecraft:light_blue_concrete": [227, 0],
+  "minecraft:yellow_concrete": [228, 0],
+  "minecraft:lime_concrete": [229, 0],
+  "minecraft:pink_concrete": [230, 0],
+  "minecraft:gray_concrete": [231, 0],
+  "minecraft:light_gray_concrete": [232, 0],
+  "minecraft:cyan_concrete": [233, 0],
+  "minecraft:blue_concrete": [234, 0],
+  "minecraft:purple_concrete": [235, 0],
+  "minecraft:brown_concrete": [236, 0],
+  "minecraft:green_concrete": [237, 0],
+  "minecraft:red_concrete": [238, 0],
+  "minecraft:black_concrete": [239, 0],
+  "minecraft:mycelium": [243, 0],
+  "minecraft:stonecutter": [245, 0],
+  "minecraft:observer": [{
+    "props": {
+      "facing": "down",
+      "powered": "false"
+    },
+    "dungeons": [251, 0]
+  }, {
+    "props": {
+      "facing": "up",
+      "powered": "false"
+    },
+    "dungeons": [251, 1]
+  }, {
+    "props": {
+      "facing": "north",
+      "powered": "false"
+    },
+    "dungeons": [251, 2]
+  }, {
+    "props": {
+      "facing": "south",
+      "powered": "false"
+    },
+    "dungeons": [251, 3]
+  }, {
+    "props": {
+      "facing": "west",
+      "powered": "false"
+    },
+    "dungeons": [251, 4]
+  }, {
+    "props": {
+      "facing": "east",
+      "powered": "false"
+    },
+    "dungeons": [251, 5]
+  }, {
+    "props": {
+      "facing": "down",
+      "powered": "true"
+    },
+    "dungeons": [251, 8]
+  }, {
+    "props": {
+      "facing": "up",
+      "powered": "true"
+    },
+    "dungeons": [251, 9]
+  }, {
+    "props": {
+      "facing": "north",
+      "powered": "true"
+    },
+    "dungeons": [251, 10]
+  }, {
+    "props": {
+      "facing": "south",
+      "powered": "true"
+    },
+    "dungeons": [251, 11]
+  }, {
+    "props": {
+      "facing": "west",
+      "powered": "true"
+    },
+    "dungeons": [251, 12]
+  }, {
+    "props": {
+      "facing": "east",
+      "powered": "true"
+    },
+    "dungeons": [251, 13]
+  }
+  ],
+  "minecraft:warped_planks": [268, 0],
+  "minecraft:crimson_nylium": [269, 0],
+  "minecraft:warped_nylium": [270, 0],
+  "minecraft:honeycomb_block": [272, 0],
+  "minecraft:warped_wart_block": [274, 0],
+  "minecraft:crimson_planks": [276, 0],
+  "minecraft:quartz_bricks": [304, 0],
+  "minecraft:basalt": [{
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [305, 0]
+  }, {
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [306, 0]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [307, 0]
+  }
+  ],
+  "minecraft:crying_obsidian": [347, 0],
+  "minecraft:dried_kelp_block": [348, 0],
+  "minecraft:nether_gold_ore": [349, 0],
+  "minecraft:polished_basalt": [{
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [354, 0]
+  }, {
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [355, 0]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [356, 0]
+  }
+  ],
+  "minecraft:crimson_stem": [{
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [357, 0]
+  }
+  ],
+  "minecraft:warped_slab": [{
+    "props": {
+      "type": "bottom"
+    },
+    "dungeons": [520, 0]
+  }
+  ],
+  "minecraft:sea_lantern": [267, 0],
+  "minecraft:stripped_oak_log": [{
+    "props": {
+      "axis": "y"
+    },
+    "dungeons": [490, 0]
+  }, {
+    "props": {
+      "axis": "x"
+    },
+    "dungeons": [490, 4]
+  }, {
+    "props": {
+      "axis": "z"
+    },
+    "dungeons": [490, 8]
+  }
+  ]
+}
