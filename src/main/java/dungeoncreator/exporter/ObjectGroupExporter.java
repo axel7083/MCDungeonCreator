@@ -132,7 +132,8 @@ public class ObjectGroupExporter {
                                     break;
                                 case "minecraft:structure_block":
 
-                                    TileEntity tileentity = world.getTileEntity(new BlockPos(realX, realY, realZ));
+                                    //TODO: this section be remove in a near future
+                                    /*TileEntity tileentity = world.getTileEntity(new BlockPos(realX, realY, realZ));
                                     // We fetch the tileEntity linked to the structureBlock at the position we are currently exploring
                                     if (tileentity instanceof StructureBlockTileEntity) {
                                         BlockPos boxSize = ((StructureBlockTileEntity) tileentity).getStructureSize();
@@ -175,7 +176,7 @@ public class ObjectGroupExporter {
 
                                             regions.add(new Region(name, tag, type, pos, size));
                                         }
-                                    }
+                                    }*/
 
 
                                 case "minecraft:barrier":

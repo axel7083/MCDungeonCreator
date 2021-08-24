@@ -1,9 +1,13 @@
 package dungeoncreator.models;
 
 import com.google.gson.annotations.SerializedName;
+import dungeoncreator.blocks.DoorBlock;
 import dungeoncreator.utils.TileUtils;
+import net.minecraft.util.math.BlockPos;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.zip.DataFormatException;
 
 public class InGameTile {
@@ -26,6 +30,19 @@ public class InGameTile {
     public transient byte[][] regionPlane;
     public transient short[][] heightPlane;
     public transient boolean heightMapComputed = false;
+
+    public ArrayList<Door> doors = new ArrayList<>();
+
+    public Door getDoorByBlockPos(BlockPos blockPos) {
+        if(doors == null)
+            return null;
+
+        for(Door d : doors) {
+            if(d.blockPos.equals(blockPos))
+                return d;
+        }
+        return null;
+    }
 
     public InGameTile(String id, int[] pos, int[] pos2) {
         this.id = id;

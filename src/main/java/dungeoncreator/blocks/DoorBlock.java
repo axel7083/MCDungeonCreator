@@ -1,6 +1,10 @@
 package dungeoncreator.blocks;
 
 import dungeoncreator.gui.door.DoorBlockScreen;
+import dungeoncreator.models.Door;
+import dungeoncreator.models.InGameTile;
+import dungeoncreator.utils.Cache;
+import dungeoncreator.utils.TileUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -18,9 +22,11 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 
 public class DoorBlock extends Block {
 
@@ -33,7 +39,7 @@ public class DoorBlock extends Block {
 
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         System.out.println("onBlockActivated");
-        Minecraft.getInstance().displayGuiScreen(new DoorBlockScreen(state, pos));
+        Minecraft.getInstance().displayGuiScreen(new DoorBlockScreen(state, pos, player));
 
         return ActionResultType.SUCCESS;
     }
@@ -41,10 +47,26 @@ public class DoorBlock extends Block {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         if (!worldIn.isRemote) {
             if (placer != null) {
-                //TODO: register the new door
-            }
 
+                Cache cache = Cache.getInstance();
+
+                InGameTile tile = TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
+                if(tile == null) {
+                    worldIn.destroyBlock(pos, false);
+                    placer.sendMessage(new StringTextComponent("The door block need to be placed inside a tile."), placer.getUniqueID());
+                }
+                else
+                {
+                    if(tile.doors == null)
+                        tile.doors = new ArrayList<>();
+                    tile.doors.add(new Door(pos));
+                    placer.sendMessage(new StringTextComponent("Placed inside " + tile.id), placer.getUniqueID());
+                    return;
+                }
+
+            }
         }
+        worldIn.destroyBlock(pos, false);
     }
 
 

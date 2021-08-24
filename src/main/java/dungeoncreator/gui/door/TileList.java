@@ -3,15 +3,13 @@ package dungeoncreator.gui.door;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import dungeoncreator.models.InGameTile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.IBidiRenderer;
-import net.minecraft.client.gui.screen.ConfirmScreen;
-import net.minecraft.client.gui.screen.PackLoadingManager;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.list.ExtendedList;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.resources.PackCompatibility;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -19,7 +17,6 @@ import net.minecraft.util.text.ITextProperties;
 import net.minecraft.util.text.LanguageMap;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -48,27 +45,33 @@ public class TileList extends ExtendedList<TileList.TileEntry> {
         return this.x1 - 6;
     }
 
+    public interface Events {
+        public void onClick(TileList.TileEntry tileEntry);
+    }
+
     @OnlyIn(Dist.CLIENT)
     public static class TileEntry extends ExtendedList.AbstractListEntry<TileEntry> {
-        private TileList field_214430_c;
-        protected final Minecraft field_214428_a;
-        protected final Screen field_214429_b;
+        private TileList tileList;
+        protected final Minecraft mc;
+        protected final Screen screen;
 
+
+        private Events events;
+        public InGameTile tile ;
         //private final PackLoadingManager.IPack field_214431_d;
         private final IReorderingProcessor field_243407_e;
         private final IBidiRenderer field_243408_f;
-        private final IReorderingProcessor field_244422_g;
-        private final IBidiRenderer field_244423_h;
 
-        public TileEntry(Minecraft p_i241201_1_, TileList p_i241201_2_, Screen p_i241201_3_, String title, String description) {
-            this.field_214428_a = p_i241201_1_;
-            this.field_214429_b = p_i241201_3_;
-            //this.field_214431_d = p_i241201_4_;
-            this.field_214430_c = p_i241201_2_;
-            this.field_243407_e = func_244424_a(p_i241201_1_, new StringTextComponent(title));
-            this.field_243408_f = func_244425_b(p_i241201_1_, new StringTextComponent(description));
-            this.field_244422_g = func_244424_a(p_i241201_1_, new StringTextComponent("unknown text 1"));
-            this.field_244423_h = func_244425_b(p_i241201_1_, new StringTextComponent("unknown text 2"));
+
+        public TileEntry(Minecraft mc, TileList tileList, Screen screen, InGameTile tile, Events events) {
+            this.mc = mc;
+            this.screen = screen;
+            this.tile = tile;
+            this.tileList = tileList;
+            this.events = events;
+
+            this.field_243407_e = func_244424_a(mc, new StringTextComponent(tile.id));
+            this.field_243408_f = func_244425_b(mc, new StringTextComponent(String.format("Size (%d,%d,%d)", tile.sizeX, tile.sizeY, tile.sizeZ)));
         }
 
         private static IReorderingProcessor func_244424_a(Minecraft p_244424_0_, ITextComponent p_244424_1_) {
@@ -85,7 +88,7 @@ public class TileList extends ExtendedList<TileList.TileEntry> {
             return IBidiRenderer.func_243259_a(p_244425_0_.fontRenderer, p_244425_1_, 157, 2);
         }
 
-        public void render(MatrixStack p_230432_1_, int p_230432_2_, int p_230432_3_, int p_230432_4_, int p_230432_5_, int p_230432_6_, int p_230432_7_, int p_230432_8_, boolean p_230432_9_, float p_230432_10_) {
+        public void render(MatrixStack p_230432_1_, int p_230432_2_, int p_230432_3_, int p_230432_4_, int p_230432_5_, int p_230432_6_, int p_230432_7_, int p_230432_8_, boolean hover_maybe, float p_230432_10_) {
             //PackCompatibility packcompatibility = this.field_214431_d.func_230460_a_();
             //TODO: check compatibility
             /*if (!packcompatibility.isCompatible()) {
@@ -94,13 +97,13 @@ public class TileList extends ExtendedList<TileList.TileEntry> {
             }*/
 
             //TODO: do something better
-            this.field_214428_a.getTextureManager().bindTexture(new ResourceLocation("textures/gui/advancements/widgets.png"));
+            this.mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/advancements/widgets.png"));
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0F, 0.0F, 32, 32, 32, 32);
             IReorderingProcessor ireorderingprocessor = this.field_243407_e;
             IBidiRenderer ibidirenderer = this.field_243408_f;
-            if (/*this.func_238920_a_() &&*/ (this.field_214428_a.gameSettings.touchscreen || p_230432_9_)) {
-                this.field_214428_a.getTextureManager().bindTexture(TileList.field_214367_b);
+            if (/*this.func_238920_a_() &&*/ (this.mc.gameSettings.touchscreen || hover_maybe)) {
+                this.mc.getTextureManager().bindTexture(TileList.field_214367_b);
                 AbstractGui.fill(p_230432_1_, p_230432_4_, p_230432_3_, p_230432_4_ + 32, p_230432_3_ + 32, -1601138544);
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
                 int i = p_230432_7_ - p_230432_4_;
@@ -145,19 +148,19 @@ public class TileList extends ExtendedList<TileList.TileEntry> {
                 }*/
             }
 
-            this.field_214428_a.fontRenderer.func_238407_a_(p_230432_1_, ireorderingprocessor, (float)(p_230432_4_ + 32 + 2), (float)(p_230432_3_ + 1), 16777215);
+            this.mc.fontRenderer.func_238407_a_(p_230432_1_, ireorderingprocessor, (float)(p_230432_4_ + 32 + 2), (float)(p_230432_3_ + 1), 16777215);
             ibidirenderer.func_241865_b(p_230432_1_, p_230432_4_ + 32 + 2, p_230432_3_ + 12, 10, 8421504);
         }
 
-        /*private boolean func_238920_a_() {
-            return !this.field_214431_d.func_230465_f_() || !this.field_214431_d.func_230466_g_();
-        }*/
-
         public boolean mouseClicked(double mouseX, double mouseY, int button) {
-            double d0 = mouseX - (double)this.field_214430_c.getRowLeft();
-            double d1 = mouseY - (double)this.field_214430_c.getRowTop(this.field_214430_c.getEventListeners().indexOf(this));
+            double d0 = mouseX - (double)this.tileList.getRowLeft();
+            double d1 = mouseY - (double)this.tileList.getRowTop(this.tileList.getEventListeners().indexOf(this));
 
             System.out.println("CLICKED");
+            if(events != null) {
+                events.onClick(this);
+                events = null;
+            }
             /*if (this.func_238920_a_() && d0 <= 32.0D) {
                 if (this.field_214431_d.func_238875_m_()) {
                     PackCompatibility packcompatibility = this.field_214431_d.func_230460_a_();
