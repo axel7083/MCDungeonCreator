@@ -1,5 +1,6 @@
 {
   "itemGroup.mcdc_itemgroup": "Minecraft Dungeon blocks",
+  "block.dungeoncreator.door_block_registry_name": "Door Block",
   "key.dungeoncreator.ortho.toggle": "Camera Mode",
   "item.dungeoncreator.walkable_item": "Walkable +",
   "item.dungeoncreator.exclude_item": "Walkable -"

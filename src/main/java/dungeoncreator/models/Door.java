@@ -1,4 +1,4 @@
-package dungeoncreator.models.not_implemented;
+package dungeoncreator.models;
 
 public class Door {
     int[] pos;

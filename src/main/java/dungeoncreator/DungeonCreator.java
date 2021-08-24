@@ -80,6 +80,7 @@ public class DungeonCreator {
     eventBus.register(dungeoncreator.itemgroup.StartupCommon.class);
     eventBus.register(dungeoncreator.commands.StartupCommon.class);
     eventBus.register(dungeoncreator.items.StartupCommon.class);
+    eventBus.register(dungeoncreator.blocks.StartupCommon.class);
   }
 
   private void clientSetup(final FMLClientSetupEvent event) {

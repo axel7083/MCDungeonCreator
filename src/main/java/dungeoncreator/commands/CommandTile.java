@@ -5,14 +5,22 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import dungeoncreator.gui.chart.LevelScreen;
+import dungeoncreator.gui.door.DoorBlockScreen;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
 import dungeoncreator.exporter.ObjectGroupExporter;
+import net.minecraft.advancements.*;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screen.CommandBlockScreen;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.*;
@@ -22,6 +30,7 @@ import java.io.IOException;
 
 public class CommandTile {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
+
         LiteralArgumentBuilder<CommandSource> commandTile =
                 Commands.literal("tiles")
                 .requires((commandSource) -> commandSource.hasPermissionLevel(1))
@@ -56,9 +65,66 @@ public class CommandTile {
                 .then(Commands.literal("walkable")
                         .then(Commands.literal("show").executes(commandSource -> toggleWalkable(commandSource,true)))
                         .then(Commands.literal("hide").executes(commandSource -> toggleWalkable(commandSource,false)))
-                );
+                ).then(Commands.literal("debug").executes(CommandTile::debug) );
 
         dispatcher.register(commandTile);
+    }
+
+    static int debug(CommandContext<CommandSource> commandContext) {
+        try {
+            LevelScreen screen = new LevelScreen(Minecraft.getInstance());
+
+            Advancement root = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.PLAYER_HEAD.asItem()),
+                    new TranslationTextComponent("advancements.end.root.title"),
+                    new TranslationTextComponent("advancements.end.root.description"),
+                    new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                    FrameType.TASK,
+                    false,
+                    false,
+                    false).build(new ResourceLocation("end/id"));
+
+            Advancement second = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.OAK_PLANKS.asItem()),
+                    new TranslationTextComponent("advancements.end.root.title"),
+                    new TranslationTextComponent("advancements.end.root.description"),
+                    (ResourceLocation)null,
+                    FrameType.TASK,
+                    false,
+                    false,
+                    false).withParent(root).build(new ResourceLocation("end/kill_dragon"));
+
+            Advancement second_2 = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.LAVA.asItem()),
+                    new TranslationTextComponent("advancements.end.root.title"),
+                    new TranslationTextComponent("advancements.end.root.description"),
+                    (ResourceLocation)null,
+                    FrameType.TASK,
+                    false,
+                    false,
+                    false).withParent(root).build(new ResourceLocation("end/aaa"));
+
+            Advancement next2 = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.OAK_LOG.asItem()),
+                    new TranslationTextComponent("advancements.end.root.title"),
+                    new TranslationTextComponent("advancements.end.root.description"),
+                    (ResourceLocation)null,
+                    FrameType.TASK,
+                    false,
+                    false,
+                    false).withParent(second).build(new ResourceLocation("end/enter_end_gateway"));
+
+            AdvancementTreeNode.layout(root);
+
+            screen.rootAdvancementAdded(root);
+            screen.nonRootAdvancementAdded(second);
+            screen.nonRootAdvancementAdded(second_2);
+            screen.nonRootAdvancementAdded(next2);
+            screen.setSelectedTab(root);
+
+            Minecraft.getInstance().displayGuiScreen(screen);
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 1;
     }
 
     static int showExportPath(CommandContext<CommandSource> commandContext) {

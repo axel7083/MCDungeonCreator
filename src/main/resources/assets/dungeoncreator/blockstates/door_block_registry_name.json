@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "dungeoncreator:block/door_block_model" }
+  }
+}

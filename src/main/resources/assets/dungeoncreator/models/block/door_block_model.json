@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "dungeoncreator:block/door_block",
+    "up": "dungeoncreator:block/door_block",
+    "north": "dungeoncreator:block/door_block",
+    "east": "dungeoncreator:block/door_block",
+    "south": "dungeoncreator:block/door_block",
+    "west": "dungeoncreator:block/door_block",
+    "particle": "block/lapis_block"
+  }
+}
