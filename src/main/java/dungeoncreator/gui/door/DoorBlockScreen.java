@@ -32,19 +32,52 @@ public class DoorBlockScreen extends AbstractDoorBlockScreen {
         this.player = player;
     }
 
-    int func_195236_i() {
-        return 135;
-    }
-
     protected void init() {
         super.init();
+    }
+
+    @Override
+    void load() {
+        System.out.println("Loading ");
+        Cache cache = Cache.getInstance();
+        InGameTile tile = TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
+
+        if(tile != null) {
+
+            // Generate minimap
+
+
+
+
+            Door d = tile.getDoorByBlockPos(pos);
+
+            if(d != null) {
+                ArrayList<String> tilesIDs = d.tiles;
+                System.out.println("tilesIDs " + (tilesIDs==null) );
+
+                this.posXEdit.setText(d.pos[0] + "");
+                this.posYEdit.setText(d.pos[1] + "");
+                this.posZEdit.setText(d.pos[2] + "");
+
+                this.sizeXEdit.setText(d.size[0] + "");
+                this.sizeYEdit.setText(d.size[1] + "");
+                this.sizeZEdit.setText(d.size[2] + "");
+
+                setTileUsed(tilesIDs);
+
+                //TODO:set probability
+
+                //tagsMode = d.tagsModes;
+
+                //doorMode = d.doorModes;
+            }
+        }
     }
 
     @Override
     void save() {
         Cache cache = Cache.getInstance();
         ArrayList<String> tilesIDs = getTilesUsed();
-
         InGameTile tile = TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
 
         if(tile != null) {
@@ -58,7 +91,8 @@ public class DoorBlockScreen extends AbstractDoorBlockScreen {
                         tilesIDs,
                         getTags(),
                         1f,
-                        mode
+                        doorMode,
+                        tagsMode
                 );
                 try {
                     cache.worldData.save();

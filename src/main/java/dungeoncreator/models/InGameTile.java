@@ -3,7 +3,15 @@ package dungeoncreator.models;
 import com.google.gson.annotations.SerializedName;
 import dungeoncreator.blocks.DoorBlock;
 import dungeoncreator.utils.TileUtils;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.renderer.texture.NativeImage;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,9 +28,9 @@ public class InGameTile {
     public int sizeY;
     public int sizeZ;
 
-    public transient int minX;
-    public transient int minY;
-    public transient int minZ;
+    public int minX;
+    public int minY;
+    public int minZ;
 
     @SerializedName(value = "region-plane")
     public String encodedRegionPlane = null;
@@ -31,7 +39,15 @@ public class InGameTile {
     public transient short[][] heightPlane;
     public transient boolean heightMapComputed = false;
 
+    public boolean isLevelStart = false;
+
     public ArrayList<Door> doors = new ArrayList<>();
+
+    public NativeImage minimap;
+
+    public void computeMinimap(World w) {
+        minimap = TileUtils.computeHeightMap(this, w);
+    }
 
     public Door getDoorByBlockPos(BlockPos blockPos) {
         if(doors == null)

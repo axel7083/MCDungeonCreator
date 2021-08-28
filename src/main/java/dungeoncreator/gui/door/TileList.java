@@ -10,6 +10,7 @@ import net.minecraft.client.gui.IBidiRenderer;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.list.ExtendedList;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -22,11 +23,15 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TileList extends ExtendedList<TileList.TileEntry> {
-    private static final ResourceLocation field_214367_b = new ResourceLocation("textures/gui/resource_packs.png");
+
+    private static ResourceLocation field_214367_b = new ResourceLocation("textures/gui/resource_packs.png");
     private final ITextComponent field_214370_e;
 
     public TileList(Minecraft p_i241200_1_, int p_i241200_2_, int topIn, int p_i241200_3_, ITextComponent p_i241200_4_) {
         super(p_i241200_1_, p_i241200_2_, p_i241200_3_, topIn, p_i241200_3_ - 55 + 4, 36);
+
+        //generate(); //DEBUG
+
         this.field_214370_e = p_i241200_4_;
         this.centerListVertically = false;
         this.setRenderHeader(true, (int)(9.0F * 1.5F));
@@ -97,13 +102,18 @@ public class TileList extends ExtendedList<TileList.TileEntry> {
             }*/
 
             //TODO: do something better
-            this.mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/advancements/widgets.png"));
+
+
+            ResourceLocation r = this.mc.getTextureManager().getDynamicTextureLocation("itembitsword/" + tile.id, new DynamicTexture(tile.minimap));
+
+            //this.mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/advancements/widgets.png"));
+            this.mc.getTextureManager().bindTexture(r); //TODO: fix empty world
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             AbstractGui.blit(p_230432_1_, p_230432_4_, p_230432_3_, 0.0F, 0.0F, 32, 32, 32, 32);
             IReorderingProcessor ireorderingprocessor = this.field_243407_e;
             IBidiRenderer ibidirenderer = this.field_243408_f;
             if (/*this.func_238920_a_() &&*/ (this.mc.gameSettings.touchscreen || hover_maybe)) {
-                this.mc.getTextureManager().bindTexture(TileList.field_214367_b);
+                this.mc.getTextureManager().bindTexture(r);
                 AbstractGui.fill(p_230432_1_, p_230432_4_, p_230432_3_, p_230432_4_ + 32, p_230432_3_ + 32, -1601138544);
                 RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
                 int i = p_230432_7_ - p_230432_4_;

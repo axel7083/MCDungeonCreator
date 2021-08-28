@@ -16,32 +16,42 @@ import net.minecraft.client.gui.screen.EditStructureScreen;
 import net.minecraft.client.gui.widget.list.ResourcePackList;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.StructureBlockTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.event.world.BlockEvent;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class DoorBlock extends Block {
 
-
-
     public DoorBlock() {
         super(Block.Properties.create(Material.ROCK));
     }
 
-
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         System.out.println("onBlockActivated");
+
+        for(InGameTile t : Cache.getInstance().worldData.objects)
+            t.computeMinimap(worldIn);
+
         Minecraft.getInstance().displayGuiScreen(new DoorBlockScreen(state, pos, player));
 
         return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+        System.out.println("Block harvested");
     }
 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {

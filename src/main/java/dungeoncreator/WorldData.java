@@ -102,7 +102,7 @@ public class WorldData {
         t = new StringTextComponent(objects.size() + " tile(s) in memory.");
 
         for(InGameTile o : objects) {
-            t.append(new StringTextComponent("\n- " + o.id + " "));
+            t.append(new StringTextComponent("\n- " + o.id + " " + (o.isLevelStart?"(Start tile)":"")));
 
             Style style = Style.EMPTY
                     .setItalic(true)

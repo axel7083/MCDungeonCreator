@@ -1,10 +1,8 @@
 package dungeoncreator.gui.door;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import dungeoncreator.models.Door;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
-import dungeoncreator.utils.TileUtils;
 import javafx.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
@@ -31,7 +29,7 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         SIDE_PATH,
     }
 
-    public enum TagsMode {
+    public enum TagsModes {
         NONE,
         ENTER,
         EXIT,
@@ -56,8 +54,8 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
 
     protected Button modeBtn;
     protected Button tagsBtn;
-    protected DoorModes mode = DoorModes.MAIN_PATH;
-    protected TagsMode tagsMode = TagsMode.NONE;
+    protected DoorModes doorMode = DoorModes.MAIN_PATH;
+    protected TagsModes tagsMode = TagsModes.NONE;
 
     private TileList left_list;
     private TileList right_list;
@@ -66,7 +64,6 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
 
     @Override
     public void onClick(TileList.TileEntry tileEntry) {
-
         // Exchanging from left list to right list the clicked tile Entry
         if(left_list.getEventListeners().contains(tileEntry)) {
             left_list.getEventListeners().remove(tileEntry);
@@ -77,7 +74,6 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
             right_list.getEventListeners().remove(tileEntry);
             left_list.getEventListeners().add(new TileList.TileEntry(this.minecraft, left_list, this, tileEntry.tile, this));
         }
-
     }
 
     public AbstractDoorBlockScreen() {
@@ -114,19 +110,20 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         this.left_list = new TileList(this.minecraft, 150, topLeft.getValue() + 100, this.height, new StringTextComponent("Available"));
         this.left_list.setLeftPos(this.topLeft.getKey());
 
-        fillLeftList();
-
-        this.children.add(this.left_list);
 
         // Create left list (containing selected tiles)
         this.right_list = new TileList(this.minecraft, 150, topLeft.getValue() + 100, this.height, new StringTextComponent("Selected"));
         this.right_list.setLeftPos(this.topLeft.getKey() + 160);
+
+
+        load();
+        this.children.add(this.left_list);
         this.children.add(this.right_list);
     }
 
     protected String getTags() {
 
-        if(mode.equals(DoorModes.MAIN_PATH))
+        if(doorMode.equals(DoorModes.MAIN_PATH))
             switch (tagsMode) {
                 case NONE:
                     return "";
@@ -139,6 +136,23 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         return "deadend";
     }
 
+
+    protected void setTileUsed(ArrayList<String> tilesIds) {
+        if(tilesIds == null)
+            tilesIds = new ArrayList<>();
+
+        Cache cache = Cache.getInstance();
+
+        for(InGameTile t : cache.worldData.objects) {
+            if(tilesIds.contains(t.id))
+                right_list.getEventListeners().add(
+                        new TileList.TileEntry(this.minecraft, right_list, this, t, this));
+            else
+                left_list.getEventListeners().add(
+                        new TileList.TileEntry(this.minecraft, left_list, this, t, this));
+        }
+    }
+
     public ArrayList<String> getTilesUsed() {
         ArrayList<String> tilesIDs = new ArrayList<>();
         for(TileList.TileEntry entry : right_list.getEventListeners()) {
@@ -147,6 +161,7 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         return tilesIDs;
     }
 
+    abstract void load();
     abstract void save();
 
     protected float parseFloat(String v) {
@@ -210,31 +225,20 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         this.sizeZEdit.tick();
     }
 
-    private void fillLeftList() {
-        // Fetching all the tiles
-        Cache cache = Cache.getInstance();
-
-        // Fill up two time just for demo
-        for(InGameTile t : cache.worldData.objects) {
-            left_list.getEventListeners().add(
-                    new TileList.TileEntry(this.minecraft, left_list, this, t, this));
-        }
-    }
-
     private void nextMode() {
-        switch (mode) {
+        switch (doorMode) {
             case MAIN_PATH:
-                mode = DoorModes.DEAD_END;
+                doorMode = DoorModes.DEAD_END;
                 this.tagsBtn.visible = false; // Since all dead end MUST have "deadend" tag
                 this.modeBtn.setMessage(new StringTextComponent("Dead Ends"));
                 break;
             case DEAD_END:
-                mode = DoorModes.SIDE_PATH;
+                doorMode = DoorModes.SIDE_PATH;
                 this.tagsBtn.visible = false; // Since all side-path MUST have "deadend" tag
                 this.modeBtn.setMessage(new StringTextComponent("Side path"));
                 break;
             case SIDE_PATH:
-                mode = DoorModes.MAIN_PATH;
+                doorMode = DoorModes.MAIN_PATH;
                 this.tagsBtn.visible = true; // can be "Enter" Or "Exit" or nothing
                 this.modeBtn.setMessage(new StringTextComponent("Main path"));
                 break;
@@ -244,15 +248,15 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
     private void nextTags() {
         switch (tagsMode) {
             case NONE:
-                tagsMode = TagsMode.ENTER;
+                tagsMode = TagsModes.ENTER;
                 this.tagsBtn.setMessage(new StringTextComponent("Enter"));
                 break;
             case ENTER:
-                tagsMode = TagsMode.EXIT;
+                tagsMode = TagsModes.EXIT;
                 this.tagsBtn.setMessage(new StringTextComponent("Exit"));
                 break;
             case EXIT:
-                tagsMode = TagsMode.NONE;
+                tagsMode = TagsModes.NONE;
                 this.tagsBtn.setMessage(new StringTextComponent("None"));
                 break;
         }
@@ -265,8 +269,6 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
     public void onClose() {
         this.minecraft.keyboardListener.enableRepeatEvents(false);
     }
-
-    protected abstract void func_195235_a(CommandBlockLogic commandBlockLogicIn);
 
     public void closeScreen() {
         this.minecraft.displayGuiScreen((Screen)null);
@@ -293,7 +295,7 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         this.renderDirtBackground(0);
 
         // If we are an enter AND the mode is MAIN_PATH we do not need to specify a tile.
-        if (!tagsMode.equals(TagsMode.ENTER) || !mode.equals(DoorModes.MAIN_PATH)) {
+        if (!tagsMode.equals(TagsModes.ENTER) || !doorMode.equals(DoorModes.MAIN_PATH)) {
             // Render the lists
             this.left_list.render(matrixStack, mouseX, mouseY, partialTicks);
             this.right_list.render(matrixStack, mouseX, mouseY, partialTicks);

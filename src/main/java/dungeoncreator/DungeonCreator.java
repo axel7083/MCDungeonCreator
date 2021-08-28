@@ -2,10 +2,18 @@ package dungeoncreator;
 
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.OrthoViewHandler;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.item.Item;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -29,6 +37,15 @@ public class DungeonCreator {
 
     MinecraftForge.EVENT_BUS.addListener(this::onWorldLoaded);
     MinecraftForge.EVENT_BUS.addListener(this::onWorldUnload);
+
+    MinecraftForge.EVENT_BUS.addListener(this::block_placed);
+  }
+
+  //
+  public void block_placed(final BlockEvent.EntityPlaceEvent event)
+  {
+    Block blockIn = event.getState().getBlock();
+    System.out.println("BLOCK PLACED in pos " + event.getPos());
   }
 
 

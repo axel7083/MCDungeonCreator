@@ -3,19 +3,32 @@ package dungeoncreator;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
+import dungeoncreator.gui.door.TileList;
+import dungeoncreator.models.Door;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.debug.DebugRenderer;
+import net.minecraft.client.renderer.texture.NativeImage;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+
+import static net.minecraft.client.gui.AbstractGui.drawCenteredString;
+import static net.minecraft.client.gui.AbstractGui.drawString;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
@@ -23,19 +36,21 @@ public class ClientEvents {
     @SubscribeEvent
     public static void onRender(RenderWorldLastEvent event)
     {
+
+        Minecraft mc = Minecraft.getInstance();
         // If we are in a world
-        if(Minecraft.getInstance().world != null)
+        if(mc.world != null)
         {
             Cache cache = Cache.getInstance();
             if(cache.worldData == null || cache.worldData.objects == null)
                 return;
 
-            IRenderTypeBuffer.Impl renderBuffers = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
+            IRenderTypeBuffer.Impl renderBuffers = mc.getRenderTypeBuffers().getBufferSource();
             IVertexBuilder builder = renderBuffers.getBuffer(RenderType.LINES);
             MatrixStack matrixStack = event.getMatrixStack();
 
             RenderSystem.lineWidth(10.0f);
-            PlayerEntity player = Minecraft.getInstance().player;
+            PlayerEntity player = mc.player;
             if(player == null)
                 return;
 
@@ -55,6 +70,9 @@ public class ClientEvents {
             matrixStack.pop();
             RenderSystem.disableDepthTest();
             renderBuffers.finish(RenderType.LINES);
+
+            //Render 3D Box
+            drawDoors(event,t);
         }
     }
 
@@ -104,10 +122,97 @@ public class ClientEvents {
                 }
             }
         }
-
-
     }
 
+    // Source https://www.minecraftforgefrance.fr/topic/6412/dessin-dans-le-monde/12
+    public static void drawDoors(RenderWorldLastEvent event, InGameTile t) {
+        if(t == null)
+            return;
+
+        MatrixStack ms = event.getMatrixStack();
+        IRenderTypeBuffer.Impl buffers = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
+        RenderSystem.disableCull();
+        ms.push();
+
+        for(Door d: t.doors) {
+            drawCube(ms, buffers, new AxisAlignedBB(
+                    new BlockPos(d.blockPos.getX()+d.pos[0], d.blockPos.getY()+d.pos[1], d.blockPos.getZ()+d.pos[2]))
+                    .expand(d.size[0], d.size[1], d.size[2]), new Color(0, 255, 0, 100));
+        }
+
+
+        ms.pop();
+        buffers.finish();
+    }
+
+    public static void drawCube(MatrixStack ms, IRenderTypeBuffer buffers, AxisAlignedBB aabb, Color color) {
+        draw3dRectangle(ms, buffers, aabb, color, "TOP");
+        draw3dRectangle(ms, buffers, aabb, color, "BOTTOM");
+        draw3dRectangle(ms, buffers, aabb, color, "NORTH");
+        draw3dRectangle(ms, buffers, aabb, color, "EAST");
+        draw3dRectangle(ms, buffers, aabb, color, "SOUTH");
+        draw3dRectangle(ms, buffers, aabb, color, "WEST");
+    }
+
+    public static void draw3dRectangle(MatrixStack ms, IRenderTypeBuffer buffers, AxisAlignedBB aabb, Color color, String side) {
+        int r = color.getRed();
+        int g = color.getGreen();
+        int b = color.getBlue();
+        int a = color.getAlpha();
+        double renderPosX = Minecraft.getInstance().getRenderManager().info.getProjectedView().getX();
+        double renderPosY = Minecraft.getInstance().getRenderManager().info.getProjectedView().getY();
+        double renderPosZ = Minecraft.getInstance().getRenderManager().info.getProjectedView().getZ();
+
+        ms.push();
+        ms.translate(aabb.minX - renderPosX, aabb.minY - renderPosY, aabb.minZ - renderPosZ);
+
+        IVertexBuilder buffer = buffers.getBuffer(RenderType.makeType(DungeonCreator.MODID + ":rectangle_highlight", DefaultVertexFormats.POSITION_COLOR, GL11.GL_QUADS, 256, false, true, RenderType.State.getBuilder().transparency(ObfuscationReflectionHelper.getPrivateValue(RenderState.class, null, "field_228515_g_")).cull(new RenderState.CullState(false)).build(false)));
+        Matrix4f mat = ms.getLast().getMatrix();
+
+        float x = (float) (aabb.maxX - aabb.minX);
+        float y = (float) (aabb.maxY - aabb.minY);
+        float z = (float) (aabb.maxZ - aabb.minZ);
+
+        switch (side) {
+            case "TOP":
+                buffer.pos(mat, x, y, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, y, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, y, z).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, y, z).color(r, g, b, a).endVertex();
+                break;
+            case "BOTTOM":
+                buffer.pos(mat, x, 0, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, 0, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, 0, z).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, 0, z).color(r, g, b, a).endVertex();
+                break;
+            case "NORTH":
+                buffer.pos(mat, 0, y, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, 0, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, 0, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, y, 0).color(r, g, b, a).endVertex();
+                break;
+            case "EAST":
+                buffer.pos(mat, x, y, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, 0, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, 0, z).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, y, z).color(r, g, b, a).endVertex();
+                break;
+            case "SOUTH":
+                buffer.pos(mat, 0, y, z).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, 0, z).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, 0, z).color(r, g, b, a).endVertex();
+                buffer.pos(mat, x, y, z).color(r, g, b, a).endVertex();
+                break;
+            case "WEST":
+                buffer.pos(mat, 0, y, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, 0, 0).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, 0, z).color(r, g, b, a).endVertex();
+                buffer.pos(mat, 0, y, z).color(r, g, b, a).endVertex();
+                break;
+        }
+        ms.pop();
+    }
 
 
 }

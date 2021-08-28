@@ -5,8 +5,8 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import dungeoncreator.WorldData;
 import dungeoncreator.gui.chart.LevelScreen;
-import dungeoncreator.gui.door.DoorBlockScreen;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
@@ -14,11 +14,11 @@ import dungeoncreator.exporter.ObjectGroupExporter;
 import net.minecraft.advancements.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.CommandBlockScreen;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
@@ -54,6 +54,9 @@ public class CommandTile {
                         .then(Commands.literal("hide").executes(commandSource -> toggleBox(commandSource,false))))
                 .then(Commands.literal("where").executes(CommandTile::where))
                 .then(Commands.literal("force-save").executes(CommandTile::forceSave))
+                .then(Commands.literal("set-level-start").executes(CommandTile::setLevelStart)
+                        .then(Commands.argument("name",StringArgumentType.string())
+                                .executes(CommandTile::setLevelStart)))
                 .then(Commands.literal("export").executes(CommandTile::export)
                         .then(Commands.literal("set-default-path")
                             .then(Commands.argument("path",StringArgumentType.string())
@@ -64,10 +67,20 @@ public class CommandTile {
                                 .executes(CommandTile::showExportPath)))
                 .then(Commands.literal("walkable")
                         .then(Commands.literal("show").executes(commandSource -> toggleWalkable(commandSource,true)))
-                        .then(Commands.literal("hide").executes(commandSource -> toggleWalkable(commandSource,false)))
-                ).then(Commands.literal("debug").executes(CommandTile::debug) );
+                        .then(Commands.literal("hide").executes(commandSource -> toggleWalkable(commandSource,false))))
+                .then(Commands.literal("debug").executes(CommandTile::debug) )
+                .then(Commands.literal("generate-preview").executes(CommandTile::generatePreview) );
 
         dispatcher.register(commandTile);
+    }
+
+    static int generatePreview(CommandContext<CommandSource> commandContext) {
+        Cache cache = Cache.getInstance();
+
+        for( InGameTile t :cache.worldData.objects) {
+            t.computeMinimap(commandContext.getSource().getWorld());
+        }
+        return 1;
     }
 
     static int debug(CommandContext<CommandSource> commandContext) {
@@ -82,6 +95,7 @@ public class CommandTile {
                     false,
                     false,
                     false).build(new ResourceLocation("end/id"));
+
 
             Advancement second = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.OAK_PLANKS.asItem()),
                     new TranslationTextComponent("advancements.end.root.title"),
@@ -124,6 +138,46 @@ public class CommandTile {
         catch (Exception e) {
             e.printStackTrace();
         }
+        return 1;
+    }
+
+
+    static int setLevelStart(CommandContext<CommandSource> commandContext) {
+
+        String name = null;
+        try {
+            name = StringArgumentType.getString(commandContext,"name");
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("setLevelStart no name argument given. We will try to found the tile where the placer is currently in.");
+        }
+
+        WorldData worldData = Cache.getInstance().worldData;
+        PlayerEntity player = null;
+
+        try {
+            player = commandContext.getSource().asPlayer();
+        } catch (CommandSyntaxException e) {
+            e.printStackTrace();
+            return 1;
+        }
+
+        InGameTile tile = null;
+        if(name != null)
+            tile = worldData.getTileByName(name);
+        else
+            tile = TileUtils.getTileWithPlayerInside(worldData.objects,(int)  player.getPosX(),(int)  player.getPosY(), (int) player.getPosZ());
+
+
+        if(tile == null)
+            sendMessage(commandContext, "No corresponding tile could be found. Are you inside a tile ? Or check the name given.");
+        else
+        {
+            for(InGameTile t: worldData.objects)
+                t.isLevelStart = t.id.equals(tile.id);
+            sendMessage(commandContext, tile.id + " has been defined as the start tile of the level.");
+        }
+
         return 1;
     }
 

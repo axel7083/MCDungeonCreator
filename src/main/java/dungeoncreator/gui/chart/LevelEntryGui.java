@@ -10,7 +10,10 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.MapItemRenderer;
 import net.minecraft.client.gui.advancements.AdvancementState;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -138,7 +141,14 @@ public class LevelEntryGui extends AbstractGui {
 
             this.minecraft.getTextureManager().bindTexture(WIDGETS);
             this.blit(matrixStack, x + this.x + 3, y + this.y, this.displayInfo.getFrame().getIcon(), 128 + advancementstate.getId() * 26, 26, 26);
-            this.minecraft.getItemRenderer().renderItemAndEffectIntoGuiWithoutEntity(this.displayInfo.getIcon(), x + this.x + 8, y + this.y + 5);
+
+
+            //TODO: DO SOMETHING GOOD
+            //this.minecraft.getTextureManager().bindTexture(generate(this.minecraft));
+            //RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            //AbstractGui.blit(matrixStack, x + this.x + 8, y + this.y + 5, 0.0F, 0.0F, 16, 16, 32, 32);
+
+            //this.minecraft.getItemRenderer().renderItemAndEffectIntoGuiWithoutEntity(this.displayInfo.getIcon(), x + this.x + 8, y + this.y + 5);
         //}
 
         for(LevelEntryGui advancemententrygui : this.children) {

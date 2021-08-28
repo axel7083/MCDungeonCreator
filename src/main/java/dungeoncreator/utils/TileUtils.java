@@ -2,6 +2,11 @@ package dungeoncreator.utils;
 
 import dungeoncreator.WorldData;
 import dungeoncreator.models.InGameTile;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -40,23 +45,47 @@ public class TileUtils {
         return null;
     }
 
-    public static void computeHeightMap(InGameTile t, World world) {
+    public static NativeImage computeHeightMap(InGameTile t, World world) {
+
         if(t.sizeX == 0 || t.sizeY == 0 || t.sizeZ == 0)
             t.computeSizes();
+
+        int textureSize = 32;
+
+        float ratio = Math.max(t.sizeX, t.sizeZ);
+        ratio = textureSize/ratio;
+        System.out.println("Ratio " + ratio);
+
+        NativeImage textureArray = new NativeImage(textureSize, textureSize, true);
+
+        if(world == null)
+            return textureArray;
 
         for(int x = 0 ; x < t.sizeX; x++) {
             for(int z = 0; z < t.sizeZ; z++) {
 
-                short y = 255;
-                while(!world.getBlockState(new BlockPos(x+t.minX, y, z+t.minZ)).isSolid() && y != 0) {
+                short y = 256;
+                BlockState s;
+
+                do {
                     y--;
-                }
+                    s = world.getBlockState(new BlockPos(x+t.minX, y, z+t.minZ));
+                } while((!s.isSolid() && !s.getMaterial().isLiquid()) && y != 0);
+
+
+                int colorRGC = s.getMaterial().getColor().colorValue;
+                int colorRGBA = NativeImage.getCombined(255,
+                        colorRGC & 255,
+                        (colorRGC >> 8) & 255,
+                        (colorRGC >> 16) & 255);
+
+                textureArray.setPixelRGBA((int)(x*ratio), (int)(z*ratio),  colorRGBA);
 
                 t.heightPlane[x][z] = y;
             }
         }
 
-        return;
+        return textureArray;
     }
 
     public static String setBlockWalkable(PlayerEntity playerIn, byte value, int range) {
