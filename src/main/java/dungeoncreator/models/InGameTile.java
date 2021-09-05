@@ -1,21 +1,13 @@
 package dungeoncreator.models;
 
 import com.google.gson.annotations.SerializedName;
-import dungeoncreator.blocks.DoorBlock;
 import dungeoncreator.utils.TileUtils;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.NativeImage;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.zip.DataFormatException;
 
 public class InGameTile {
@@ -37,23 +29,23 @@ public class InGameTile {
 
     public transient byte[][] regionPlane;
     public transient short[][] heightPlane;
-    public transient boolean heightMapComputed = false;
 
     public boolean isLevelStart = false;
 
-    public ArrayList<Door> doors = new ArrayList<>();
+    public ArrayList<InGameDoor> inGameDoors = new ArrayList<>();
 
-    public NativeImage minimap;
+    public transient NativeImage minimap;
 
     public void computeMinimap(World w) {
         minimap = TileUtils.computeHeightMap(this, w);
     }
 
-    public Door getDoorByBlockPos(BlockPos blockPos) {
-        if(doors == null)
+    public InGameDoor getDoorByBlockPos(BlockPos blockPos) {
+        if(inGameDoors == null)
             return null;
 
-        for(Door d : doors) {
+
+        for(InGameDoor d : inGameDoors) {
             if(d.blockPos.equals(blockPos))
                 return d;
         }

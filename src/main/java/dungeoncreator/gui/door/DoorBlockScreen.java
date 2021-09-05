@@ -1,6 +1,6 @@
 package dungeoncreator.gui.door;
 
-import dungeoncreator.models.Door;
+import dungeoncreator.models.InGameDoor;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
@@ -40,16 +40,10 @@ public class DoorBlockScreen extends AbstractDoorBlockScreen {
     void load() {
         System.out.println("Loading ");
         Cache cache = Cache.getInstance();
-        InGameTile tile = TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
+        InGameTile tile = TileUtils.getTileWithByPosition(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
 
         if(tile != null) {
-
-            // Generate minimap
-
-
-
-
-            Door d = tile.getDoorByBlockPos(pos);
+            InGameDoor d = tile.getDoorByBlockPos(pos);
 
             if(d != null) {
                 ArrayList<String> tilesIDs = d.tiles;
@@ -63,13 +57,21 @@ public class DoorBlockScreen extends AbstractDoorBlockScreen {
                 this.sizeYEdit.setText(d.size[1] + "");
                 this.sizeZEdit.setText(d.size[2] + "");
 
+                this.nameEdit.setText(d.name);
+
                 setTileUsed(tilesIDs);
 
                 //TODO:set probability
 
-                //tagsMode = d.tagsModes;
+                if(d.tagsModes != null) {
+                    tagsMode = d.tagsModes;
+                    this.tagsBtn.setMessage(new StringTextComponent(tagsMode.name));
+                }
 
-                //doorMode = d.doorModes;
+                if(d.doorModes != null) {
+                    doorMode = d.doorModes;
+                    this.modeBtn.setMessage(new StringTextComponent(doorMode.name));
+                }
             }
         }
     }
@@ -78,11 +80,11 @@ public class DoorBlockScreen extends AbstractDoorBlockScreen {
     void save() {
         Cache cache = Cache.getInstance();
         ArrayList<String> tilesIDs = getTilesUsed();
-        InGameTile tile = TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
+        InGameTile tile = TileUtils.getTileWithByPosition(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
 
         if(tile != null) {
 
-            Door d = tile.getDoorByBlockPos(pos);
+            InGameDoor d = tile.getDoorByBlockPos(pos);
 
             if(d != null) {
                 d.set(
@@ -101,8 +103,9 @@ public class DoorBlockScreen extends AbstractDoorBlockScreen {
                     e.printStackTrace();
                 }
             }
-            else
+            else {
                 player.sendMessage(new StringTextComponent("ERROR door could not be found. [??]"), player.getUniqueID());
+            }
 
         }
         else

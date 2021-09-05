@@ -1,19 +1,17 @@
 package dungeoncreator;
 
+import dungeoncreator.blocks.StartupCommon;
+import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.OrthoViewHandler;
+import dungeoncreator.utils.TileUtils;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.item.Item;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -38,14 +36,24 @@ public class DungeonCreator {
     MinecraftForge.EVENT_BUS.addListener(this::onWorldLoaded);
     MinecraftForge.EVENT_BUS.addListener(this::onWorldUnload);
 
-    MinecraftForge.EVENT_BUS.addListener(this::block_placed);
+    MinecraftForge.EVENT_BUS.addListener(this::block_break);
   }
 
   //
-  public void block_placed(final BlockEvent.EntityPlaceEvent event)
+  public void block_break(final BlockEvent.BreakEvent event)
   {
     Block blockIn = event.getState().getBlock();
     System.out.println("BLOCK PLACED in pos " + event.getPos());
+
+    if(blockIn.getRegistryName() != null && blockIn.getRegistryName().equals(StartupCommon.doorBlock.getRegistryName())) {
+      // Destroying a door block by hand.
+      BlockPos p = event.getPos();
+      Cache cache = Cache.getInstance();
+      InGameTile t = TileUtils.getTileWithByPosition(cache.worldData.objects, p.getX(), p.getY(), p.getZ());
+      if(t != null) {
+        t.inGameDoors.removeIf(d -> d.blockPos.equals(p));
+      }
+    }
   }
 
 

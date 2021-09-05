@@ -6,19 +6,20 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
 
-public class Door {
+public class InGameDoor {
     public int[] pos = new int[] {0,0,0};
     public int[] size = new int[] {0,0,0};
     public ArrayList<String> tiles = new ArrayList<>(); // If size == 1 simple stretch OTHERWISE WILL BE A tile-group OR will be dead-ends if size == 0, tags MUST be enter
     public String tags = "";
+    public String name = "";
     public float probability = 0f;
-    public transient AbstractDoorBlockScreen.DoorModes doorModes;
-    public transient AbstractDoorBlockScreen.TagsModes tagsModes;
+    public AbstractDoorBlockScreen.DoorModes doorModes;
+    public AbstractDoorBlockScreen.TagsModes tagsModes;
 
     // Minecraft World real position
     public BlockPos blockPos;
 
-    public Door(BlockPos blockPos) {
+    public InGameDoor(BlockPos blockPos) {
         this.blockPos = blockPos;
     }
 

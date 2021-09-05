@@ -5,15 +5,13 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.List;
 import javax.annotation.Nullable;
-import net.minecraft.advancements.Advancement;
+
 import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.MapItemRenderer;
 import net.minecraft.client.gui.advancements.AdvancementState;
 import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -31,7 +29,7 @@ public class LevelEntryGui extends AbstractGui {
     private static final ResourceLocation WIDGETS = new ResourceLocation("textures/gui/advancements/widgets.png");
     private static final int[] LINE_BREAK_VALUES = new int[]{0, 10, -10, 25, -25};
     private final LevelTabGui guiAdvancementTab;
-    private final Advancement advancement;
+    private final Tile tile;
     private final DisplayInfo displayInfo;
     private final IReorderingProcessor title;
     private final int width;
@@ -43,16 +41,16 @@ public class LevelEntryGui extends AbstractGui {
     private final int x;
     private final int y;
 
-    public LevelEntryGui(LevelTabGui guiAdvancementTab, Minecraft minecraft, Advancement advancement, DisplayInfo displayInfo) {
+    public LevelEntryGui(LevelTabGui guiAdvancementTab, Minecraft minecraft, Tile tile, DisplayInfo displayInfo) {
 
         this.guiAdvancementTab = guiAdvancementTab;
-        this.advancement = advancement;
+        this.tile = tile;
         this.displayInfo = displayInfo;
         this.minecraft = minecraft;
         this.title = LanguageMap.getInstance().func_241870_a(minecraft.fontRenderer.func_238417_a_(displayInfo.getTitle(), 163));
         this.x = MathHelper.floor(displayInfo.getX() * 28.0F);
         this.y = MathHelper.floor(displayInfo.getY() * 27.0F);
-        int i = advancement.getRequirementCount();
+        int i = tile.getRequirementCount();
         int j = String.valueOf(i).length();
         int k = i > 1 ? minecraft.fontRenderer.getStringWidth("  ") + minecraft.fontRenderer.getStringWidth("0") * j * 2 + minecraft.fontRenderer.getStringWidth("/") : 0;
         int l = 29 + minecraft.fontRenderer.func_243245_a(this.title) + k;
@@ -91,7 +89,7 @@ public class LevelEntryGui extends AbstractGui {
     }
 
     @Nullable
-    private LevelEntryGui getFirstVisibleParent(Advancement advancementIn) {
+    private LevelEntryGui getFirstVisibleParent(Tile advancementIn) {
         do {
             advancementIn = advancementIn.getParent();
         } while(advancementIn != null && advancementIn.getDisplay() == null);
@@ -144,9 +142,13 @@ public class LevelEntryGui extends AbstractGui {
 
 
             //TODO: DO SOMETHING GOOD
-            //this.minecraft.getTextureManager().bindTexture(generate(this.minecraft));
-            //RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-            //AbstractGui.blit(matrixStack, x + this.x + 8, y + this.y + 5, 0.0F, 0.0F, 16, 16, 32, 32);
+            ResourceLocation r = minecraft
+                    .getTextureManager()
+                    .getDynamicTextureLocation("itembitsword/" + this.tile.inGameTile.id, new DynamicTexture(this.tile.inGameTile.minimap));
+
+            this.minecraft.getTextureManager().bindTexture(r);
+            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            AbstractGui.blit(matrixStack, x + this.x + 8, y + this.y + 5, 0.0F, 0.0F, 32, 32, 32, 32);
 
             //this.minecraft.getItemRenderer().renderItemAndEffectIntoGuiWithoutEntity(this.displayInfo.getIcon(), x + this.x + 8, y + this.y + 5);
         //}
@@ -285,8 +287,8 @@ public class LevelEntryGui extends AbstractGui {
     }
 
     public void attachToParent() {
-        if (this.parent == null && this.advancement.getParent() != null) {
-            this.parent = this.getFirstVisibleParent(this.advancement);
+        if (this.parent == null && this.tile.getParent() != null) {
+            this.parent = this.getFirstVisibleParent(this.tile);
             if (this.parent != null) {
                 this.parent.addGuiAdvancement(this);
             }

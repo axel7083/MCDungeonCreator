@@ -7,6 +7,9 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dungeoncreator.WorldData;
 import dungeoncreator.gui.chart.LevelScreen;
+import dungeoncreator.gui.chart.Tile;
+import dungeoncreator.gui.chart.TileTreeNode;
+import dungeoncreator.models.InGameDoor;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
@@ -14,6 +17,7 @@ import dungeoncreator.exporter.ObjectGroupExporter;
 import net.minecraft.advancements.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.command.arguments.BlockPosArgument;
@@ -27,6 +31,8 @@ import net.minecraft.util.text.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.UUID;
 
 public class CommandTile {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
@@ -83,54 +89,78 @@ public class CommandTile {
         return 1;
     }
 
+    private static Tile create(NativeImage image, String title, String bio, String id, Tile parent) {
+        return Tile.Builder.builder().withDisplay(new ItemStack(Blocks.GRASS_BLOCK.asItem()),
+                new StringTextComponent(title),
+                new StringTextComponent(bio),
+                new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
+                FrameType.TASK,
+                false,
+                false,
+                false).withParent(parent).build(new ResourceLocation(id));
+    }
+
+    private static ArrayList<Tile> explore(LevelScreen screen, Cache cache, Tile parent, InGameTile current) {
+        ArrayList<Tile> result = new ArrayList<>();
+
+        Tile child = create(null, current.id, "description", "end/" + UUID.randomUUID().toString().substring(0,4), parent);
+        child.inGameTile = current;
+        result.add(child);
+
+        if(current.inGameDoors == null)
+            return result;
+
+        for(InGameDoor d: current.inGameDoors) {
+
+            System.out.println("[Tile] " + current.id + " door on pos " + d.blockPos + " has " + d.tiles.size() + " tiles after.");
+
+            switch (d.tiles.size()) {
+                case 0:
+                    continue;
+                case 1:
+                    // Simple link
+                    InGameTile tile = cache.worldData.getTileByName(d.tiles.get(0));
+                    result.addAll(explore(screen, cache, child, tile));
+                    break;
+                default:
+
+                    break;
+            }
+
+
+        }
+        return result;
+    }
+
     static int debug(CommandContext<CommandSource> commandContext) {
         try {
             LevelScreen screen = new LevelScreen(Minecraft.getInstance());
 
-            Advancement root = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.PLAYER_HEAD.asItem()),
-                    new TranslationTextComponent("advancements.end.root.title"),
-                    new TranslationTextComponent("advancements.end.root.description"),
-                    new ResourceLocation("textures/gui/advancements/backgrounds/adventure.png"),
-                    FrameType.TASK,
-                    false,
-                    false,
-                    false).build(new ResourceLocation("end/id"));
+            Cache cache = Cache.getInstance();
+            InGameTile start = TileUtils.getSpawnTile(cache.worldData.objects);
+            if(start == null) {
+                sendMessage(commandContext, "You need to define a level start using /tiles set-level-start [name]");
+                return 1;
+            }
 
+            ArrayList<Tile> result = explore(screen, cache, null, start);
 
-            Advancement second = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.OAK_PLANKS.asItem()),
-                    new TranslationTextComponent("advancements.end.root.title"),
-                    new TranslationTextComponent("advancements.end.root.description"),
-                    (ResourceLocation)null,
-                    FrameType.TASK,
-                    false,
-                    false,
-                    false).withParent(root).build(new ResourceLocation("end/kill_dragon"));
+            System.out.println("[debug] get " + result.size() + " advancement");
 
-            Advancement second_2 = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.LAVA.asItem()),
-                    new TranslationTextComponent("advancements.end.root.title"),
-                    new TranslationTextComponent("advancements.end.root.description"),
-                    (ResourceLocation)null,
-                    FrameType.TASK,
-                    false,
-                    false,
-                    false).withParent(root).build(new ResourceLocation("end/aaa"));
+            for(Tile a : result) {
+                if(a.getParent() == null) {
+                    TileTreeNode.layout(a);
+                }
+            }
 
-            Advancement next2 = Advancement.Builder.builder().withDisplay(new ItemStack(Blocks.OAK_LOG.asItem()),
-                    new TranslationTextComponent("advancements.end.root.title"),
-                    new TranslationTextComponent("advancements.end.root.description"),
-                    (ResourceLocation)null,
-                    FrameType.TASK,
-                    false,
-                    false,
-                    false).withParent(second).build(new ResourceLocation("end/enter_end_gateway"));
-
-            AdvancementTreeNode.layout(root);
-
-            screen.rootAdvancementAdded(root);
-            screen.nonRootAdvancementAdded(second);
-            screen.nonRootAdvancementAdded(second_2);
-            screen.nonRootAdvancementAdded(next2);
-            screen.setSelectedTab(root);
+            for(Tile a : result) {
+                if(a.getParent() == null) {
+                    screen.rootAdvancementAdded(a);
+                    screen.setSelectedTab(a);
+                }
+                else
+                    screen.nonRootAdvancementAdded(a);
+            }
 
             Minecraft.getInstance().displayGuiScreen(screen);
 
@@ -166,7 +196,7 @@ public class CommandTile {
         if(name != null)
             tile = worldData.getTileByName(name);
         else
-            tile = TileUtils.getTileWithPlayerInside(worldData.objects,(int)  player.getPosX(),(int)  player.getPosY(), (int) player.getPosZ());
+            tile = TileUtils.getTileWithByPosition(worldData.objects,(int)  player.getPosX(),(int)  player.getPosY(), (int) player.getPosZ());
 
 
         if(tile == null)
@@ -212,14 +242,14 @@ public class CommandTile {
         try {
             File file = new File(path);
 
-            if (!file.isDirectory()) {
+            if (file.isDirectory()) {
                 Cache.getInstance().worldData.exportPath = path;
                 Cache.getInstance().worldData.save();
                 sendMessage(commandContext,"Saved.");
             }
             else
             {
-                sendMessage(commandContext,"The path selected is a directory, you need to choose the filename.");
+                sendMessage(commandContext,"The path selected is not a valid directory.");
             }
 
         } catch (IOException e) {
@@ -270,7 +300,7 @@ public class CommandTile {
 
         try {
             BlockPos pos = commandContext.getSource().asPlayer().getPosition();
-            InGameTile t = TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
+            InGameTile t = TileUtils.getTileWithByPosition(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
             if(t != null) {
                 t.displayWalkable = visible;
                 sendMessage(commandContext,"Computing height map...");
@@ -306,7 +336,7 @@ public class CommandTile {
         System.out.println("Cache.getInstance() => "  + cache.worldData.objects.size());
         try {
             BlockPos pos = commandContext.getSource().asPlayer().getPosition();
-            InGameTile t= TileUtils.getTileWithPlayerInside(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
+            InGameTile t= TileUtils.getTileWithByPosition(cache.worldData.objects, pos.getX(), pos.getY(), pos.getZ());
             if(t == null) {
                 sendMessage(commandContext,"You are not currently inside a defined tile.");
             }

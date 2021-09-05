@@ -1,14 +1,12 @@
-package dungeoncreator.models;
-
-import dungeoncreator.models.ObjectTile;
+package dungeoncreator.models.dungeons;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectGroup {
-    List<ObjectTile> objects = null;
+    List<Tile> objects = null;
 
-    public void addObjectTile(ObjectTile tile) {
+    public void addObjectTile(Tile tile) {
         if(objects == null)
             objects = new ArrayList<>();
 

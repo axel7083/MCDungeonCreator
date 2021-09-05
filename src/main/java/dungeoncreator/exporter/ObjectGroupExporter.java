@@ -2,11 +2,11 @@ package dungeoncreator.exporter;
 
 import com.google.gson.*;
 import dungeoncreator.WorldData;
-import dungeoncreator.models.InGameTile;
-import dungeoncreator.models.Door;
-import dungeoncreator.models.ObjectGroup;
-import dungeoncreator.models.ObjectTile;
-import dungeoncreator.models.Region;
+import dungeoncreator.models.*;
+import dungeoncreator.models.dungeons.Door;
+import dungeoncreator.models.dungeons.ObjectGroup;
+import dungeoncreator.models.dungeons.Region;
+import dungeoncreator.models.dungeons.Tile;
 import dungeoncreator.utils.TileUtils;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.StructureBlockTileEntity;
@@ -99,7 +99,6 @@ public class ObjectGroupExporter {
             ObjectGroup objectGroup = new ObjectGroup();
             for(InGameTile tile : worldData.objects) {
                 ArrayList<Region> regions = new ArrayList<>();
-                ArrayList<Door> doors = new ArrayList<>();
 
                 int block_count =tile.sizeX*tile.sizeY*tile.sizeZ;
                 byte[] blocks = new byte[(int) Math.ceil(block_count*2 + (float) block_count/2)];
@@ -133,7 +132,7 @@ public class ObjectGroupExporter {
                                 case "minecraft:structure_block":
 
                                     //TODO: this section be remove in a near future
-                                    /*TileEntity tileentity = world.getTileEntity(new BlockPos(realX, realY, realZ));
+                                    TileEntity tileentity = world.getTileEntity(new BlockPos(realX, realY, realZ));
                                     // We fetch the tileEntity linked to the structureBlock at the position we are currently exploring
                                     if (tileentity instanceof StructureBlockTileEntity) {
                                         BlockPos boxSize = ((StructureBlockTileEntity) tileentity).getStructureSize();
@@ -144,11 +143,6 @@ public class ObjectGroupExporter {
 
                                         int[] pos = new int[]{x, y, z};
                                         int[] size = new int[]{boxSize.getX(), boxSize.getY(), boxSize.getZ()};
-
-                                        // We create a door if it is
-                                        if(name.startsWith("door:")) {
-                                            doors.add(new Door(pos, size));
-                                        }
 
                                         // If it is a region, we define it properly
                                         if(name.startsWith("region:")) {
@@ -176,7 +170,9 @@ public class ObjectGroupExporter {
 
                                             regions.add(new Region(name, tag, type, pos, size));
                                         }
-                                    }*/
+                                    }
+
+
 
 
                                 case "minecraft:barrier":
@@ -219,21 +215,21 @@ public class ObjectGroupExporter {
                 String block = new String(Base64.getEncoder().encode(TileUtils.compress(blocks)));
                // System.out.println("OUTPUT: " + block);
 
-                objectGroup.addObjectTile(new ObjectTile(tile.id,
+                objectGroup.addObjectTile(new Tile(tile.id,
                         new int[]{tile.sizeX, tile.sizeY, tile.sizeZ},
                         new int[]{Math.min(tile.pos[0],tile.pos2[0]), Math.min(tile.pos[1],tile.pos2[1]), Math.min(tile.pos[2],tile.pos2[2])},
                         block,
                         TileUtils.exportRegionPlane(tile),
                         TileUtils.exportHeightPlane(tile),
                         null,
-                        doors,
+                        InGameDoorToObjectGroupDoor(tile.inGameDoors, tile),
                         regions));
             }
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             String json = gson.toJson(objectGroup);
 
-            BufferedWriter writer = new BufferedWriter( new FileWriter((worldData.exportPath==null)?(saveDir + "\\" + "objectgroup.json"):worldData.exportPath));
+            BufferedWriter writer = new BufferedWriter( new FileWriter(((worldData.exportPath==null)?(saveDir):worldData.exportPath) + "\\" + "objectgroup.json"));
             writer.write(json);
             writer.close();
         }
@@ -245,6 +241,22 @@ public class ObjectGroupExporter {
             callback.LogEvent("Export Done.");
         }
         return true;
+    }
+
+    private static ArrayList<Door> InGameDoorToObjectGroupDoor(ArrayList<InGameDoor> doors, InGameTile tile) {
+        ArrayList<Door> output = new ArrayList<>();
+
+        if(doors == null)
+            return output;
+
+        for(InGameDoor door : doors) {
+            output.add(new Door(
+                    new int[]{door.blockPos.getX() + door.pos[0] - tile.minX,
+                            door.blockPos.getY() +door.pos[1] - tile.minY,
+                            door.blockPos.getZ() +door.pos[2] - tile.minZ}
+                            , door.size, door.tags, door.name));
+        }
+        return output;
     }
 
     public interface Callback {

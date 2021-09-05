@@ -1,4 +1,4 @@
-package dungeoncreator.models;
+package dungeoncreator.models.dungeons;
 
 public class Region {
     String name;

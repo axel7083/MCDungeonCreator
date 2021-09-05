@@ -24,12 +24,12 @@ public class LevelTabGui extends AbstractGui {
     private final LevelScreen screen;
     private final LevelTabType type;
     private final int index;
-    private final Advancement advancement;
+    private final Tile advancement;
     private final DisplayInfo display;
     private final ItemStack icon;
     private final ITextComponent title;
     private final LevelEntryGui root;
-    private final Map<Advancement, LevelEntryGui> guis = Maps.newLinkedHashMap();
+    private final Map<Tile, LevelEntryGui> guis = Maps.newLinkedHashMap();
     private double scrollX;
     private double scrollY;
     private int minX = Integer.MAX_VALUE;
@@ -44,7 +44,7 @@ public class LevelTabGui extends AbstractGui {
     private int tab_width = 400; //old value 234
     private int tab_height = 250; //old value 234
 
-    public LevelTabGui(Minecraft minecraft, LevelScreen screen, LevelTabType type, int index, Advancement advancement, DisplayInfo displayInfo) {
+    public LevelTabGui(Minecraft minecraft, LevelScreen screen, LevelTabType type, int index, Tile advancement, DisplayInfo displayInfo) {
         this.minecraft = minecraft;
         this.screen = screen;
         this.type = type;
@@ -57,7 +57,7 @@ public class LevelTabGui extends AbstractGui {
         this.addGuiLevel(this.root, advancement);
     }
 
-    public LevelTabGui(Minecraft mc, LevelScreen screen, LevelTabType type, int index, int page, Advancement adv, DisplayInfo info) {
+    public LevelTabGui(Minecraft mc, LevelScreen screen, LevelTabType type, int index, int page, Tile adv, DisplayInfo info) {
         this(mc, screen, type, index, adv, info);
         this.page = page;
     }
@@ -66,7 +66,7 @@ public class LevelTabGui extends AbstractGui {
         return page;
     }
 
-    public Advancement getAdvancement() {
+    public Tile getAdvancement() {
         return this.advancement;
     }
 
@@ -161,7 +161,7 @@ public class LevelTabGui extends AbstractGui {
     }
 
     @Nullable
-    public static LevelTabGui create(Minecraft minecraft, LevelScreen screen, int tabIndex, Advancement advancement) {
+    public static LevelTabGui create(Minecraft minecraft, LevelScreen screen, int tabIndex, Tile advancement) {
         if (advancement.getDisplay() == null) {
             return null;
         } else {
@@ -188,14 +188,14 @@ public class LevelTabGui extends AbstractGui {
 
     }
 
-    public void addAdvancement(Advancement advancement) {
+    public void addAdvancement(Tile advancement) {
         if (advancement.getDisplay() != null) {
             LevelEntryGui advancemententrygui = new LevelEntryGui(this, this.minecraft, advancement, advancement.getDisplay());
             this.addGuiLevel(advancemententrygui, advancement);
         }
     }
 
-    private void addGuiLevel(LevelEntryGui gui, Advancement advancement) {
+    private void addGuiLevel(LevelEntryGui gui, Tile advancement) {
         this.guis.put(advancement, gui);
         int i = gui.getX();
         int j = i + 28;
@@ -213,7 +213,7 @@ public class LevelTabGui extends AbstractGui {
     }
 
     @Nullable
-    public LevelEntryGui getLevelEntryGui(Advancement advancement) {
+    public LevelEntryGui getLevelEntryGui(Tile advancement) {
         return this.guis.get(advancement);
     }
 

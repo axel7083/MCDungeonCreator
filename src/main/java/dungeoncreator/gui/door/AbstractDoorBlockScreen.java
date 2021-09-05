@@ -1,5 +1,6 @@
 package dungeoncreator.gui.door;
 
+import com.google.gson.annotations.SerializedName;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
@@ -24,19 +25,30 @@ import java.util.ArrayList;
 public abstract class AbstractDoorBlockScreen extends Screen implements TileList.Events {
 
     public enum DoorModes {
-        MAIN_PATH,
-        DEAD_END,
-        SIDE_PATH,
+        @SerializedName("0") MAIN_PATH("Main path"),
+        @SerializedName("1") DEAD_END("Dead end"),
+        @SerializedName("2") SIDE_PATH("Side path");
+
+        String name;
+        DoorModes(String s) {
+            this.name = s;
+        }
     }
 
     public enum TagsModes {
-        NONE,
-        ENTER,
-        EXIT,
+        @SerializedName("0") NONE("None"),
+        @SerializedName("1") ENTER("Enter"),
+        @SerializedName("2") EXIT("Exit");
+
+        String name;
+        TagsModes(String s) {
+            this.name = s;
+        }
     }
 
     private static final ITextComponent field_mode = new StringTextComponent("Mode");
     private static final ITextComponent field_name = new StringTextComponent("Door Name");
+    private static final ITextComponent field_tag = new StringTextComponent("Door Tag");
 
 
     protected TextFieldWidget posXEdit;
@@ -99,22 +111,20 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         initTextField(new BlockPos(0, 0, 0), new BlockPos(0, 0, 0));
 
         // Center this button in the top
-        this.modeBtn = this.addButton(new Button(this.width - topLeft.getKey() - 120, topLeft.getValue(), 120, 20,new StringTextComponent("Main path"), (p_214191_1_) -> {
+        this.modeBtn = this.addButton(new Button(this.width - topLeft.getKey() - 120, topLeft.getValue(), 120, 20,new StringTextComponent(doorMode.name), (p_214191_1_) -> {
             this.nextMode();
         }));
 
-        this.tagsBtn = this.addButton(new Button(this.width - topLeft.getKey() - 100, topLeft.getValue() + 100, 100, 20,new StringTextComponent("None"), (p_214191_1_) -> {
+        this.tagsBtn = this.addButton(new Button(this.width - topLeft.getKey() - 100, topLeft.getValue() + 100, 100, 20,new StringTextComponent(tagsMode.name), (p_214191_1_) -> {
             this.nextTags();
         }));
 
         this.left_list = new TileList(this.minecraft, 150, topLeft.getValue() + 100, this.height, new StringTextComponent("Available"));
         this.left_list.setLeftPos(this.topLeft.getKey());
 
-
         // Create left list (containing selected tiles)
         this.right_list = new TileList(this.minecraft, 150, topLeft.getValue() + 100, this.height, new StringTextComponent("Selected"));
         this.right_list.setLeftPos(this.topLeft.getKey() + 160);
-
 
         load();
         this.children.add(this.left_list);
@@ -122,7 +132,6 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
     }
 
     protected String getTags() {
-
         if(doorMode.equals(DoorModes.MAIN_PATH))
             switch (tagsMode) {
                 case NONE:
@@ -132,7 +141,6 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
                 case EXIT:
                     return "exit";
             }
-
         return "deadend";
     }
 
@@ -230,17 +238,17 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
             case MAIN_PATH:
                 doorMode = DoorModes.DEAD_END;
                 this.tagsBtn.visible = false; // Since all dead end MUST have "deadend" tag
-                this.modeBtn.setMessage(new StringTextComponent("Dead Ends"));
+                this.modeBtn.setMessage(new StringTextComponent(doorMode.name));
                 break;
             case DEAD_END:
                 doorMode = DoorModes.SIDE_PATH;
                 this.tagsBtn.visible = false; // Since all side-path MUST have "deadend" tag
-                this.modeBtn.setMessage(new StringTextComponent("Side path"));
+                this.modeBtn.setMessage(new StringTextComponent(doorMode.name));
                 break;
             case SIDE_PATH:
                 doorMode = DoorModes.MAIN_PATH;
                 this.tagsBtn.visible = true; // can be "Enter" Or "Exit" or nothing
-                this.modeBtn.setMessage(new StringTextComponent("Main path"));
+                this.modeBtn.setMessage(new StringTextComponent(doorMode.name));
                 break;
         }
     }
@@ -249,15 +257,15 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         switch (tagsMode) {
             case NONE:
                 tagsMode = TagsModes.ENTER;
-                this.tagsBtn.setMessage(new StringTextComponent("Enter"));
+                this.tagsBtn.setMessage(new StringTextComponent(tagsMode.name));
                 break;
             case ENTER:
                 tagsMode = TagsModes.EXIT;
-                this.tagsBtn.setMessage(new StringTextComponent("Exit"));
+                this.tagsBtn.setMessage(new StringTextComponent(tagsMode.name));
                 break;
             case EXIT:
                 tagsMode = TagsModes.NONE;
-                this.tagsBtn.setMessage(new StringTextComponent("None"));
+                this.tagsBtn.setMessage(new StringTextComponent(tagsMode.name));
                 break;
         }
     }
@@ -318,6 +326,9 @@ public abstract class AbstractDoorBlockScreen extends Screen implements TileList
         this.sizeXEdit.render(matrixStack, mouseX, mouseY, partialTicks);
         this.sizeYEdit.render(matrixStack, mouseX, mouseY, partialTicks);
         this.sizeZEdit.render(matrixStack, mouseX, mouseY, partialTicks);
+
+        if(this.tagsBtn.visible)
+            drawString(matrixStack, this.font, field_tag,this.width - topLeft.getKey() - font.getStringWidth(field_tag.getString()),topLeft.getValue()+ 90, 10526880);
 
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }

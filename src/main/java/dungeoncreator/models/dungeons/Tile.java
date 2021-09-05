@@ -1,10 +1,10 @@
-package dungeoncreator.models;
+package dungeoncreator.models.dungeons;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ObjectTile {
+public class Tile {
 
     String id;
     int[] size;
@@ -19,7 +19,7 @@ public class ObjectTile {
     List<Door> doors;
     List<Region> regions;
 
-    public ObjectTile(String id, int[] size, int[] pos, String blocks, String regionPlane, String heightPlane, String regionYPlane, List<Door> doors, List<Region> regions) {
+    public Tile(String id, int[] size, int[] pos, String blocks, String regionPlane, String heightPlane, String regionYPlane, List<Door> doors, List<Region> regions) {
         this.id = id;
         this.size = size;
         this.pos = pos;

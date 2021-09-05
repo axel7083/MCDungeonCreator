@@ -3,9 +3,6 @@ package dungeoncreator.utils;
 import dungeoncreator.WorldData;
 import dungeoncreator.models.InGameTile;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +10,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
@@ -32,16 +30,25 @@ public class TileUtils {
         return false;
     }
 
-    public static InGameTile getTileWithPlayerInside(ArrayList<InGameTile> tiles, int playerX, int playerY, int playerZ) {
+    public static InGameTile getTileWithByPosition(ArrayList<InGameTile> tiles, int posX, int posY, int posZ) {
         for(InGameTile t : tiles) {
             if(t.sizeX == 0 || t.sizeY == 0 || t.sizeZ == 0)
                 t.computeSizes();
 
-            if(t.minX < playerX && t.sizeX + t.minX > playerX
-            && t.minY < playerY && t.sizeY + t.minY > playerY
-            && t.minZ < playerZ && t.sizeZ + t.minZ > playerZ)
+            if(t.minX < posX && t.sizeX + t.minX >= posX
+            && t.minY < posY && t.sizeY + t.minY >= posY
+            && t.minZ < posZ && t.sizeZ + t.minZ >= posZ)
                 return t;
         }
+        return null;
+    }
+
+    @Nullable
+    public static InGameTile getSpawnTile(ArrayList<InGameTile> tiles) {
+
+        for(InGameTile t : tiles)
+            if(t.isLevelStart) return t;
+
         return null;
     }
 
@@ -60,6 +67,10 @@ public class TileUtils {
 
         if(world == null)
             return textureArray;
+
+        if(t.heightPlane == null || t.heightPlane.length == 0) {
+            t.generatePlane();
+        }
 
         for(int x = 0 ; x < t.sizeX; x++) {
             for(int z = 0; z < t.sizeZ; z++) {
@@ -95,7 +106,7 @@ public class TileUtils {
             BlockPos pos = playerIn.getPosition();
 
             // Getting the tile where the player is in
-            InGameTile tile = TileUtils.getTileWithPlayerInside(worldData.objects,pos.getX(),pos.getY(),pos.getZ());
+            InGameTile tile = TileUtils.getTileWithByPosition(worldData.objects,pos.getX(),pos.getY(),pos.getZ());
 
             if(tile == null)  {
                 return "You are not currently in a tile.";

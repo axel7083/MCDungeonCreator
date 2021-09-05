@@ -3,18 +3,14 @@ package dungeoncreator;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import dungeoncreator.gui.door.TileList;
-import dungeoncreator.models.Door;
+import dungeoncreator.models.InGameDoor;
 import dungeoncreator.models.InGameTile;
 import dungeoncreator.utils.Cache;
 import dungeoncreator.utils.TileUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.debug.DebugRenderer;
-import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Matrix4f;
@@ -63,7 +59,7 @@ public class ClientEvents {
 
             renderTileBoxes(event, renderBuffers, builder, matrixStack, cache.worldData);
 
-            InGameTile t = TileUtils.getTileWithPlayerInside(cache.worldData.objects, (int) x, (int) y, (int) z);
+            InGameTile t = TileUtils.getTileWithByPosition(cache.worldData.objects, (int) x, (int) y, (int) z);
             if(t != null)
                 renderWalkableArea(builder, matrixStack, t);
 
@@ -104,7 +100,6 @@ public class ClientEvents {
         if(tileObject.displayWalkable) {
             for(int x = 0; x< tileObject.sizeX; x++) {
                 for(int z = 0; z< tileObject.sizeZ; z++) {
-
                     if(tileObject.regionPlane == null || tileObject.regionPlane.length == 0)
                         tileObject.generatePlane();
 
@@ -134,12 +129,12 @@ public class ClientEvents {
         RenderSystem.disableCull();
         ms.push();
 
-        for(Door d: t.doors) {
-            drawCube(ms, buffers, new AxisAlignedBB(
-                    new BlockPos(d.blockPos.getX()+d.pos[0], d.blockPos.getY()+d.pos[1], d.blockPos.getZ()+d.pos[2]))
-                    .expand(d.size[0], d.size[1], d.size[2]), new Color(0, 255, 0, 100));
-        }
-
+        if(t.inGameDoors != null)
+            for(InGameDoor d: t.inGameDoors) {
+                drawCube(ms, buffers, new AxisAlignedBB(
+                        new BlockPos(d.blockPos.getX()+d.pos[0], d.blockPos.getY()+d.pos[1], d.blockPos.getZ()+d.pos[2]))
+                        .expand(d.size[0]-1, d.size[1]-1, d.size[2]-1), new Color(0, 255, 0, 100));
+            }
 
         ms.pop();
         buffers.finish();

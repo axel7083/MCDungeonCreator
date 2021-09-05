@@ -1,7 +1,10 @@
 package dungeoncreator.utils;
 
 import dungeoncreator.WorldData;
+import dungeoncreator.models.InGameDoor;
 import net.minecraft.world.IWorld;
+
+import java.util.ArrayList;
 
 public class Cache {
 
@@ -9,7 +12,10 @@ public class Cache {
     public WorldData worldData = null;
     public String worldPath = null;
 
+    public ArrayList<InGameDoor> deleted = new ArrayList<>();
+
     private static Cache cache = null;
+
 
     private Cache() {
 

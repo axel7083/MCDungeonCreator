@@ -3,28 +3,26 @@ package dungeoncreator.gui.chart;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import java.util.Map;
-import javax.annotation.Nullable;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.chat.NarratorChatListener;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.multiplayer.ClientAdvancementManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
+import java.util.Map;
+
 @OnlyIn(Dist.CLIENT)
-public class LevelScreen extends Screen implements ClientAdvancementManager.IListener {
+public class LevelScreen extends Screen {
     private static final ResourceLocation WINDOW = new ResourceLocation("textures/gui/advancements/window.png");
     private static final ResourceLocation TABS = new ResourceLocation("textures/gui/advancements/tabs.png");
     private static final ITextComponent SAD_LABEL = new TranslationTextComponent("advancements.sad_label");
     private static final ITextComponent EMPTY = new TranslationTextComponent("advancements.empty");
     private static final ITextComponent GUI_LABEL = new TranslationTextComponent("gui.advancements");
-    private final Map<Advancement, LevelTabGui> tabs = Maps.newLinkedHashMap();
+    private final Map<Tile, LevelTabGui> tabs = Maps.newLinkedHashMap();
     private LevelTabGui selectedTab;
     private boolean isScrolling;
     private static int tabPage, maxPages;
@@ -180,7 +178,7 @@ public class LevelScreen extends Screen implements ClientAdvancementManager.ILis
 
     }
 
-    public void rootAdvancementAdded(Advancement advancementIn) {
+    public void rootAdvancementAdded(Tile advancementIn) {
         System.out.println("[rootAdvancementAdded] " + advancementIn.getId().getPath());
 
         LevelTabGui advancementtabgui = LevelTabGui.create(this.minecraft, this, this.tabs.size(), advancementIn);
@@ -193,10 +191,10 @@ public class LevelScreen extends Screen implements ClientAdvancementManager.ILis
 
     }
 
-    public void rootAdvancementRemoved(Advancement advancementIn) {
+    public void rootAdvancementRemoved(Tile advancementIn) {
     }
 
-    public void nonRootAdvancementAdded(Advancement advancementIn) {
+    public void nonRootAdvancementAdded(Tile advancementIn) {
         LevelTabGui advancementtabgui = this.getTab(advancementIn);
         if (advancementtabgui != null) {
             advancementtabgui.addAdvancement(advancementIn);
@@ -204,18 +202,7 @@ public class LevelScreen extends Screen implements ClientAdvancementManager.ILis
 
     }
 
-    public void nonRootAdvancementRemoved(Advancement advancementIn) {
-    }
-
-    public void onUpdateAdvancementProgress(Advancement advancementIn, AdvancementProgress progress) {
-        LevelEntryGui advancemententrygui = this.getAdvancementGui(advancementIn);
-        if (advancemententrygui != null) {
-            advancemententrygui.setAdvancementProgress(progress);
-        }
-
-    }
-
-    public void setSelectedTab(@Nullable Advancement advancementIn) {
+    public void setSelectedTab(@Nullable Tile advancementIn) {
         this.selectedTab = this.tabs.get(advancementIn);
         System.out.println("[setSelectedTab] is null? " + (this.selectedTab == null));
     }
@@ -226,13 +213,13 @@ public class LevelScreen extends Screen implements ClientAdvancementManager.ILis
     }
 
     @Nullable
-    public LevelEntryGui getAdvancementGui(Advancement advancement) {
+    public LevelEntryGui getAdvancementGui(Tile advancement) {
         LevelTabGui advancementtabgui = this.getTab(advancement);
         return advancementtabgui == null ? null : advancementtabgui.getLevelEntryGui(advancement);
     }
 
     @Nullable
-    private LevelTabGui getTab(Advancement advancement) {
+    private LevelTabGui getTab(Tile advancement) {
         while(advancement.getParent() != null) {
             advancement = advancement.getParent();
         }

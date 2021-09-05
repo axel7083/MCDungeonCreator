@@ -7,7 +7,7 @@ This mod need a lot of re-work, most of the features are just prototype to prove
  
 # Generate the objectgroup.json
 
-You need to create some tiles (at least 3), defined doors using structure block (More information about that in the Discord), put a starting place by placing a player_head.
+You need to create some tiles (at least 3), defined inGameDoors using structure block (More information about that in the Discord), put a starting place by placing a player_head.
 Then, you can run the commands explained in the commands section to export the objectgroup.json, ready to be used.
  
 # Region-Plane (For proper minimap)
